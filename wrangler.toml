@@ -1,0 +1,7 @@
+name = "thego2guys-site"
+main = "src/index.js"
+compatibility_date = "2026-09-01"
+
+[[r2_buckets]]
+binding = "Files"
+bucket_name = "thego2guys-files"
