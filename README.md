@@ -8,3 +8,5 @@ Pushing to `main` deploys automatically via Cloudflare Workers Builds.
 2. Register its path in the routes map next to `'/guides/house-extension-cost'`.
 3. Add a card for it in `guidesIndexPage()`.
 4. Add the path to the sitemap `paths` list.
+
+Deploys run automatically on every push to main.
