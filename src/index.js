@@ -285,7 +285,8 @@ function routeExtraPage(path) {
     '/calculators/plaster': plasterCalcPage,
     '/guides': guidesIndexPage,
     '/guides/house-extension-cost': extensionGuidePage,
-    '/guides/loft-conversion-cost': loftGuidePage
+    '/guides/loft-conversion-cost': loftGuidePage,
+    '/guides/extension-preliminaries': prelimsGuidePage
   };
   if (pages[path]) { return new Response(pages[path](), { headers: PAGE_HEADERS }); }
   if (path === '/sitemap.xml') { return new Response(sitemapXml(), { headers: { 'Content-Type': 'application/xml; charset=utf-8', 'Cache-Control': 'public, max-age=3600' } }); }
@@ -294,7 +295,7 @@ function routeExtraPage(path) {
 }
 
 function sitemapXml() {
-  const paths = ['/', '/calculators', '/calculators/bricks-and-blocks', '/calculators/concrete', '/calculators/plaster', '/guides', '/guides/house-extension-cost', '/guides/loft-conversion-cost', '/terms', '/privacy'];
+  const paths = ['/', '/calculators', '/calculators/bricks-and-blocks', '/calculators/concrete', '/calculators/plaster', '/guides', '/guides/house-extension-cost', '/guides/loft-conversion-cost', '/guides/extension-preliminaries', '/terms', '/privacy'];
   return '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
     paths.map(function (p) { return '  <url><loc>' + SITE + (p === '/' ? '/' : p) + '</loc></url>'; }).join('\n') + '\n</urlset>\n';
 }
@@ -518,11 +519,12 @@ function guidesIndexPage() {
   return pageShell({
     path: '/guides',
     title: 'Building Cost Guides UK 2026 | TheGo2Guys',
-    desc: 'Plain-English UK building cost guides for 2026: house extensions and loft conversions, with budget calculators.',
+    desc: 'Plain-English UK building cost guides for 2026: house extensions, loft conversions and pricing preliminaries, with budget calculators.',
     body: pageHero([['/', 'Home'], ['/guides', 'Cost guides']], 'Building cost guides', 'What common residential jobs cost in the UK in 2026, what pushes the price up, and a quick budget calculator for each.') +
       `<section class="plain"><div class="container"><div class="card-grid">
 <a class="card" href="/guides/house-extension-cost"><h3>House extension cost UK (2026)</h3><p>Cost per m² for single and double-storey extensions, where the money goes, and the extras people forget.</p><span class="card-go">Read the guide &rarr;</span></a>
 <a class="card" href="/guides/loft-conversion-cost"><h3>Loft conversion cost UK (2026)</h3><p>Velux, dormer, hip-to-gable and mansard conversions compared, with typical prices and timescales.</p><span class="card-go">Read the guide &rarr;</span></a>
+<a class="card" href="/guides/extension-preliminaries"><h3>Pricing preliminaries on an extension</h3><p>For builders: what goes in preliminaries, a real 2026 breakdown, and the items most often left out of a quote.</p><span class="card-go">Read the guide &rarr;</span></a>
 </div></div></section>` + CALC_CTA
   });
 }
@@ -670,6 +672,67 @@ function loftGuidePage() {
       document.getElementById('calc').addEventListener('change', run);
       run();
     })
+  });
+}
+
+// ---------------------- Insight: extension preliminaries -------------------
+// Figures are the preliminaries section of the sample estimate (G2G-EST-0001 Rev P02)
+const SAMPLE_PRELIMS = [
+  ['Site set-up and protection to the existing house, floors and access route', '1 item', 650],
+  ['Scaffold: erect, adapt, 8 weeks hire, dismantle', '1 item', 1650],
+  ['Welfare: portable WC and hand wash, serviced weekly', '10 weeks', 450],
+  ['Waste: two 8-yard skips, including permit and waste transfer notes', '2 skips', 660],
+  ['Supervision: part-time working foreman', '10 weeks', 2500],
+  ['Builder\'s clean on completion', '1 item', 300]
+];
+
+const PRELIMS_FAQ = [
+  ['What are preliminaries in a building quote?', 'Preliminaries are the costs of running the site that do not belong to any one part of the building: scaffolding, skips, welfare, protecting the existing house, supervision and the final clean. Most of them depend on how long the job takes.'],
+  ['What percentage should preliminaries be on an extension?', 'There is no fixed figure, because it depends on the programme, access and site. On our sample single-storey rear extension they came to 15.4% of the construction cost. On a small domestic job, a figure well below 10% usually means something has been left out.'],
+  ['Are planning and building control fees part of preliminaries?', 'Usually not. Planning and building control fees are normally paid by the client and listed as exclusions, as they are in our sample estimate.'],
+  ['Do I need welfare facilities on a domestic extension?', 'Yes. Under the CDM Regulations 2015 every construction site, including domestic work, needs toilets, washing facilities and drinking water. On many extensions that means hiring a portable unit for the length of the job.']
+];
+
+function prelimsGuidePage() {
+  const total = SAMPLE_PRELIMS.reduce(function (s, p) { return s + p[2]; }, 0);
+  const rows = SAMPLE_PRELIMS.map(function (p) { return '<tr><th>' + p[0] + '</th><td>' + p[1] + '</td><td class="num">£' + p[2].toLocaleString('en-GB') + '</td><td class="num">' + (p[2] / total * 100).toFixed(0) + '%</td></tr>'; }).join('');
+  return pageShell({
+    path: '/guides/extension-preliminaries',
+    title: 'Pricing Preliminaries on an Extension: What to Include (2026) | TheGo2Guys',
+    desc: 'What to include in preliminaries when pricing a house extension, with a real 2026 breakdown: scaffold, skips, welfare, supervision and the items small builders most often miss.',
+    schema: faqSchema(PRELIMS_FAQ),
+    body: pageHero([['/', 'Home'], ['/guides', 'Cost guides'], ['/guides/extension-preliminaries', 'Extension preliminaries']], 'Preliminaries: the line that sinks extension quotes', 'On a small extension, preliminaries cost nearly as much as the roof, and they are the easiest part of the job to under-price. Here is what goes in them, using a real 2026 estimate.') +
+      `<section class="plain"><div class="container prose">
+<h2>Why preliminaries matter on small jobs</h2>
+<p>Preliminaries are the costs of running the site rather than building any one part of it: scaffolding, skips, welfare, protecting the client's house, supervision and the final clean. On a big project they disappear into the overall price. On a 16&nbsp;m² extension they are one of the largest items in the estimate.</p>
+<p>In our <a href="/sample-estimate.pdf" target="_blank" rel="noopener">sample estimate</a> for a single-storey rear extension in Merseyside, preliminaries came to <strong>£${total.toLocaleString('en-GB')}</strong>. That is <strong>15.4% of the £40,393 construction cost</strong>, close to the cost of the roof (£6,347) or the external walls (£6,370).</p>
+<p>Most of that money depends on time. Spread over a 10-week programme it works out at about <strong>£621 a week</strong>. If the job runs two weeks over, the scaffold, welfare and supervision keep costing money, and that comes straight out of your margin.</p>
+<h2>A real breakdown</h2>
+<p>These are the preliminaries from the sample estimate, priced at Q4 2026 rates.</p>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Item</th><th>Quantity</th><th class="num">Cost</th><th class="num">Share</th></tr></thead><tbody>${rows}<tr><th>Total preliminaries</th><td></td><td class="num"><strong>£${total.toLocaleString('en-GB')}</strong></td><td class="num">100%</td></tr></tbody></table></div>
+<p>Supervision is the biggest line at 40%, followed by the scaffold at 27%. Together they make up two-thirds of the total.</p>
+</div></section>
+<section class="plain alt"><div class="container prose">
+<h2>What gets missed</h2>
+<h3>1. Your own time on site</h3>
+<p>If you run the job yourself, it is tempting to leave supervision out because you are not paying anyone. But every day you spend organising trades, taking deliveries and dealing with the client is a day you are not earning elsewhere. In the sample, a part-time working foreman is £250 a week. Leave it out and you are running the job for free.</p>
+<h3>2. Scaffold for the whole time it stands</h3>
+<p>Scaffold is usually hired by the week. Price it for the weeks it will actually be up, not the weeks you hope it will be up, and allow for adapting it when the roof goes on. The sample prices 8 weeks of hire on a 10-week job.</p>
+<h3>3. Skip permits</h3>
+<p>A skip on the road needs a permit from the council, and the cost and lead time vary from one council to the next. Check before you price, especially if there is no room for the skip on the drive.</p>
+<h3>4. Protecting the client's house</h3>
+<p>Floor protection along the access route, dust sheets and a temporary screen when you knock through. It is a small line, but leaving it out tends to cost far more in callbacks and complaints.</p>
+<h3>5. Welfare</h3>
+<p>The trades need a toilet, hand washing and drinking water. If the client's bathroom is not available, that means hiring a portable unit for the length of the job, serviced weekly.</p>
+<h3>6. The final clean</h3>
+<p>Handing over a clean extension is part of the job. Price a builder's clean rather than assuming someone will do it at the end of the last day.</p>
+<div class="callout"><p><strong>A quick check before you send a price:</strong> if your preliminaries come in well under 10% of the build cost on a small extension, look again. The usual gaps are supervision time, extra scaffold hire and waste.</p></div>
+<h2>Price them by the week</h2>
+<p>The simplest way to get preliminaries right is to split them into two groups and work from the programme:</p>
+<ul><li><strong>Time-related items</strong> such as scaffold hire, welfare and supervision. Multiply the weekly cost by the number of weeks in the programme.</li><li><strong>Fixed items</strong> such as site set-up, protection, skips and the final clean. Price these once.</li></ul>
+<p>Laying them out like this also makes it easy to show a client why a longer programme or a change of scope costs more.</p>
+<h2>Common questions</h2>${faqHtml(PRELIMS_FAQ)}
+</div></section>` + ctaBand('Want every line priced, preliminaries included?', 'Send us your drawings and we price the whole job, with preliminaries set out item by item like the example above. From £150 for a single-storey extension, in 3&ndash;5 working days.')
   });
 }
 
