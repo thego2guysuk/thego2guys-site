@@ -288,6 +288,7 @@ function routeExtraPage(path) {
     '/guides/house-extension-cost': extensionGuidePage,
     '/guides/loft-conversion-cost': loftGuidePage,
     '/guides/extension-preliminaries': prelimsGuidePage,
+    '/guides/single-storey-extension-cost-liverpool': nwExtensionGuidePage,
     '/insights': insightsIndexPage,
     '/insights/steel-prices-mortgage-rates-october-2026': steelMortgageInsightPage
   };
@@ -298,7 +299,7 @@ function routeExtraPage(path) {
 }
 
 function sitemapXml() {
-  const paths = ['/', '/calculators', '/calculators/bricks-and-blocks', '/calculators/concrete', '/calculators/plaster', '/guides', '/guides/house-extension-cost', '/guides/loft-conversion-cost', '/guides/extension-preliminaries', '/insights', '/insights/steel-prices-mortgage-rates-october-2026', '/terms', '/privacy'];
+  const paths = ['/', '/calculators', '/calculators/bricks-and-blocks', '/calculators/concrete', '/calculators/plaster', '/guides', '/guides/house-extension-cost', '/guides/loft-conversion-cost', '/guides/extension-preliminaries', '/guides/single-storey-extension-cost-liverpool', '/insights', '/insights/steel-prices-mortgage-rates-october-2026', '/terms', '/privacy'];
   return '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
     paths.map(function (p) { return '  <url><loc>' + SITE + (p === '/' ? '/' : p) + '</loc></url>'; }).join('\n') + '\n</urlset>\n';
 }
@@ -528,6 +529,7 @@ function guidesIndexPage() {
 <a class="card" href="/guides/house-extension-cost"><h3>House extension cost UK (2026)</h3><p>Cost per m² for single and double-storey extensions, where the money goes, and the extras people forget.</p><span class="card-go">Read the guide &rarr;</span></a>
 <a class="card" href="/guides/loft-conversion-cost"><h3>Loft conversion cost UK (2026)</h3><p>Velux, dormer, hip-to-gable and mansard conversions compared, with typical prices and timescales.</p><span class="card-go">Read the guide &rarr;</span></a>
 <a class="card" href="/guides/extension-preliminaries"><h3>Pricing preliminaries on an extension</h3><p>For builders: what goes in preliminaries, a real 2026 breakdown, and the items most often left out of a quote.</p><span class="card-go">Read the guide &rarr;</span></a>
+<a class="card" href="/guides/single-storey-extension-cost-liverpool"><h3>Single-storey extension cost in Liverpool and the North West (2026)</h3><p>Prices by size and specification, Liverpool building control fees, planning limits and the extras people forget.</p><span class="card-go">Read the guide &rarr;</span></a>
 </div></div></section>` + CALC_CTA
   });
 }
@@ -736,6 +738,104 @@ function prelimsGuidePage() {
 <p>Laying them out like this also makes it easy to show a client why a longer programme or a change of scope costs more.</p>
 <h2>Common questions</h2>${faqHtml(PRELIMS_FAQ)}
 </div></section>` + ctaBand('Want every line priced, preliminaries included?', 'Send us your drawings and we price the whole job, with preliminaries set out item by item like the example above. From £150 for a single-storey extension, in 3&ndash;5 working days.')
+  });
+}
+
+// -------------- Single-storey rear extension cost, North West ---------------
+const NW_EXTENSION_FAQ = [
+  ['How much does a single-storey extension cost in Liverpool?', 'About £1,800&ndash;£2,500 per m² plus VAT for a standard specification. For a 4m &times; 4m extension, budget roughly £50,000&ndash;£80,000 all-in once VAT, a kitchen, fees and contingency are added.'],
+  ['Is building in the North West cheaper than the rest of the UK?', 'Slightly. Less.co.uk and BestBuilders&rsquo; 2026 guides put the region 6&ndash;12% below the UK average. Labour is a little cheaper; materials cost about the same everywhere.'],
+  ['Are the prices with or without VAT?', 'Without. A VAT-registered builder adds 20%. A builder whose turnover is below the £90,000 VAT threshold won&rsquo;t charge it, which is one reason quotes vary.'],
+  ['Can I live in the house while the work is done?', 'Usually yes, but expect several weeks without a working kitchen once the back wall comes out. Plan for a temporary kitchen in another room.'],
+  ['How much contingency should I keep?', '10&ndash;15% of the build cost for a straightforward job, nearer 20% on a pre-1919 terrace or where the drains and ground are unknown. Keep it outside the contract price.']
+];
+
+function nwExtensionGuidePage() {
+  const path = '/guides/single-storey-extension-cost-liverpool';
+  return pageShell({
+    path: path,
+    title: 'Single-Storey Extension Cost Liverpool and North West 2026 | TheGo2Guys',
+    desc: 'What a single-storey rear extension costs in Liverpool and the North West in 2026: cost per m², prices by size, Liverpool building control fees, planning and the extras people forget.',
+    schema: faqSchema(NW_EXTENSION_FAQ),
+    body: pageHero([['/', 'Home'], ['/guides', 'Cost guides'], [path, 'Extension cost in Liverpool']], 'How much does a single-storey rear extension cost in Liverpool and the North West?', 'A standard single-storey rear extension in Liverpool and the North West costs roughly £1,800&ndash;£2,500 per m² with the builder in 2026, before VAT. A 5m-deep, 4m-wide extension comes in at around £36,000&ndash;£50,000. Smaller ones cost more per m².') +
+      `<section class="plain"><div class="container prose">
+<p class="pub-date">Updated October 2026</p>
+<h2>What the price covers</h2>
+<p>Those figures are the builder&rsquo;s price for the new room, with overheads and profit included. They cover foundations, walls, roof, glazing, the opening into the house, a screeded floor, plastering, basic electrics and heating, and decoration. They don&rsquo;t cover VAT, the kitchen, floor finishes, design and engineer&rsquo;s fees, building control, planning or party wall costs.</p>
+<p>Once those are added, most homeowners with a 4m &times; 4m extension in mind should budget roughly <strong>£50,000&ndash;£80,000 all-in</strong>. That&rsquo;s the build (£31,000&ndash;£44,000), VAT at 20%, a mid-range kitchen (£8,000&ndash;£15,000), fees of around £3,000&ndash;£5,000 and a 10&ndash;15% contingency.</p>
+<p>The North West is a bit cheaper than the UK as a whole. Less.co.uk and BestBuilders&rsquo; 2026 guides put the region 6&ndash;12% below the national average, and quoted day rates are slightly lower: £115&ndash;£165 for a labourer against £120&ndash;£180 nationally, and £240&ndash;£370 for a general builder against £250&ndash;£400. Materials cost much the same everywhere, though, and they&rsquo;re a large share of an extension, so the saving is modest.</p>
+<h2>Cost by size</h2>
+<p>Builder&rsquo;s prices for a standard-specification single-storey rear extension in the North West, 2026. Depth is measured out from the back of the house; floor areas are internal. Excludes VAT, kitchen, floor finishes and fees.</p>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Depth &times; width</th><th class="num">Floor area</th><th class="num">Build cost (ex VAT)</th><th class="num">Per m²</th></tr></thead><tbody>
+<tr><th>3m &times; 4m</th><td class="num">12 m²</td><td class="num">£25,000&ndash;£36,000</td><td class="num">£2,080&ndash;£3,000</td></tr>
+<tr><th>4m &times; 4m</th><td class="num">16 m²</td><td class="num">£31,000&ndash;£44,000</td><td class="num">£1,940&ndash;£2,750</td></tr>
+<tr><th>5m &times; 4m</th><td class="num">20 m²</td><td class="num">£36,000&ndash;£50,000</td><td class="num">£1,800&ndash;£2,500</td></tr>
+<tr><th>6m &times; 5m</th><td class="num">30 m²</td><td class="num">£51,000&ndash;£72,000</td><td class="num">£1,700&ndash;£2,400</td></tr>
+</tbody></table></div>
+<p>On a semi or terrace, anything deeper than 3m needs either prior approval under the larger home extension scheme (up to 6m) or full planning permission. See the planning section below.</p>
+<p>By specification, for a 5m &times; 4m (20 m²) extension:</p>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Specification</th><th class="num">Per m² (ex VAT)</th><th class="num">20 m² example</th></tr></thead><tbody>
+<tr><th>Basic: rendered blockwork, flat roof, standard French doors</th><td class="num">£1,600&ndash;£1,900</td><td class="num">£32,000&ndash;£38,000</td></tr>
+<tr><th>Standard: facing brick, flat roof with a lantern or a tiled lean-to, bifolds or sliders</th><td class="num">£1,800&ndash;£2,500</td><td class="num">£36,000&ndash;£50,000</td></tr>
+<tr><th>High: large sliders, vaulted ceiling, underfloor heating, better finishes</th><td class="num">£2,500&ndash;£3,200</td><td class="num">£50,000&ndash;£64,000</td></tr>
+</tbody></table></div>
+<p>Small extensions cost more per m² because some costs barely change with size: scaffold, the steel beam into the house, drainage connections, skips and the builder&rsquo;s time running the job.</p>
+<h2>How our own sample compares</h2>
+<p>Our <a href="/sample-estimate.pdf" target="_blank" rel="noopener">sample estimate</a> for a 16.28&nbsp;m² rear extension in Merseyside, priced at Q4 2026 rates, came to £46,451 before VAT, or £2,853 per m². That&rsquo;s above the 16 m² range in the table, because it&rsquo;s a fully measured price.</p>
+<p>It includes £6,210 of <a href="/guides/extension-preliminaries">preliminaries</a>, the site costs that aren&rsquo;t part of the building itself: scaffold, skips, welfare, site set-up and supervision. Demolition and alterations to the existing house, including the opening into it, came to £3,888. Overheads, profit and a contingency allowance were £6,059.</p>
+<p>Plenty of local quotes come in lower than that. Before accepting one, check whether scaffold, skips and a contingency are actually in it, or whether they&rsquo;ll turn up later as extras.</p>
+</div></section>
+<section class="plain alt"><div class="container prose">
+<h2>What pushes the price up</h2>
+<ul>
+<li><strong>The opening into the house.</strong> Taking out the back wall needs a steel beam, padstones under each end and temporary propping. Supplied and fitted, expect £1,500&ndash;£4,000 depending on the span. Fabricated structural steel was 21.2% dearer in August 2026 than a year earlier, according to the Department for Business and Trade, but on a single beam that&rsquo;s only a few hundred pounds extra. <a href="/insights/steel-prices-mortgage-rates-october-2026">More on steel prices</a>.</li>
+<li><strong>Glazing.</strong> A three-panel 3m aluminium bifold is commonly £4,000&ndash;£6,500, a roof lantern £2,000&ndash;£4,000, and a rooflight £900&ndash;£1,500 supplied and fitted. Building Regulations limit glazing in an extension to 25% of its floor area, plus the area of any windows or doors it removes. Go over that with bifolds and a lantern and you&rsquo;ll need heat-loss calculations, and possibly better insulation elsewhere to compensate.</li>
+<li><strong>Drains and ground, especially on older terraces.</strong> Building over or within 3m of a public sewer needs approval, and since 2011 that includes most of the shared drains running behind terraced houses. Low-risk cases are usually signed off by building control under a protocol with United Utilities. The water company won&rsquo;t allow building over manholes or most old brick, masonry or pitch-fibre sewers, so a manhole move or sewer diversion, paid for by the homeowner, may be needed. Pre-1919 houses can also have shallow footings, and clay, nearby trees or made ground can mean deeper foundations.</li>
+<li><strong>Access.</strong> A mid-terrace with no rear entry means materials and spoil go through the house by hand, which adds days. Where there is a back entry, check it&rsquo;s wide enough for a dumper and that you can get the alley-gate key. A skip or scaffold on the road needs a council permit.</li>
+<li><strong>Insulation rules.</strong> New extensions must meet current Part L standards. Quotes based on older specifications may be short on wall and roof insulation and glazing performance.</li>
+</ul>
+<h2>What keeps it down</h2>
+<ul><li>A simple rectangle with a flat roof, on ordinary strip or trench-fill foundations.</li><li>Standard door and window sizes rather than made-to-measure glazing.</li><li>A kitchen layout that keeps the sink near the existing drain run.</li><li>Getting the structural engineer&rsquo;s calculations done before asking for quotes, so builders aren&rsquo;t adding a margin to cover a beam size they&rsquo;ve had to guess.</li></ul>
+<h2>Costs people forget</h2>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Item</th><th>Typical cost, 2026</th><th>VAT</th></tr></thead><tbody>
+<tr><th>Architectural drawings, simple extension</th><td>£1,500&ndash;£2,500</td><td>Usually plus VAT</td></tr>
+<tr><th>Structural engineer</th><td>£250&ndash;£500 for a single beam; £600&ndash;£1,200 for a full extension</td><td>Usually plus VAT</td></tr>
+<tr><th>Building control, Liverpool City Council, 10&ndash;40 m²</th><td>£822 full plans (£300 plan charge + £522 inspection), or £828 building notice</td><td>Included</td></tr>
+<tr><th>Householder planning application, England</th><td>£548 (from 1 April 2026)</td><td>None</td></tr>
+<tr><th>Lawful development certificate, to prove the work is permitted development</th><td>£274</td><td>None</td></tr>
+<tr><th>Prior approval, larger home extension</th><td>£249</td><td>None</td></tr>
+<tr><th>Party wall surveyor, if your neighbour doesn&rsquo;t consent in writing</th><td>£900&ndash;£1,800 per neighbour</td><td>Usually plus VAT</td></tr>
+<tr><th>Mid-range fitted kitchen</th><td>£8,000&ndash;£15,000</td><td>Included</td></tr>
+<tr><th>Contingency, held by you outside the contract</th><td>10&ndash;15% of the build; nearer 20% on a pre-1919 house</td><td>&ndash;</td></tr>
+<tr><th>VAT from a VAT-registered builder</th><td>20% of the build</td><td>&ndash;</td></tr>
+</tbody></table></div>
+<p>Building control charges are set by each council. The Liverpool figures are from the council&rsquo;s website as of October 2026; Wirral, Sefton, Knowsley and St Helens publish their own. A building notice can&rsquo;t be used when you&rsquo;re building over or within 3m of a public sewer, so full plans is the safer route on most terraces.</p>
+<p>Party wall notices are needed for most rear extensions on terraces and semis, because the new foundations will usually be within 3m of the neighbour&rsquo;s and dug deeper than theirs. If the neighbour agrees in writing, there&rsquo;s no surveyor to pay.</p>
+<h2>Do you need planning permission?</h2>
+<p>Many single-storey rear extensions are permitted development (PD), meaning they don&rsquo;t need a planning application. The main limits:</p>
+<ul><li>Up to 3m deep on a semi or terrace, 4m on a detached house, measured from the original rear wall. An existing back kitchen or outrigger counts as part of the original house only if it was there on 1 July 1948 or when the house was built; later additions use up your allowance.</li><li>Up to 4m high, or 3m to the eaves if within 2m of a boundary, with eaves no higher than the existing house.</li><li>Materials similar in appearance to the house, and the extension plus other outbuildings covering no more than half the garden.</li><li>Under the larger home extension scheme you can go to 6m (attached) or 8m (detached) after notifying the council, which has 42 days to decide.</li></ul>
+<p>Flats and maisonettes, listed buildings, and houses where PD rights have been removed by a planning condition or an Article 4 direction need full planning. In a conservation area a single-storey rear extension can still be PD, but the larger home extension route isn&rsquo;t available. Every extension needs Building Regulations approval, whether or not it needs planning.</p>
+<div class="callout"><p>PD rules have conditions and exceptions not listed here. Check with your council, or apply for a lawful development certificate, before relying on them.</p></div>
+<h2>How long does it take?</h2>
+<p>Our sample 16 m² extension was programmed at 10 weeks on site. Most single-storey rear extensions take 8&ndash;14 weeks once work starts, longer if glazing or steel is slow to arrive. Before that, allow time for drawings, the engineer, building control, and either 8 weeks for a householder planning decision or 42 days for prior approval.</p>
+<h2>What to do next</h2>
+<ol><li>Check which planning route applies, and look up the sewer map for your address with United Utilities.</li><li>Get drawings and the structural engineer&rsquo;s calculations.</li><li>Submit a building control application and serve party wall notices.</li><li>Get at least three quotes on the same drawings, and compare them line by line against an independent estimate.</li></ol>
+<h2>Common questions</h2>${faqHtml(NW_EXTENSION_FAQ)}
+<h2>Sources</h2>
+<ul>
+<li><a href="https://less.co.uk/home-improvements/extensions/cost/north-west" rel="noopener">Less.co.uk, Extension cost in the North West (updated April 2026)</a></li>
+<li><a href="https://www.bestbuilders.co.uk/costs/single-storey-extension-cost-uk" rel="noopener">BestBuilders, Single-storey extension cost UK (updated 10 August 2026)</a></li>
+<li><a href="https://www.self-build.co.uk/extension-cost-guide" rel="noopener">Build It, How much does it cost to build an extension in 2026? (updated 31 August 2026)</a></li>
+<li><a href="https://www.fmb.org.uk/resource/single-storey-extension-costs-a-practical-guide-for-homeowners.html" rel="noopener">Federation of Master Builders, Single storey extension costs: a practical guide for homeowners (4 March 2026)</a></li>
+<li><a href="https://liverpool.gov.uk/planning-and-building-control/building-control/building-regulation-fees/fees-for-domestic-extensions-and-alterations/" rel="noopener">Liverpool City Council, Building regulation fees for domestic extensions and alterations (viewed October 2026)</a></li>
+<li><a href="https://www.ribblevalley.gov.uk/downloads/file/4972/planning-application-fees-from-1-april-2026-table-" rel="noopener">Ribble Valley Borough Council, Planning application fees from 1 April 2026 (national fee schedule)</a></li>
+<li><a href="https://www.myjobquote.co.uk/costs/installing-rsj" rel="noopener">MyJobQuote, RSJ installation cost (7 July 2026)</a></li>
+<li><a href="https://www.trade2base.com/blog/builder-day-rates-uk" rel="noopener">Trade2base, Builder day rates UK 2026 (8 June 2026)</a></li>
+<li><a href="https://www.unitedutilities.com/builders-developers/wastewater-services/building-over-a-sewer/" rel="noopener">United Utilities, Building over a sewer</a></li>
+<li><a href="https://www.gov.uk/government/statistics/building-materials-and-components-statistics-september-2026/construction-building-materials-commentary-september-2026" rel="noopener">Department for Business and Trade, Building materials and components statistics, 7 October 2026</a></li>
+<li><a href="https://www.gov.uk/government/publications/permitted-development-rights-for-householders-technical-guidance" rel="noopener">GOV.UK, Permitted development rights for householders: technical guidance</a></li>
+</ul>
+</div></section>` + ctaBand('Pricing an extension in the North West?', 'TheGo2Guys measures every item on your drawings and prices it at current Merseyside rates. Homeowners use it to check builders&rsquo; quotes; builders use it to tender. Single-storey extensions from £150, back in 3&ndash;5 working days. No drawings yet? Get in touch and we&rsquo;ll tell you what you need first.')
   });
 }
 
