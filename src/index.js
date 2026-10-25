@@ -289,7 +289,8 @@ function routeExtraPage(path) {
     '/guides/loft-conversion-cost': loftGuidePage,
     '/guides/extension-preliminaries': prelimsGuidePage,
     '/insights': insightsIndexPage,
-    '/insights/steel-prices-mortgage-rates-october-2026': steelMortgageInsightPage
+    '/insights/steel-prices-mortgage-rates-october-2026': steelMortgageInsightPage,
+    '/insights/construction-jobs-plan-builder-shortages-october-2026': jobsPlanInsightPage
   };
   if (pages[path]) { return new Response(pages[path](), { headers: PAGE_HEADERS }); }
   if (path === '/sitemap.xml') { return new Response(sitemapXml(), { headers: { 'Content-Type': 'application/xml; charset=utf-8', 'Cache-Control': 'public, max-age=3600' } }); }
@@ -298,7 +299,7 @@ function routeExtraPage(path) {
 }
 
 function sitemapXml() {
-  const paths = ['/', '/calculators', '/calculators/bricks-and-blocks', '/calculators/concrete', '/calculators/plaster', '/guides', '/guides/house-extension-cost', '/guides/loft-conversion-cost', '/guides/extension-preliminaries', '/insights', '/insights/steel-prices-mortgage-rates-october-2026', '/terms', '/privacy'];
+  const paths = ['/', '/calculators', '/calculators/bricks-and-blocks', '/calculators/concrete', '/calculators/plaster', '/guides', '/guides/house-extension-cost', '/guides/loft-conversion-cost', '/guides/extension-preliminaries', '/insights', '/insights/steel-prices-mortgage-rates-october-2026', '/insights/construction-jobs-plan-builder-shortages-october-2026', '/terms', '/privacy'];
   return '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
     paths.map(function (p) { return '  <url><loc>' + SITE + (p === '/' ? '/' : p) + '</loc></url>'; }).join('\n') + '\n</urlset>\n';
 }
@@ -742,6 +743,7 @@ function prelimsGuidePage() {
 // ------------------------------- Insights ----------------------------------
 // Newest first. Each insight: [path, date label, title, summary]
 const INSIGHTS = [
+  ['/insights/construction-jobs-plan-builder-shortages-october-2026', '25 October 2026', 'Builder shortages and the Construction Jobs Plan: what changes for extensions', 'The new jobs plan, the general builder apprenticeship and the &pound;2,000 hiring payment, and how to plan an extension around the shortage of electricians and other trades.'],
   ['/insights/steel-prices-mortgage-rates-october-2026', '18 October 2026', 'Structural steel up 21%, five-year fixes at 6%: pricing an extension this autumn', 'August&rsquo;s materials figures, the new steel import duty and dearer mortgages, and what homeowners and builders should do about them.']
 ];
 
@@ -823,6 +825,63 @@ function steelMortgageInsightPage() {
 <li><a href="https://www.pbctoday.co.uk/news/planning-construction-news/september-2026-pmi-shows-slowing-contraction/166419/" rel="noopener">PBC Today, &ldquo;September 2026 PMI shows slowing contraction&rdquo;, 7 October 2026 (S&amp;P Global UK Construction PMI)</a></li>
 </ul>
 </div></section>` + ctaBand('Want a price at this month&rsquo;s rates?', 'Send your drawings and every item is priced at current rates, with steel and other volatile materials shown on their own lines. From &pound;150 for a single-storey extension, in 3&ndash;5 working days.')
+  });
+}
+
+function jobsPlanInsightPage() {
+  const path = '/insights/construction-jobs-plan-builder-shortages-october-2026';
+  const title = 'Builder shortages and the Construction Jobs Plan: what changes for extensions';
+  return pageShell({
+    path: path,
+    title: 'Construction Jobs Plan and Builder Shortages: What It Means for Extensions, October 2026 | TheGo2Guys',
+    desc: 'The Construction Jobs Plan, the new general builder apprenticeship and the £2,000 hiring payment explained, with what homeowners and small builders should do about the shortage of electricians and other trades.',
+    schema: { '@context': 'https://schema.org', '@type': 'Article', headline: title, datePublished: '2026-10-25', author: { '@type': 'Organization', name: 'TheGo2Guys' }, publisher: { '@type': 'Organization', name: 'TheGo2Guys' }, mainEntityOfPage: SITE + path },
+    body: pageHero([['/', 'Home'], ['/insights', 'Insights'], [path, 'Construction Jobs Plan']], title, 'The government published its Construction Jobs Plan on 19 October, four days after a new Level 2 general builder apprenticeship became available. Neither will put more electricians or bricklayers on site this winter. For small builders the main change is a &pound;2,000 payment for taking on a young apprentice. For homeowners the shortage matters more, because it decides how long the job takes. Plan for it before signing a contract.') +
+      `<section class="plain"><div class="container prose">
+<p class="pub-date">Published 25 October 2026</p>
+<div class="callout"><p><strong>In short</strong></p><ul><li>Electricians and plumbers (known in the trade as M&amp;E, mechanical and electrical) are the trades most often blamed for holding up projects, according to construction professionals. Bricklayers, carpenters and groundworkers are also short.</li><li>For a homeowner, the shortage mostly affects how long the job takes rather than the price. Ask any builder how they will cover these trades before you sign.</li><li>In England, small firms taking on a new apprentice aged 16 to 24 can now claim up to &pound;2,000, paid in two instalments.</li><li>The training schemes in the plan will take years to make a difference on site.</li></ul></div>
+<h2>If you are planning an extension or renovation</h2>
+<p>The shortage shows up in the schedule (builders call it the programme) more than in the price. On a typical single-storey extension the electrician comes at least three times: first fix, running cables once the stud walls and ceiling joists are in and before plastering; second fix, fitting sockets, switches and lights after plastering; and a final visit to test and certify the work. If the electrician cannot come when the walls are ready, the plasterer waits, and so does everything after.</p>
+<p>Before you sign:</p>
+<ol><li>Ask the builder which trades they employ and which they subcontract. A builder with their own electrician, or one they use regularly, is less likely to stall.</li><li>Ask for a programme with dates for the first and second fix electrics and plumbing, not just a start and finish date.</li><li>Check the electrician is registered with a competent person scheme such as NICEIC or NAPIT. Building control will need their certificate before signing off the extension.</li><li>Read what the contract says about delays, and make sure stage payments are tied to work completed rather than to dates.</li><li>Do not choose a builder only because they can start next week. In research published in April, the Federation of Master Builders (FMB) and the HomeOwners Alliance found that nearly one in five homeowners had put off work because they could not find a builder they trusted. Look at recent jobs, check insurance and take up references whatever the start date.</li></ol>
+<h2>What was announced</h2>
+<p>The Construction Jobs Plan brings together funding that had mostly been announced already, including the &pound;625 million construction skills package from March 2025. It backs an industry ambition, set by the Construction Skills Mission Board, of 100,000 construction job opportunities a year by the end of this Parliament. The plan does not define a job opportunity.</p>
+<p>For small firms, the useful parts are:</p>
+<ul><li><strong>A hiring payment of up to &pound;2,000.</strong> In England, employers that do not pay the apprenticeship levy (a payroll tax on large employers, so this covers almost every small builder) can claim it when they take on a new employee aged 16 to 24 as an apprentice. It applies to apprenticeships starting from 1 October 2026 and is paid in two equal instalments, after 90 days and after 365 days (or 242 days if the apprenticeship is shorter than a year). The government&rsquo;s guidance says it can be claimed on top of existing apprenticeship payments.</li><li><strong>Funded training.</strong> Training for eligible apprentices under 25 is fully funded, so the firm does not pay the college or training provider.</li><li><strong>Foundation apprenticeships.</strong> Up to 10,000 places on these shorter, entry-level courses for young people.</li><li><strong>Help with recruitment.</strong> CITB&rsquo;s New Entrant Support Team can help find a candidate and a training provider, and shared or flexi-job apprenticeship schemes let an agency employ the apprentice and place them with different firms.</li></ul>
+<p>The plan&rsquo;s own figures show why training is hard for small firms: 35.1% of the construction workforce is aged 50 or over, and almost all construction firms employ fewer than ten people. The plan says small firms often lack the time, money and help with paperwork that taking on a trainee needs.</p>
+<p>On 15 October the FMB announced that the Level 2 General Builder apprenticeship standard is now available. It was developed by small and medium-sized firms and gives apprentices a grounding in bricklaying, carpentry, plastering and painting, which suits the mixed work a small builder does on extensions, repairs and refurbishments.</p>
+<p>The National Federation of Builders was less positive about the plan. Its chief executive, Richard Beresford, blamed &ldquo;stealth taxation, particularly in the construction industry&rdquo; for firms shedding staff, and warned that without a better business environment learners would struggle to find employers to train with.</p>
+<h2>How short are the trades?</h2>
+<p>In Gleeds&rsquo; UK market report for the third quarter of 2026, reported on 16 October, almost nine in ten construction professionals said labour shortages were hurting their projects, and more than half said the effect was moderate or severe. More than a third named M&amp;E as the trade with the greatest impact on delivery. Bricklayers, carpenters and groundworkers were also cited.</p>
+<p>The shortage persists even though there is less work about. The Office for National Statistics reported on 15 October that construction output fell 1.0% in the three months to August. Repair and maintenance, the category that includes most home improvement work, fell 0.3%.</p>
+</div></section>
+<section class="plain alt"><div class="container prose">
+<h2>If you run a small building firm</h2>
+<p>The &pound;2,000 and the funded training reduce the cost of an apprentice, but they do not cover the wage or the time spent supervising on site, and the money arrives at day 90 and day 365, not at the start. The general builder standard suits a firm that needs someone to help across trades rather than a specialist. If you cannot offer steady work for the whole apprenticeship, a shared scheme lets an agency employ the apprentice and move them between firms.</p>
+<p>When pricing, allow realistic time for M&amp;E in the programme and in the preliminaries (the site running costs such as welfare, supervision, skips and scaffold). On the sample estimate in the <a href="/guides/extension-preliminaries">preliminaries guide</a>, welfare and part-time supervision alone come to about &pound;300 a week. A week lost waiting for an electrician costs that and puts the agreed finish date at risk.</p>
+<h2>VAT on energy-saving work and the Budget</h2>
+<p>The Budget is on 28 October. In its submission the FMB has asked for VAT relief to be extended beyond energy-saving work to wider home improvements, for more support for small firms taking on apprentices, and for funding for mandatory licensing of building firms. None of this is confirmed.</p>
+<p>What is already set: installing qualifying energy-saving materials in existing homes, such as insulation, heating controls, draught-proofing, heat pumps, solar panels and batteries, is zero-rated for VAT until 31 March 2027, after which the rate is due to go to 5%. If a renovation includes this kind of work, have it priced as a separate item. Insulation built into the walls and floor of a new extension may not qualify. The rate charged depends on when the work is invoiced or paid for, not when it is finished, so payments made after 31 March 2027 are likely to carry 5%. Check the details with the installer or an accountant before relying on the saving.</p>
+<h2>An estimator&rsquo;s view</h2>
+<p>For the next year or two, expect electricians and plumbers to be the hardest trades to book. Allow for that in both the price and the programme.</p>
+<h2>Getting a price</h2>
+<p>TheGo2Guys is a Liverpool-based estimating service. Homeowners can get an independent, itemised price before signing with a builder; builders can hand over their take-offs and pricing. Every trade is shown on its own line, with time for M&amp;E allowed in the preliminaries. Send your drawings through the quote form, or call <a href="tel:01516621274">0151 662 1274</a>, and the fee and delivery date are confirmed within 24 hours.</p>
+<h2>Sources</h2>
+<ul>
+<li><a href="https://www.gov.uk/government/publications/construction-jobs-plan" rel="noopener">GOV.UK, Construction Jobs Plan, 19 October 2026</a></li>
+<li><a href="https://help.apprenticeships.education.gov.uk/hc/en-gb/articles/37226219811090-Financial-support-to-hire-a-young-person" rel="noopener">Apprenticeship service, Financial support to hire a young person</a></li>
+<li><a href="https://help.apprenticeships.education.gov.uk/hc/en-gb/articles/34063554413202-Non-levy-incentive-for-hiring-a-young-apprentice" rel="noopener">Apprenticeship service, Non-levy incentive for hiring a young apprentice</a></li>
+<li><a href="https://www.fmb.org.uk/resource/new-general-builder-apprenticeship-opens-new-route-into-construction.html" rel="noopener">Federation of Master Builders, New General Builder Apprenticeship opens new route into construction, 15 October 2026</a></li>
+<li><a href="https://www.buildnews.co.uk/government-unveils-625m-construction-jobs-plan/" rel="noopener">Build News, &ldquo;Government unveils &pound;625m Construction Jobs Plan&rdquo;, 21 October 2026 (NFB comments)</a></li>
+<li><a href="https://www.pbctoday.co.uk/news/hr-skills-news/construction-jobs-plan-aims-for-100000-jobs-per-year/166877/" rel="noopener">PBC Today, &ldquo;Construction jobs plan aims for 100,000 jobs per year&rdquo;, 22 October 2026</a></li>
+<li><a href="https://pbctoday.co.uk/news/planning-construction-news/labour-shortages-impacting-construction-projects-report-finds/166690/" rel="noopener">PBC Today, &ldquo;Labour shortages are impacting construction projects, report finds&rdquo;, 16 October 2026 (Gleeds UK Market Report Q3 2026)</a></li>
+<li><a href="https://www.ons.gov.uk/businessindustryandtrade/constructionindustry/bulletins/constructionoutputingreatbritain/august2026" rel="noopener">Office for National Statistics, Construction output in Great Britain: August 2026, 15 October 2026</a></li>
+<li><a href="https://projectscot.com/2026/10/fmb-calls-for-vat-relief-to-encourage-home-improvement-work/" rel="noopener">Project Scotland, &ldquo;FMB calls for VAT relief to encourage home improvement work&rdquo;, 22 October 2026</a></li>
+<li><a href="https://www.fmb.org.uk/resource/consumer-confidence-in-builders-costs-uk-economy-11-2bn-a-year.html" rel="noopener">Federation of Master Builders, Consumer confidence in builders costs UK economy &pound;11.2bn a year, 30 April 2026</a></li>
+<li><a href="https://hillierhopkins.co.uk/insight-posts/vat-relief-on-energy-saving-materials/" rel="noopener">Hillier Hopkins, VAT relief on energy-saving materials</a></li>
+<li><a href="https://www.icaew.com/insights/tax-news/2026/aug-2026/tax-news-in-brief-5-august-2026" rel="noopener">ICAEW, Tax news in brief, 5 August 2026 (Budget date)</a></li>
+</ul>
+</div></section>` + ctaBand('Want to know what your job should cost?', 'Send your drawings and every trade is priced at current rates on its own line, with a realistic programme behind the preliminaries. Homeowners and builders welcome, in 3&ndash;5 working days.')
   });
 }
 
