@@ -289,6 +289,7 @@ function routeExtraPage(path) {
     '/guides/house-extension-cost': extensionGuidePage,
     '/guides/loft-conversion-cost': loftGuidePage,
     '/guides/extension-preliminaries': prelimsGuidePage,
+    '/guides/garage-conversion-cost': garageGuidePage,
     '/insights': insightsIndexPage,
     '/insights/steel-prices-mortgage-rates-october-2026': steelMortgageInsightPage,
     '/insights/construction-jobs-plan-builder-shortages-october-2026': jobsPlanInsightPage
@@ -300,7 +301,7 @@ function routeExtraPage(path) {
 }
 
 function sitemapXml() {
-  const paths = ['/', '/calculators', '/calculators/bricks-and-blocks', '/calculators/concrete', '/calculators/plaster', '/guides', '/guides/house-extension-cost', '/guides/loft-conversion-cost', '/guides/extension-preliminaries', '/insights', '/insights/steel-prices-mortgage-rates-october-2026', '/insights/construction-jobs-plan-builder-shortages-october-2026', '/terms', '/privacy'];
+  const paths = ['/', '/calculators', '/calculators/bricks-and-blocks', '/calculators/concrete', '/calculators/plaster', '/guides', '/guides/house-extension-cost', '/guides/loft-conversion-cost', '/guides/extension-preliminaries', '/guides/garage-conversion-cost', '/insights', '/insights/steel-prices-mortgage-rates-october-2026', '/insights/construction-jobs-plan-builder-shortages-october-2026', '/terms', '/privacy'];
   return '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
     paths.map(function (p) { return '  <url><loc>' + SITE + (p === '/' ? '/' : p) + '</loc></url>'; }).join('\n') + '\n</urlset>\n';
 }
@@ -529,6 +530,7 @@ function guidesIndexPage() {
       `<section class="plain"><div class="container"><div class="card-grid">
 <a class="card" href="/guides/house-extension-cost"><h3>House extension cost UK (2026)</h3><p>Cost per m² for single and double-storey extensions, where the money goes, and the extras people forget.</p><span class="card-go">Read the guide &rarr;</span></a>
 <a class="card" href="/guides/loft-conversion-cost"><h3>Loft conversion cost UK (2026)</h3><p>Velux, dormer, hip-to-gable and mansard conversions compared, with typical prices and timescales.</p><span class="card-go">Read the guide &rarr;</span></a>
+<a class="card" href="/guides/garage-conversion-cost"><h3>Garage conversion cost UK (2026)</h3><p>Single, double and detached garage conversions, an all-in example budget, Building Regulations and Liverpool fees.</p><span class="card-go">Read the guide &rarr;</span></a>
 <a class="card" href="/guides/extension-preliminaries"><h3>Pricing preliminaries on an extension</h3><p>For builders: what goes in preliminaries, a real 2026 breakdown, and the items most often left out of a quote.</p><span class="card-go">Read the guide &rarr;</span></a>
 </div></div></section>` + CALC_CTA
   });
@@ -738,6 +740,97 @@ function prelimsGuidePage() {
 <p>Laying them out like this also makes it easy to show a client why a longer programme or a change of scope costs more.</p>
 <h2>Common questions</h2>${faqHtml(PRELIMS_FAQ)}
 </div></section>` + ctaBand('Want every line priced, preliminaries included?', 'Send us your drawings and we price the whole job, with preliminaries set out item by item like the example above. From £150 for a single-storey extension, in 3&ndash;5 working days.')
+  });
+}
+
+// ------------------------- Garage conversion guide -------------------------
+const GARAGE_FAQ = [
+  ['How much does it cost to convert a single garage in 2026?', 'Around £10,000 to £14,000 before VAT for an integral garage turned into a basic room, or £15,000 to £22,000 with a shower room. Northern England, including the North West, generally prices 10 to 20% below the UK average.'],
+  ['Is a garage conversion cheaper than an extension?', 'Yes, by a wide margin. Checkatrade puts conversions at about £625 to £1,250 per m², against £1,800 to £3,000 per m² for a new extension.'],
+  ['Do I need planning permission to convert my garage?', 'Usually not for internal work. The exception is a house where permitted development rights were removed, most often by a condition on a newer estate that keeps the garage for parking.'],
+  ['Do I need Building Regulations approval?', 'Yes, even without planning. In Liverpool a full plans application costs £660 including VAT, and building control will want to see the footing under the old door opening before it is covered up.'],
+  ['How long does a garage conversion take?', 'Two to four weeks on site for a simple single conversion. Allow up to five weeks before that for a full plans decision, so get the drawings in early.']
+];
+
+function garageGuidePage() {
+  return pageShell({
+    path: '/guides/garage-conversion-cost',
+    title: 'Garage Conversion Cost UK 2026: Single, Double and Detached | TheGo2Guys',
+    desc: 'What a garage conversion costs in the UK in 2026: single, double and detached garages, an all-in example budget, Building Regulations, Liverpool fees and what pushes the price up.',
+    schema: faqSchema(GARAGE_FAQ),
+    body: pageHero([['/', 'Home'], ['/guides', 'Cost guides'], ['/guides/garage-conversion-cost', 'Garage conversion cost']], 'How much does a garage conversion cost in the UK?', 'Turning a single integral garage into a habitable room costs around £10,000&ndash;£14,000 before VAT in 2026. A double garage is more like £20,000&ndash;£30,000, and a detached garage from £15,000. Northern England, including Liverpool and the North West, generally prices 10&ndash;20% below the UK average.') +
+      `<section class="plain"><div class="container prose">
+<h2>Garage conversion costs in 2026</h2>
+<p>A garage conversion is usually the cheapest way to add a room, because the shell is already built. Most of the money goes on bricking up the door opening and insulating the room to current standards. Electrics, heating and finishes make up the rest.</p>
+<p>An integral garage sits inside the footprint of the house, often with a bedroom above. An attached garage stands against the side of the house under its own roof. A detached garage is a separate building.</p>
+<p>Typical 2026 costs for a finished room with standard finishes, generally quoted before VAT:</p>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Conversion</th><th class="num">Typical size</th><th class="num">Typical cost (ex VAT)</th></tr></thead><tbody>
+<tr><th>Partial (front kept as store or utility)</th><td class="num">Part of a single</td><td class="num">£5,500&ndash;£8,500</td></tr>
+<tr><th>Single integral garage, basic room</th><td class="num">15&ndash;18 m²</td><td class="num">£10,000&ndash;£14,000</td></tr>
+<tr><th>Single attached garage, basic room</th><td class="num">15&ndash;18 m²</td><td class="num">£10,000&ndash;£20,000</td></tr>
+<tr><th>Single, bedroom with shower room</th><td class="num">15&ndash;18 m²</td><td class="num">£15,000&ndash;£22,000</td></tr>
+<tr><th>Double integral or attached</th><td class="num">30&ndash;36 m²</td><td class="num">£20,000&ndash;£30,000</td></tr>
+<tr><th>Detached garage</th><td class="num">Varies</td><td class="num">£15,000&ndash;£31,000 (single), up to £45,000 (double)</td></tr>
+</tbody></table></div>
+<p>The ranges come from the Checkatrade, MyJobQuote and BestBuilders 2026 cost guides. MyJobQuote puts northern England 10&ndash;20% below the UK average, and the guides put London and the South East 15&ndash;35% above it. An integral garage is the cheapest to convert: it already shares walls with the house and sits next to the existing heating and electrical circuits. A detached garage often needs a new floor, power, water and drainage run across the garden, and sometimes planning permission.</p>
+<h2>An example budget</h2>
+<p>For a single integral garage at £12,000 for the build, the all-in figure looks more like this:</p>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Item</th><th class="num">Cost</th></tr></thead><tbody>
+<tr><th>Build cost</th><td class="num">£12,000</td></tr>
+<tr><th>VAT at 20%, if the builder is VAT-registered</th><td class="num">£2,400</td></tr>
+<tr><th>Drawings</th><td class="num">£1,000</td></tr>
+<tr><th>Liverpool building control, full plans (inc VAT)</th><td class="num">£660</td></tr>
+<tr><th>Contingency at 10% of the build</th><td class="num">£1,200</td></tr>
+<tr><th>Total</th><td class="num"><strong>£17,260</strong></td></tr>
+</tbody></table></div>
+<p>Many small builders in the North West trade below the VAT threshold, so the VAT line won't apply to every quote. Make sure any two quotes you compare are on the same basis.</p>
+<h2>Where the money goes on a single conversion</h2>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Item</th><th class="num">Typical cost</th></tr></thead><tbody>
+<tr><th>Filling the door opening: footing or beam, insulated wall, window</th><td class="num">£2,500&ndash;£6,000</td></tr>
+<tr><th>Insulation and damp-proofing to floor, walls and ceiling</th><td class="num">£1,500&ndash;£5,000</td></tr>
+<tr><th>Electrics: sockets, lighting, smoke alarms</th><td class="num">£600&ndash;£2,000</td></tr>
+<tr><th>Extra radiator off the existing heating</th><td class="num">From around £800</td></tr>
+<tr><th>Plumbing and drainage, if adding a sink or WC</th><td class="num">£800&ndash;£3,000</td></tr>
+<tr><th>Shower room or bathroom, if wanted</th><td class="num">£5,500&ndash;£9,000</td></tr>
+</tbody></table></div>
+<p>Plastering, the internal door and joinery, flooring, decorating, the skip, and the builder's overheads and profit make up the rest of a full quote.</p>
+<p>The door infill has the widest range. A rendered blockwork panel with a uPVC window is the cheap end. Reclaimed brick to match, a new footing, a bay, or a front door as well as a window push it towards £6,000.</p>
+</div></section>
+<section class="plain alt"><div class="container prose">
+<h2>What Building Regulations will ask for</h2>
+<p>Converting a garage into a habitable room needs Building Regulations approval, even when it needs no planning permission. The points that drive cost:</p>
+<ul><li><strong>Support under the old door opening.</strong> Garage foundations often stop either side of the door. The infill wall needs a new footing, or a concrete beam spanning between the existing foundations where building control accepts it.</li><li><strong>The floor.</strong> Garage slabs sit 100&ndash;150 mm below the house floor. A damp-proof membrane, insulation and screed or chipboard take up most of that, but the build-up can come out higher or lower. Get it drawn so it finishes level with the house floor, with no trip step at the doorway.</li><li><strong>Insulation.</strong> The new infill wall needs a U-value of 0.18 W/m²K or better. Existing walls, floor and ceiling are upgraded to around 0.30, 0.25 and 0.16 W/m²K, and new windows and doors to 1.4. A single-skin garage wall needs an insulated lining inside, which takes floor space as well as money.</li><li><strong>Fire safety.</strong> Building control will want mains-wired, interlinked smoke alarms. If the room doesn't open directly onto a hall leading to the front door, it also needs an escape window with an opening of at least 0.33 m² and 450 mm each way, its bottom edge no more than 1,100 mm above the floor.</li><li><strong>Ventilation.</strong> Trickle vents in the new window, an opening window big enough to air the room quickly, and extract fans in any shower room or utility.</li><li><strong>Electrics.</strong> New circuits are notifiable under Part P. An electrician registered with a competent person scheme can certify the work; otherwise building control has to inspect it.</li></ul>
+<h2>Fees and approvals</h2>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Item</th><th class="num">Typical cost</th></tr></thead><tbody>
+<tr><th>Drawings (architect or technician)</th><td class="num">£500&ndash;£2,500</td></tr>
+<tr><th>Structural engineer, if needed</th><td class="num">£500&ndash;£1,200</td></tr>
+<tr><th>Liverpool City Council building control, full plans (plan and inspection charge, inc VAT)</th><td class="num">£660</td></tr>
+<tr><th>Liverpool City Council building notice (inc VAT)</th><td class="num">£672</td></tr>
+<tr><th>Lawful Development Certificate, proposed development (half the householder fee)</th><td class="num">£274</td></tr>
+<tr><th>Householder planning application, if needed</th><td class="num">£548</td></tr>
+</tbody></table></div>
+<p>Full plans means the drawings are approved before work starts, which also gives builders a fixed specification to price. A building notice is quicker to get going but leaves more decisions to be made on site. Other councils and registered building control approvers charge their own rates, so ask for a quote.</p>
+<p>Most garage conversions don't need planning permission when the work is internal and the building isn't made bigger. Planning is needed where permitted development rights have been removed by a planning condition or an Article 4 direction. That is common on newer estates, where a condition may require the garage to stay available for parking, and in some conservation areas. Listed buildings need listed building consent, and turning a garage into a separate dwelling may need permission whatever the work involves. Check the original planning approval for your house before starting.</p>
+<h2>What pushes the price up</h2>
+<ul><li><strong>No footing under the door opening</strong>, or poor ground.</li><li><strong>A cracked or uneven slab</strong> that has to be broken out and relaid.</li><li><strong>Moving the boiler or meters</strong>, which are often in the garage on newer houses. Get these priced separately; meter moves are arranged through the supplier and can take weeks.</li><li><strong>A shower room or kitchen</strong>: drainage runs, extract fans and fittings.</li><li><strong>A detached garage</strong>: services across the garden, and often a new roof.</li><li><strong>A shared garage wall</strong>, where a party wall agreement can cost from about £700 per neighbour.</li></ul>
+<h2>Extras people forget</h2>
+<ul><li>Plastering, skirting, doors, flooring and decorating, if the quote stops at &ldquo;first fix&rdquo;.</li><li>Making good the drive where the door used to be.</li><li>Somewhere to put whatever lives in the garage now.</li><li>A contingency of 10&ndash;15%, more on an older or detached garage.</li><li>Telling your home insurer about the work.</li></ul>
+<h2>How long it takes</h2>
+<p>Most integral or attached single conversions take two to four weeks on site. Adding a shower room pushes that to four to six weeks, and a detached garage needing new services six to ten. Before that, allow time for drawings and approval: a council has five weeks to decide a full plans application, or two months if you agree, and a planning decision can take up to eight weeks.</p>
+<div class="callout"><p><strong>What to do next:</strong> check your house's original planning approval for a condition about the garage, get drawings done and submitted to building control, then get two or three quotes against the same drawings and compare them line by line, on the same VAT basis.</p></div>
+<h2>Common questions</h2>${faqHtml(GARAGE_FAQ)}
+<h2>Sources</h2>
+<ul>
+<li><a href="https://checkatrade.com/blog/cost-guides/garage-conversion-cost" rel="noopener">Checkatrade, Garage conversion cost in the UK, updated May 2026</a></li>
+<li><a href="https://www.myjobquote.co.uk/costs/garage-conversion-cost" rel="noopener">MyJobQuote, Garage conversion cost, 9 July 2026</a></li>
+<li><a href="https://www.bestbuilders.co.uk/guides/costs/how-much-does-a-garage-conversion-cost-in-2026-uk" rel="noopener">BestBuilders, How much does a garage conversion cost in 2026, 1 September 2026</a></li>
+<li><a href="https://www.fmb.org.uk/resource/homeowner-s-guide-to-garage-conversion-costs.html" rel="noopener">Federation of Master Builders, Homeowner&rsquo;s guide to garage conversion costs, updated February 2026</a></li>
+<li><a href="https://liverpool.gov.uk/planning-and-building-control/building-control/building-regulation-fees/fees-for-domestic-extensions-and-alterations/" rel="noopener">Liverpool City Council, Fees for domestic extensions and alterations (category 4), viewed October 2026</a></li>
+<li><a href="https://www.ribblevalley.gov.uk/downloads/file/4972/planning-application-fees-from-1-april-2026-table-" rel="noopener">Planning application fees from 1 April 2026 (national schedule, as published by Ribble Valley Borough Council)</a></li>
+<li><a href="https://www.planningportal.co.uk/permission/common-projects/garage-conversion/planning-permission" rel="noopener">Planning Portal, Garage conversion: planning permission</a></li>
+<li><a href="https://cncbuildingcontrol.gov.uk/wp-content/uploads/2025/02/CNCD-052-Garage-Conversion-Easy-Guide-V1.2.pdf" rel="noopener">CNC Building Control, Garage conversion easy guide</a></li>
+</ul>
+</div></section>` + ctaBand('Pricing a garage conversion?', 'Got drawings or quotes? We measure every item, from the infill wall to the skirting, and price it at current North West rates, so you can check a quote or build your own. Back in 3&ndash;5 working days.')
   });
 }
 
