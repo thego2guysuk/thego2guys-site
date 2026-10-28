@@ -1,6 +1,7 @@
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+    if (url.protocol === 'http:') { return Response.redirect(SITE + url.pathname + url.search, 301); }
     const path = url.pathname.length > 1 ? url.pathname.replace(/\/+$/, '') : url.pathname; if (url.hostname.startsWith('www.')) { return Response.redirect(SITE + url.pathname + url.search, 301); } if (path !== url.pathname || path === '/index.html') { return Response.redirect(SITE + (path === '/index.html' ? '/' : path) + url.search, 301); } if (path === '/favicon.ico' || path === '/favicon.png' || path === '/apple-touch-icon.png') { return new Response(Uint8Array.from(atob(FAVICON_B64), function (c) { return c.charCodeAt(0); }), { headers: { 'Content-Type': 'image/png', 'Cache-Control': 'public, max-age=86400' } }); }
     if (path === '/api/enquiry' && request.method === 'POST') { return handleEnquiry(request, env, url); }
     if (path.startsWith('/files/')) { return serveUpload(path, env); }
@@ -333,20 +334,28 @@ function calculatorsIndexPage() {
     body: pageHero([['/', 'Home'], ['/calculators', 'Free tools']], 'Free building calculators', 'Quick quantities for pricing a job or putting an order together with your merchant. No sign-up.') +
       `<section class="plain"><div class="container"><div class="card-grid">
 <a class="card" href="/calculators/bricks-and-blocks"><h3>Bricks, blocks and mortar</h3><p>Bricks or blocks for a wall, with the cement and building sand for the mortar.</p><span class="card-go">Open calculator &rarr;</span></a>
-<a class="card" href="/calculators/concrete"><h3>Concrete</h3><p>Volume for slabs and trench-fill footings, as a ready-mix order or bags to mix yourself.</p><span class="card-go">Open calculator &rarr;</span></a>
+<a class="card" href="/calculators/concrete"><h3>Concrete</h3><p>How much concrete you need for a slab, shed base, basement floor or footing, as ready-mix or bags to mix yourself.</p><span class="card-go">Open calculator &rarr;</span></a>
 <a class="card" href="/calculators/plaster"><h3>Plaster and plasterboard</h3><p>Bags of skim and undercoat, and sheets of board, for a room or a set area.</p><span class="card-go">Open calculator &rarr;</span></a>
-<a class="card" href="/guides/house-extension-cost"><h3>Extension budget</h3><p>A rough cost range for a single or double-storey extension by size, specification and region.</p><span class="card-go">Open calculator &rarr;</span></a>
+<a class="card" href="/guides/house-extension-cost"><h3>Extension cost calculator</h3><p>A rough cost range for a single or double-storey extension by size, specification and region.</p><span class="card-go">Open calculator &rarr;</span></a>
 <a class="card" href="/guides/loft-conversion-cost"><h3>Loft conversion budget</h3><p>A rough cost range for a Velux, dormer, hip-to-gable or mansard conversion.</p><span class="card-go">Open calculator &rarr;</span></a>
 </div></div></section>` + CALC_CTA
   });
 }
 
 // ------------------------ Bricks, blocks and mortar ------------------------
+const BRICK_FAQ = [
+  ['How many bricks do I need per m²?', 'About 60 bricks per m² for a single-skin (half-brick) wall and 120 per m² for a one-brick (215mm) wall, using standard 215 x 102.5 x 65mm bricks with 10mm joints. Add around 5% for cuts and breakages.'],
+  ['How many blocks are in a m²?', 'Ten standard 440 x 215mm concrete blocks make 1m² of wall, whatever the block thickness.'],
+  ['How much mortar do I need for a block wall?', 'Roughly 0.009m³ of mortar per m² of 100mm blockwork. At a 1:5 mix that is about one 25kg bag of cement for every 8 to 9m² of wall, or a bag every 6 to 7m² if you allow for droppings and part-used mixes.'],
+  ['What mortar mix should I use?', 'A 1:5 or 1:6 cement-to-sand mix suits most general walling above ground. Use a stronger 1:4 mix below the damp-proof course and in exposed garden walls.']
+];
+
 function brickCalcPage() {
   return pageShell({
     path: '/calculators/bricks-and-blocks',
-    title: 'Brick and Block Calculator UK (with Mortar) | TheGo2Guys',
-    desc: 'Work out how many bricks or blocks you need for a wall, plus cement and building sand for the mortar. Free UK calculator using standard sizes.',
+    title: 'Brick Calculator UK: How Many Bricks and Blocks Do I Need? | TheGo2Guys',
+    desc: 'How many bricks or blocks do you need? Enter your wall size to get the number of bricks or blocks, plus the cement and building sand for the mortar. Free UK calculator.',
+    schema: faqSchema(BRICK_FAQ),
     body: pageHero([['/', 'Home'], ['/calculators', 'Free tools'], ['/calculators/bricks-and-blocks', 'Bricks and blocks']], 'Brick and block calculator', 'How many bricks or blocks you need for a wall, and the cement and building sand to lay them.') +
       `<section class="plain"><div class="container tool-grid"><form class="calc" id="calc" onsubmit="return false"><h2>Your wall</h2>
 <div class="form-row"><div class="form-group"><label for="len">Wall length (m)</label><input id="len" type="number" inputmode="decimal" min="0" step="0.01" value="5"></div><div class="form-group"><label for="ht">Wall height (m)</label><input id="ht" type="number" inputmode="decimal" min="0" step="0.01" value="2.4"></div></div>
@@ -372,6 +381,17 @@ function brickCalcPage() {
 <p>Mortar allowances include filling the frogs on bricks. To get cement and sand, the wet mortar volume is increased by about 27% to allow for the dry materials bulking down when mixed, then split by the mix ratio. Cement is taken at 1,440&nbsp;kg/m³ and building sand at 1.6 tonnes/m³.</p>
 <h3>Things the calculator doesn't cover</h3>
 <ul><li>Cavity walls: work out each leaf separately (for example, a half-brick outer leaf and a 100mm block inner leaf), then add wall ties at about 2.5 per m² and cavity insulation.</li><li>Piers, returns and fair-faced work, which use more bricks and more cutting.</li><li>Lintels, DPC, cavity closers and weep vents.</li><li>Plasticiser and any lime in the mix.</li></ul>
+<h2>How to estimate mortar for a block wall</h2>
+<p>Allow about 0.009&nbsp;m³ of wet mortar per m² of 100mm blockwork, and 0.012&nbsp;m³ for 140mm blocks. For a 10&nbsp;m² wall in 100mm blocks at a 1:5 mix with 5% wastage, that comes to:</p>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>10 m² wall at 1:5</th><th class="num">Blocks</th><th class="num">Cement (25kg)</th><th class="num">Building sand</th></tr></thead><tbody>
+<tr><th>100mm blocks</th><td class="num">105</td><td class="num">About 1&ndash;2 bags</td><td class="num">0.16 t</td></tr>
+<tr><th>140mm blocks</th><td class="num">105</td><td class="num">About 2 bags</td><td class="num">0.21 t</td></tr>
+<tr><th>Half-brick wall (for comparison)</th><td class="num">630 bricks</td><td class="num">About 3 bags</td><td class="num">0.39 t</td></tr>
+</tbody></table></div>
+<p>On paper that is about one 25kg bag of cement for every 8&ndash;9&nbsp;m² of 100mm blockwork; many bricklayers allow a bag every 6&ndash;7&nbsp;m² to cover droppings and part-used mixes. Order building sand in bulk bags (around 0.8&ndash;0.9 tonnes each) rather than small bags once you go above a few square metres.</p>
+<h2>Building a shed or garden wall base</h2>
+<p>For a small garden wall or a block plinth for a shed, work out the wall here, then use the <a href="/calculators/concrete">concrete calculator</a> for the footing or base underneath it. A low garden wall usually sits on a concrete strip footing about twice the width of the wall and 150&ndash;225mm deep.</p>
+<h2>Common questions</h2>${faqHtml(BRICK_FAQ)}
 </div></section>` + CALC_CTA,
     script: inlineScript(function () {
       var RATES = { half: { per: 60, mortar: 0.022, label: 'Bricks' }, one: { per: 120, mortar: 0.05, label: 'Bricks' }, b100: { per: 10, mortar: 0.009, label: 'Blocks' }, b140: { per: 10, mortar: 0.012, label: 'Blocks' } };
@@ -402,20 +422,32 @@ function brickCalcPage() {
 }
 
 // -------------------------------- Concrete ---------------------------------
+const CONCRETE_FAQ = [
+  ['How much concrete do I need for a 10m² slab?', 'At 100mm thick, a 10m² slab needs 1m³ of concrete, or about 1.05m³ with 5% wastage. At 150mm thick it needs 1.5m³, or about 1.6m³ with wastage.'],
+  ['How do I calculate concrete in cubic metres?', 'Multiply the length by the width by the depth, all in metres. A 4m x 3m slab at 100mm (0.1m) deep is 4 x 3 x 0.1 = 1.2m³. Add 5 to 10% for wastage and uneven ground.'],
+  ['How many bags of cement for 1m³ of concrete?', 'For a general-purpose 1:2:4 mix, about 13 bags of 25kg cement, with roughly 0.7 tonnes of sharp sand and 1.3 tonnes of 20mm gravel, or about 2 tonnes of all-in ballast.'],
+  ['What is a yard of concrete in m³?', 'One cubic yard is about 0.76m³, and one cubic metre is about 1.31 cubic yards. UK suppliers sell ready-mix by the cubic metre.'],
+  ['How thick should a shed base be?', 'For most garden sheds, 75 to 100mm of concrete on 75 to 100mm of compacted hardcore. Use the thicker end for large or heavy sheds and workshops.'],
+  ['Is it cheaper to mix concrete yourself or order ready-mix?', 'For small jobs under about 1m³, mixing by hand or with a hired mixer is usually cheaper. Above that, ready-mix normally works out cheaper once you allow for labour, and it gives a more consistent pour.']
+];
+
 function concreteCalcPage() {
   return pageShell({
     path: '/calculators/concrete',
-    title: 'Concrete Calculator UK: Slabs and Footings | TheGo2Guys',
-    desc: 'Work out how much concrete you need for a slab or trench-fill footing, as a ready-mix order or as cement, sand and gravel to mix yourself.',
-    body: pageHero([['/', 'Home'], ['/calculators', 'Free tools'], ['/calculators/concrete', 'Concrete']], 'Concrete calculator', 'The volume for a slab or trench-fill footing, as a ready-mix order or as bags to mix on site.') +
+    title: 'Concrete Calculator UK: How Much Concrete Do I Need? | TheGo2Guys',
+    desc: 'How much concrete do you need? Enter the size of your slab, shed base, basement floor or footing to get m³ of ready-mix, tonnes, cubic yards, or bags of cement, sand and gravel.',
+    schema: faqSchema(CONCRETE_FAQ),
+    body: pageHero([['/', 'Home'], ['/calculators', 'Free tools'], ['/calculators/concrete', 'Concrete']], 'Concrete calculator: how much concrete do I need?', 'Enter the length, width and depth of your slab, shed base, basement floor or footing. You get the volume in m³ to order as ready-mix, or the bags to mix on site.') +
       `<section class="plain"><div class="container tool-grid"><form class="calc" id="calc" onsubmit="return false"><h2>Your pour</h2>
-<div class="form-group"><label for="shape">What are you pouring?</label><select id="shape"><option value="slab">Slab or base</option><option value="trench">Trench-fill footing</option></select></div>
+<div class="form-group"><label for="shape">What are you pouring?</label><select id="shape"><option value="slab">Slab, patio or driveway</option><option value="shed">Shed base</option><option value="basement">Basement floor slab</option><option value="trench">Trench-fill footing</option></select></div>
 <div class="form-row"><div class="form-group"><label for="len">Length (m)</label><input id="len" type="number" inputmode="decimal" min="0" step="0.01" value="4"><p class="form-hint" id="len-hint">Length of the slab.</p></div><div class="form-group"><label for="wid" id="wid-label">Width (m)</label><input id="wid" type="number" inputmode="decimal" min="0" step="0.01" value="4"></div></div>
 <div class="form-row"><div class="form-group"><label for="dep">Depth (mm)</label><input id="dep" type="number" inputmode="decimal" min="0" step="5" value="150"></div><div class="form-group"><label for="waste">Wastage (%)</label><input id="waste" type="number" inputmode="decimal" min="0" max="50" step="1" value="5"></div></div>
 </form>
 <div class="calc-out" aria-live="polite"><h2>You'll need about</h2><dl class="out-list">
 <div class="big"><dt>Concrete volume</dt><dd id="o-vol">&ndash;</dd></div>
 <div><dt>Ready-mix to order</dt><dd id="o-order">&ndash;</dd></div>
+<div><dt>Weight (approx.)</dt><dd id="o-tonnes">&ndash;</dd></div>
+<div><dt>In cubic yards</dt><dd id="o-yards">&ndash;</dd></div>
 <div><dt>If mixing yourself:</dt><dd></dd></div>
 <div><dt>Cement (25kg bags)</dt><dd id="o-cement">&ndash;</dd></div>
 <div><dt>Sharp sand</dt><dd id="o-sand">&ndash;</dd></div>
@@ -429,9 +461,31 @@ function concreteCalcPage() {
 <tr><th>Garden shed base</th><td class="num">75&ndash;100mm</td></tr>
 <tr><th>Ground-bearing floor slab</th><td class="num">100&ndash;150mm</td></tr>
 <tr><th>Driveway</th><td class="num">100&ndash;150mm</td></tr>
+<tr><th>Basement floor slab</th><td class="num">Often 150&ndash;250mm, reinforced</td></tr>
 <tr><th>Trench-fill footing (extension)</th><td class="num">Often 1&ndash;1.5m deep, 600mm wide</td></tr>
 </tbody></table></div>
 <p>These are only rules of thumb. Footing depth depends on the ground, nearby trees and drains, and is set by your engineer or building control.</p>
+<h2>How much concrete do I need? Worked examples</h2>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Job</th><th>Size</th><th class="num">Concrete (incl. 5% waste)</th></tr></thead><tbody>
+<tr><th>Shed base</th><td>2.4m x 1.8m x 100mm</td><td class="num">0.45 m³</td></tr>
+<tr><th>Patio or garden slab</th><td>4m x 4m x 100mm</td><td class="num">1.68 m³</td></tr>
+<tr><th>Extension floor slab</th><td>5m x 4m x 150mm</td><td class="num">3.15 m³</td></tr>
+<tr><th>Single garage base</th><td>6m x 3m x 150mm</td><td class="num">2.84 m³</td></tr>
+<tr><th>Extension trench-fill footings</th><td>12m run x 0.6m x 1m</td><td class="num">7.56 m³</td></tr>
+</tbody></table></div>
+<p>As a quick check: every 1&nbsp;m² of slab at 100mm thick is 0.1&nbsp;m³ of concrete. At 150mm it is 0.15&nbsp;m³. One cubic metre of concrete weighs about 2.4 tonnes.</p>
+<h2>Concrete slab calculator</h2>
+<p>For a slab, choose <em>Slab, patio or driveway</em> and enter the length, width and finished thickness. If the slab sits on hardcore, measure the depth of concrete only, not the hardcore. Thicken the edges by hand and add about 10% rather than 5% if the ground is uneven, because the concrete fills every dip.</p>
+<p>A ground-bearing floor slab in an extension is usually 100&ndash;150mm of concrete on a damp-proof membrane, insulation and compacted hardcore. Driveways for cars are normally 100mm on a good sub-base, or 150mm where heavier vehicles will use them.</p>
+<h2>Shed base calculator</h2>
+<p>Most garden sheds sit on a 75&ndash;100mm concrete base over 75&ndash;100mm of compacted hardcore. Make the base about 50mm bigger than the shed floor on each side so rainwater runs off rather than under it. A typical 8 x 6ft shed (about 2.4m x 1.8m) needs just under half a cubic metre at 100mm, which is around 6 bags of cement with sand and gravel, or roughly 45 bags of 25kg ready-to-use concrete mix. That is usually too small for a ready-mix lorry, so most people mix it by hand or use a mini-mix supplier.</p>
+<h2>Concrete for a basement</h2>
+<p>A basement floor is normally a reinforced slab of 150&ndash;250mm, and the walls are often reinforced concrete too. Both are designed by a structural engineer, who sets the thickness, grade (often C28/35 or above) and steel. Use the <em>Basement floor slab</em> option to get the slab volume, then work out each wall as length x height x thickness and add them together. Basements are usually poured with a concrete pump, and the pump hire can cost as much as the concrete on a small pour.</p>
+<h2>Ordering ready-mix concrete</h2>
+<p>There are two main ways to buy ready-mix:</p>
+<ul><li><strong>Drum lorry (pre-mixed).</strong> Batched at the plant to the volume you order. A full load is usually 6&ndash;8&nbsp;m³, and small orders often carry a part-load charge. Order to the nearest 0.25&nbsp;m³ and make sure you have your wastage in the figure.</li><li><strong>Volumetric or on-site mixer.</strong> The lorry carries the cement, sand and stone separately and mixes on your drive. You pay for what is actually used, so it suits jobs where the volume is hard to pin down, like footings in uneven ground.</li></ul>
+<p>Tell the supplier the grade you need. As a guide, C20 suits shed bases and garden slabs, C25 house floor slabs and paths, C30 driveways, and GEN or FND mixes footings. Your engineer or building control will confirm what your job needs.</p>
+<h2>Common questions</h2>${faqHtml(CONCRETE_FAQ)}
 </div></section>` + CALC_CTA,
     script: inlineScript(function () {
       function num(id) { var v = parseFloat(document.getElementById(id).value); return isFinite(v) && v > 0 ? v : 0; }
@@ -447,13 +501,16 @@ function concreteCalcPage() {
         var vol = num('len') * num('wid') * num('dep') / 1000 * (1 + num('waste') / 100);
         set('o-vol', fmt(vol, 2) + ' m³');
         set('o-order', fmt(Math.ceil(vol * 4 - 1e-9) / 4, 2) + ' m³');
+        set('o-tonnes', fmt(vol * 2.4, 2) + ' t');
+        set('o-yards', fmt(vol * 1.308, 2) + ' yd³');
         set('o-cement', fmt(Math.ceil(vol * 13 - 1e-9)));
         set('o-sand', fmt(vol * 0.7, 2) + ' t');
         set('o-gravel', fmt(vol * 1.3, 2) + ' t');
       }
       shape.addEventListener('change', function () {
-        if (shape.value === 'trench') { document.getElementById('wid').value = 0.6; document.getElementById('dep').value = 1000; document.getElementById('len').value = 12; }
-        else { document.getElementById('wid').value = 4; document.getElementById('dep').value = 150; document.getElementById('len').value = 4; }
+        var PRESET = { slab: [4, 4, 150], shed: [2.4, 1.8, 100], basement: [6, 5, 200], trench: [12, 0.6, 1000] };
+        var p = PRESET[shape.value];
+        document.getElementById('len').value = p[0]; document.getElementById('wid').value = p[1]; document.getElementById('dep').value = p[2];
         labels(); run();
       });
       document.getElementById('calc').addEventListener('input', run);
@@ -556,7 +613,9 @@ const EXTENSION_FAQ = [
   ['Is a double-storey extension cheaper per m²?', 'Yes. The foundations and roof are shared across two floors, so the rate per m² is usually lower, often 10 to 20% below a single-storey rate. The total cost is still higher because you are building more floor area.'],
   ['Does the cost per m² include a kitchen?', 'Usually not. Most per m² figures cover the shell and basic finishes. A new kitchen, bathroom fittings and flooring are normally priced separately.'],
   ['How much contingency should I allow?', 'Allow 10 to 15% of the build cost for a straightforward extension, and closer to 20% on older houses or where the ground and drainage are unknown.'],
-  ['Are the figures with or without VAT?', 'The figures on this page are before VAT. A VAT-registered builder will add 20%.']
+  ['Are the figures with or without VAT?', 'The figures on this page are before VAT. A VAT-registered builder will add 20%.'],
+  ['How do I calculate the cost of an extension?', 'Measure the internal floor area of the new space in m², multiply it by a cost per m² for the type and specification of extension, adjust for your region, then add 10 to 15% contingency, professional fees and VAT. The calculator on this page does the first steps for you. For a figure you can rely on, have the drawings measured and priced item by item.'],
+  ['Are 2022 and 2023 extension cost calculators still accurate?', 'Not really. Labour and materials have both gone up since then, so calculators and guides from 2022 or 2023 tend to read low. Use current rates, like the 2026 figures on this page, or get a measured estimate priced at today&rsquo;s rates.']
 ];
 
 function extensionGuidePage() {
@@ -564,10 +623,10 @@ function extensionGuidePage() {
   const rows = SAMPLE_ELEMENTS.map(function (e) { return '<tr><th>' + e[0] + '</th><td class="num">£' + e[1].toLocaleString('en-GB') + '</td><td class="num">' + (e[1] / total * 100).toFixed(1) + '%</td></tr>'; }).join('');
   return pageShell({
     path: '/guides/house-extension-cost',
-    title: 'House Extension Cost UK 2026: Cost per m² Guide | TheGo2Guys',
-    desc: 'What a house extension costs in the UK in 2026: cost per m² for single and double-storey extensions, a real elemental breakdown, and a free budget calculator.',
+    title: 'House Extension Cost Calculator UK 2026: Cost per m² | TheGo2Guys',
+    desc: 'Free 2026 extension cost calculator for the UK. Enter the size, type, spec and region of your single or double-storey extension to get a budget range and cost per m².',
     schema: faqSchema(EXTENSION_FAQ),
-    body: pageHero([['/', 'Home'], ['/guides', 'Cost guides'], ['/guides/house-extension-cost', 'House extension cost']], 'How much does a house extension cost in the UK?', 'Most single-storey extensions cost £1,800&ndash;£3,200 per m² to build in 2026. Here is where that range comes from, where the money goes, and a quick calculator for your own budget.') +
+    body: pageHero([['/', 'Home'], ['/guides', 'Cost guides'], ['/guides/house-extension-cost', 'House extension cost']], 'House extension cost calculator (UK, 2026)', 'Most single-storey extensions cost £1,800&ndash;£3,200 per m² to build in 2026. Use the calculator for a budget on your own extension, then read on for where that range comes from and where the money goes.') +
       `<section class="plain"><div class="container tool-grid"><form class="calc" id="calc" onsubmit="return false"><h2>Extension budget calculator</h2>
 <div class="form-row"><div class="form-group"><label for="area">Floor area (m²)</label><input id="area" type="number" inputmode="decimal" min="0" step="0.5" value="20"><p class="form-hint">Internal floor area of the new space. For two storeys, add both floors.</p></div><div class="form-group"><label for="type">Type</label><select id="type"><option value="1">Single-storey</option><option value="0.85">Double-storey</option></select></div></div>
 <div class="form-row"><div class="form-group"><label for="spec">Specification</label><select id="spec"><option value="basic">Basic</option><option value="std" selected>Standard</option><option value="high">High</option></select></div><div class="form-group"><label for="region">Region</label><select id="region">${REGION_OPTIONS}</select></div></div>
@@ -578,6 +637,8 @@ function extensionGuidePage() {
 <div><dt>Plus contingency (10&ndash;15%)</dt><dd id="o-cont">&ndash;</dd></div>
 </dl><p class="out-note">Excludes VAT, kitchen and bathroom fit-out, professional fees and planning. A rough guide only. A measured estimate from your drawings will be far tighter.</p><a class="btn-primary" href="/#contact">Get a measured estimate from £150</a></div></div></section>
 <section class="plain alt"><div class="container prose">
+<h2>How much does a house extension cost in the UK?</h2>
+<p>For a typical 20&nbsp;m² single-storey rear extension with a standard finish, expect roughly £44,000&ndash;£58,000 before VAT in 2026, plus a 10&ndash;15% contingency. The calculator above adjusts that for your size, specification and region. Rates on this page are updated for 2026 prices, so they will read higher than extension calculators and guides written in 2022 or 2023.</p>
 <h2>Extension cost per m² in 2026</h2>
 <p>These are typical build costs per m² of new internal floor area, before VAT, for a finished shell with standard finishes.</p>
 <div class="table-wrap"><table class="data-table"><thead><tr><th>Extension</th><th class="num">Cost per m²</th><th class="num">20 m² example</th></tr></thead><tbody>
@@ -859,7 +920,7 @@ function steelMortgageInsightPage() {
   const title = 'Structural steel up 21%, five-year fixes at 6%: pricing an extension this autumn';
   return pageShell({
     path: path,
-    title: 'Steel Prices Up 21% and Mortgages at 6%: Extension Costs, October 2026 | TheGo2Guys',
+    title: 'Steel Prices Up 21%, Mortgages at 6%: Extension Costs (Oct 2026)',
     desc: 'Structural steel was 21.2% dearer in August 2026 and five-year fixed mortgages now average 6%. What it means for extension budgets and quotes, and what to do about it.',
     schema: { '@context': 'https://schema.org', '@type': 'Article', headline: title, datePublished: '2026-10-18', author: { '@type': 'Organization', name: 'TheGo2Guys' }, publisher: { '@type': 'Organization', name: 'TheGo2Guys' }, mainEntityOfPage: SITE + path },
     body: pageHero([['/', 'Home'], ['/insights', 'Insights'], [path, 'Steel prices and mortgage rates']], title, 'Fabricated structural steel cost 21.2% more in August than a year earlier, and on 5 October the average five-year fixed mortgage reached 6%. Homeowners about to sign for an extension, and the builders pricing it, are dealing with both at once.') +
