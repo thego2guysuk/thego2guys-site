@@ -763,7 +763,7 @@ function referPage() {
     title: 'Refer a Builder: £20 Off Your Next Estimate | TheGo2Guys',
     desc: 'Know a builder who spends their evenings pricing jobs? Refer them to TheGo2Guys and get £20 off your next estimate for every one who orders.',
     schema: faqSchema(REFER_FAQ),
-    body: pageHero([['/', 'Home'], ['/refer', 'Refer a builder']], 'Refer a builder, get £20 off', 'Know a builder who could do with a hand pricing their jobs? Send them our way. For every one who orders an estimate, you get £20 off your next one. No limit.') +
+    body: pageHero([['/', 'Home'], ['/refer', 'Refer a builder']], 'Refer a builder, get £20 off', 'Know a builder who needs their jobs priced? Send them our way. For every one who orders an estimate, you get £20 off your next one. No limit.') +
       `<section class="plain"><div class="container tool-grid"><form class="calc" id="refform" onsubmit="return false"><h2>Get your referral link</h2>
 <div class="form-group"><label for="refname">Your name or company</label><input id="refname" type="text" maxlength="60" placeholder="e.g. Smith Building Ltd" autocomplete="organization"><p class="form-hint">This goes in the &ldquo;Referred by&rdquo; box when they request a quote, so we know to credit you.</p></div>
 </form>
