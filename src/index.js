@@ -296,6 +296,7 @@ function routeExtraPage(path) {
     '/guides/loft-conversion-cost-liverpool': loftLiverpoolPage,
     '/refer': referPage,
     '/insights': insightsIndexPage,
+    '/insights/autumn-budget-2026-extensions-small-builders': budgetInsightPage,
     '/insights/steel-prices-mortgage-rates-october-2026': steelMortgageInsightPage,
     '/insights/construction-jobs-plan-builder-shortages-october-2026': jobsPlanInsightPage
   };
@@ -306,7 +307,7 @@ function routeExtraPage(path) {
 }
 
 function sitemapXml() {
-  const paths = ['/', '/calculators', '/calculators/bricks-and-blocks', '/calculators/concrete', '/calculators/plaster', '/guides', '/guides/house-extension-cost', '/guides/loft-conversion-cost', '/guides/extension-preliminaries', '/guides/garage-conversion-cost', '/guides/house-extension-cost-liverpool', '/guides/loft-conversion-cost-liverpool', '/insights', '/insights/steel-prices-mortgage-rates-october-2026', '/insights/construction-jobs-plan-builder-shortages-october-2026', '/refer', '/terms', '/privacy'];
+  const paths = ['/', '/calculators', '/calculators/bricks-and-blocks', '/calculators/concrete', '/calculators/plaster', '/guides', '/guides/house-extension-cost', '/guides/loft-conversion-cost', '/guides/extension-preliminaries', '/guides/garage-conversion-cost', '/guides/house-extension-cost-liverpool', '/guides/loft-conversion-cost-liverpool', '/insights', '/insights/autumn-budget-2026-extensions-small-builders', '/insights/steel-prices-mortgage-rates-october-2026', '/insights/construction-jobs-plan-builder-shortages-october-2026', '/refer', '/terms', '/privacy'];
   return '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
     paths.map(function (p) { return '  <url><loc>' + SITE + (p === '/' ? '/' : p) + '</loc></url>'; }).join('\n') + '\n</urlset>\n';
 }
@@ -1005,6 +1006,7 @@ function garageGuidePage() {
 // ------------------------------- Insights ----------------------------------
 // Newest first. Each insight: [path, date label, title, summary]
 const INSIGHTS = [
+  ['/insights/autumn-budget-2026-extensions-small-builders', '31 October 2026', 'Autumn Budget 2026: what it means for extensions and small builders', 'VAT stays at 20%, the National Living Wage rises to &pound;13.21 and major Building Regulations changes are paused. What it means for an extension price and for small firms.'],
   ['/insights/construction-jobs-plan-builder-shortages-october-2026', '25 October 2026', 'Builder shortages and the Construction Jobs Plan: what changes for extensions', 'The new jobs plan, the general builder apprenticeship and the &pound;2,000 hiring payment, and how to plan an extension around the shortage of electricians and other trades.'],
   ['/insights/steel-prices-mortgage-rates-october-2026', '18 October 2026', 'Structural steel up 21%, five-year fixes at 6%: pricing an extension this autumn', 'August&rsquo;s materials figures, the new steel import duty and dearer mortgages, and what homeowners and builders should do about them.']
 ];
@@ -1144,6 +1146,79 @@ function jobsPlanInsightPage() {
 <li><a href="https://www.icaew.com/insights/tax-news/2026/aug-2026/tax-news-in-brief-5-august-2026" rel="noopener">ICAEW, Tax news in brief, 5 August 2026 (Budget date)</a></li>
 </ul>
 </div></section>` + ctaBand('Want to know what your job should cost?', 'Send your drawings and every trade is priced at current rates on its own line, with a realistic programme behind the preliminaries. Homeowners and builders welcome, in 3&ndash;5 working days.')
+  });
+}
+
+function budgetInsightPage() {
+  const path = '/insights/autumn-budget-2026-extensions-small-builders';
+  const title = 'Autumn Budget 2026: what it means for extensions and small builders';
+  return pageShell({
+    path: path,
+    title: 'Autumn Budget 2026: What It Means for Extensions and Small Builders | TheGo2Guys',
+    desc: 'The 28 October 2026 Budget explained for homeowners planning an extension and small builders: VAT, the £13.21 National Living Wage, the Building Regulations pause, fuel duty and capital allowances.',
+    schema: { '@context': 'https://schema.org', '@type': 'Article', headline: title, datePublished: '2026-10-31', author: { '@type': 'Organization', name: 'TheGo2Guys' }, publisher: { '@type': 'Organization', name: 'TheGo2Guys' }, mainEntityOfPage: SITE + path },
+    body: pageHero([['/', 'Home'], ['/insights', 'Insights'], [path, 'Autumn Budget 2026']], title, 'The Budget on 28 October 2026 left VAT on home improvements at 20%, raised the National Living Wage to &pound;13.21 an hour from April 2027 and promised no major changes to the Building Regulations in England before the next general election, apart from safety measures. A homeowner&rsquo;s extension price barely moves. Small builders feel more of it, through the wage rise and the pause on new regulations.') +
+      `<section class="plain"><div class="container prose">
+<p class="pub-date">Published 31 October 2026</p>
+<div class="callout"><p><strong>In short</strong></p><ul><li>VAT on extensions stays at 20% where the builder is VAT-registered. The zero rate on installing energy-saving materials in existing homes still ends on 31 March 2027.</li><li>The National Living Wage rises 3.9% to &pound;13.21 an hour on 1 April 2027. Few skilled trades are paid at that level, so the direct effect on an extension price is a couple of hundred pounds.</li><li>No major changes to the Building Regulations in England for the rest of this Parliament, except where safety is involved. The energy-efficiency changes already made for 24 March 2027 still go ahead.</li><li>The fuel duty cut and freeze now run to 1 July 2027. Nothing has been promised after that.</li></ul></div>
+<h2>What changed</h2>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Measure</th><th>From</th><th>Who it affects</th></tr></thead><tbody>
+<tr><th>National Living Wage (21 and over) up 3.9% to &pound;13.21 an hour</th><td>1 April 2027</td><td>Firms with staff on or near the minimum</td></tr>
+<tr><th>National Minimum Wage for 18 to 20-year-olds up to &pound;11.27 an hour</th><td>1 April 2027</td><td>Firms employing young workers</td></tr>
+<tr><th>No major Building Regulations changes, except where safety-critical</th><td>Until the next general election (England)</td><td>Designers, builders, building control</td></tr>
+<tr><th>5p fuel duty cut extended; planned rise in January cancelled</th><td>To 1 July 2027</td><td>Anyone running vans</td></tr>
+<tr><th>First-year allowance on main-rate plant and machinery up from 40% to 50%</th><td>Spending from 1 January 2027</td><td>Firms spending more than the &pound;1 million Annual Investment Allowance</td></tr>
+<tr><th>Main-rate writing-down allowance cut from 14% to 12%</th><td>April 2027</td><td>Firms with an existing plant and machinery pool</td></tr>
+<tr><th>Tax on property income: basic rate 24%, higher 44%, additional 49%</th><td>6 April 2027</td><td>Landlords in England, Wales and Northern Ireland</td></tr>
+<tr><th>Biodiversity net gain no longer required on residential brownfield sites up to 1.5 hectares</th><td>No date yet</td><td>Small housebuilders</td></tr>
+</tbody></table></div>
+<p>Sources: HM Treasury, Budget 2026; FMB, 28 October 2026; Inside Housing, 29 October 2026; Travers Smith.</p>
+<h2>VAT: no cut for home improvements</h2>
+<p>The Federation of Master Builders (FMB) had asked for a VAT cut on home improvement work, at least where it includes energy-efficiency measures. It did not get one. In its response on 28 October, the FMB said the relief should cover whole improvement jobs, not only the specific installations whose zero rate ends next March.</p>
+<p>Five days before the Budget, the FMB published research suggesting homeowners in the North of England put off &pound;2.5 billion of building work a year because they cannot find a builder they trust. In the same release its members argued that a lower VAT rate would bring some of that work forward. Rob Clark, who runs a building firm in Blackpool, said: &ldquo;At the standard rate, a &pound;50,000 extension carries &pound;10,000 of VAT.&rdquo;</p>
+<p>For the coming year the position is unchanged. A builder who is VAT-registered charges 20% on an extension. A builder whose turnover is under the &pound;90,000 registration threshold charges no VAT, so always check whether a quote includes it before comparing prices.</p>
+<p>Installing qualifying energy-saving materials in an existing home, such as loft or cavity wall insulation, a heat pump, solar panels or a battery, is zero-rated until 31 March 2027 and then due to go to 5%. HMRC treats insulation and other energy-saving materials built into a new extension as part of one standard-rated job, so pricing them on a separate line does not make them zero-rated. Separate work on the existing house can qualify. If that applies to your project, ask the installer or an accountant how the timing of invoices and payments around 31 March affects the rate. The earlier insight on the <a href="/insights/construction-jobs-plan-builder-shortages-october-2026">Construction Jobs Plan</a> covers the relief in more detail.</p>
+<h2>Building Regulations: no major changes, except for safety</h2>
+<p>In his speech the Chancellor, John Healey, said: &ldquo;No major changes to building regulations in this Parliament, except where it is critical to safety.&rdquo; The Budget does not say what counts as a major change. Building safety work, including the Grenfell Tower Inquiry recommendations, carries on. Building regulations are devolved, so the promise covers England but not Wales or Scotland.</p>
+<p>It is a policy commitment, not a change in the law, and it does not cancel rules already made. The amendment regulations bringing in the Future Homes Standard were made in March 2026, and most of them take effect on 24 March 2027. The biggest changes are for new homes, including a requirement for on-site renewable electricity such as solar panels. The updated Approved Document L, the guidance on energy efficiency, also covers work to existing homes, so an extension notified to building control on or after 24 March 2027 is assessed against the new edition. Ask your designer whether that changes the insulation or glazing specification on your drawings.</p>
+<p>Work notified before 24 March 2027 can stay under the current rules if it starts before 24 March 2028. That applies to building notices, full plans applications and initial notices from approved inspectors, and on a site with several houses it applies to each house separately.</p>
+<p>For a homeowner, the result is that once the drawings are approved, the rules are unlikely to change again before the extension is built. A small builder doing extensions and refurbishments has fewer changes to keep up with after March.</p>
+<h2>Wages: the rise from April</h2>
+<p>The National Living Wage for workers aged 21 and over goes from &pound;12.71 to &pound;13.21 an hour on 1 April 2027. The rate for 18 to 20-year-olds goes to &pound;11.27. Apprentices under 19, or in their first year, are on the separate apprentice rate. The headline rates of employer National Insurance are not changing. FMB chief executive Brian Berry said: &ldquo;For small building firms operating on tight margins, a further increase will be difficult to absorb.&rdquo;</p>
+<p>Skilled trades are rarely paid at the minimum, and many labourers are self-employed or already earn more. Where a firm does employ a labourer on the minimum for 39 hours a week, the rise is &pound;19.50 a week in wages, or about &pound;25 once employer National Insurance, pension and holiday pay are added. Over a ten-week single-storey extension that is roughly &pound;250. The bigger effect may be staff just above the minimum asking to keep their gap over it.</p>
+<p>Materials have moved more. Across all construction work, materials were 6.4% dearer in August than a year earlier, with fabricated structural steel up 21.2% and rigid pipes and fittings up 15.5%. The <a href="/insights/steel-prices-mortgage-rates-october-2026">steel prices insight</a> has the full figures.</p>
+<h2>Fuel, vans and equipment</h2>
+<p>The planned fuel duty rise in January has been cancelled, and the 5p cut and freeze now run to 1 July 2027. The red diesel cut is also extended, but construction plant has had to run on white diesel since April 2022, so that one does not help builders.</p>
+<p>Most small firms claim 100% relief on vans and plant through the &pound;1 million Annual Investment Allowance, so the change to the first-year allowance (40% to 50% from 1 January 2027) matters only to firms spending more than that. The cut in the writing-down allowance from 14% to 12% from April 2027 slows the relief on what is already in a firm&rsquo;s plant and machinery pool. Double-cab pick-ups are treated as cars and get neither. If you are buying a van or plant soon, ask your accountant whether to buy before or after 1 January.</p>
+<h2>Landlords</h2>
+<p>Landlords in England, Wales and Northern Ireland will pay 24% on property income at the basic rate from 6 April 2027, 44% at the higher rate and 49% at the additional rate. That combines last year&rsquo;s two-point rise, which had not yet started, with another two points announced in this Budget. Repairs and improvements are treated differently for tax, so take advice before a refurbishment between tenancies.</p>
+<h2>Inflation and borrowing</h2>
+<p>The Office for Budget Responsibility, the official forecaster, expects inflation to peak at 3.8% in early 2027 and return to the 2% target in the third quarter of 2028. Inflation was 3.5% in September. The Bank of England&rsquo;s next interest rate decision will be announced on 5 November. For anyone borrowing to pay for an extension, the mortgage rate is likely to affect the total cost more than anything in this Budget, so speak to a broker before signing with a builder.</p>
+</div></section>
+<section class="plain alt"><div class="container prose">
+<h2>If you are planning an extension</h2>
+<ol><li>Ask whether each quote includes VAT. A VAT-registered builder will add 20%.</li><li>If the work includes insulation, a heat pump or solar panels in the existing house, ask how it will be treated for VAT, and whether invoicing before 31 March 2027 makes a difference.</li><li>If the drawings are not yet with building control, ask your designer whether the 24 March 2027 changes to Approved Document L affect your specification.</li><li>If you have a quote from the summer, ask the builder to recheck the steel and drainage prices before you sign.</li><li>Keep a contingency of 10 to 15% of the build cost, more on an older house. Hold it yourself rather than adding it to the contract price, and use it for what turns up once the ground is open or walls come down.</li></ol>
+<h2>If you run a small building firm</h2>
+<ol><li>Price any work running past 1 April 2027 at the new rates for staff on or near the minimum, and check how long your quotes are valid for.</li><li>If you are starting a new house, get the building notice, full plans or initial notice in before 24 March 2027 and start each plot before 24 March 2028 to stay under the current energy rules.</li><li>Talk to your accountant before buying vans or plant around 1 January.</li></ol>
+<h2>An estimator&rsquo;s view</h2>
+<p>A single-storey extension in Liverpool with a standard finish costs around &pound;2,000&ndash;&pound;2,650 per m&sup2; to build, before VAT (see the <a href="/guides/house-extension-cost-liverpool">Liverpool extension cost guide</a>). Nothing in this Budget shifts that range by more than a fraction of a per cent. On a 20&nbsp;m&sup2; extension at around &pound;45,000, the wage rise might add &pound;250, and materials inflation over the past year far more. The pause on new regulations matters more than either: a scheme notified before 24 March 2027 and started before March 2028 can be built to the rules it was drawn to, and nothing major is due to change after that.</p>
+<h2>Getting a price</h2>
+<p>TheGo2Guys is an estimating service based in Liverpool, working for homeowners and builders. Homeowners use an itemised estimate to check builders&rsquo; quotes before signing; builders use it to price a job without doing the take-off themselves. Labour and materials are priced at current rates on separate lines. A full measured estimate for a single-storey extension starts at &pound;150. Send your drawings through the <a href="/#contact">quote form</a>, and the fee and delivery date are confirmed within 24 hours.</p>
+<h2>Sources</h2>
+<ul>
+<li><a href="https://www.gov.uk/government/publications/budget-2026-document/budget-2026-html" rel="noopener">HM Treasury, Budget 2026, 28 October 2026</a></li>
+<li><a href="https://www.fmb.org.uk/resource/autumn-budget-2026-rising-wage-costs-put-small-builders-under-pressure.html" rel="noopener">Federation of Master Builders, Autumn Budget 2026: rising wage costs put small builders under pressure, 28 October 2026</a></li>
+<li><a href="https://www.fmb.org.uk/resource/2-5bn-of-building-work-on-hold-in-the-north-says-fmb.html" rel="noopener">Federation of Master Builders, &pound;2.5bn of building work on hold in the North, 23 October 2026</a></li>
+<li><a href="https://theintermediary.co.uk/2026/10/autumn-budget-2026-major-building-regulation-changes-ruled-out-for-remainder-of-parliament/" rel="noopener">The Intermediary, &ldquo;Major building regulation changes ruled out for remainder of Parliament&rdquo;, 28 October 2026</a></li>
+<li><a href="https://www.planninggeek.co.uk/2026/building-regulations-budget/" rel="noopener">Planning Geek, &ldquo;Budget pledges building regulations stability&rdquo;, 28 October 2026</a></li>
+<li><a href="https://www.gov.uk/government/publications/the-future-homes-and-buildings-standards-building-circular-012026/the-future-homes-and-buildings-standards-building-circular-012026-letter" rel="noopener">MHCLG, The Future Homes and Buildings Standards: Building Circular 01/2026</a></li>
+<li><a href="https://www.insidehousing.co.uk/insight/5-things-we-learned-from-the-autumn-budget-2026-99334" rel="noopener">Inside Housing, &ldquo;5 things we learned from the Autumn Budget 2026&rdquo;, 29 October 2026</a></li>
+<li><a href="https://www.traverssmith.com/knowledge/knowledge-container/the-autumn-budget-2026-property-infrastructure/" rel="noopener">Travers Smith, The Budget 2026: Property &amp; Infrastructure</a></li>
+<li><a href="https://www.gov.uk/guidance/vat-on-energy-saving-materials-and-heating-equipment-notice-7086" rel="noopener">HMRC, VAT on energy-saving materials and heating equipment (VAT Notice 708/6)</a></li>
+<li><a href="https://www.gov.uk/government/statistics/building-materials-and-components-statistics-september-2026/construction-building-materials-commentary-september-2026" rel="noopener">Department for Business and Trade, Building materials and components statistics, 7 October 2026</a></li>
+<li><a href="https://www.bankofengland.co.uk/monetary-policy/upcoming-mpc-dates" rel="noopener">Bank of England, Upcoming MPC dates</a></li>
+</ul>
+</div></section>` + ctaBand('Want to check a quote against current rates?', 'Send your drawings and every item is priced at current North West rates, with labour and materials on their own lines. From &pound;150 for a single-storey extension, in 3&ndash;5 working days.')
   });
 }
 
