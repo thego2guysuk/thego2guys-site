@@ -306,6 +306,7 @@ function routeExtraPage(path) {
     '/refer': referPage,
     '/quote': quotePage,
     '/insights': insightsIndexPage,
+    '/insights/builders-merchant-prices-construction-slowdown-november-2026': merchantPricesInsightPage,
     '/insights/autumn-budget-2026-extensions-small-builders': budgetInsightPage,
     '/insights/steel-prices-mortgage-rates-october-2026': steelMortgageInsightPage,
     '/insights/construction-jobs-plan-builder-shortages-october-2026': jobsPlanInsightPage
@@ -317,7 +318,7 @@ function routeExtraPage(path) {
 }
 
 function sitemapXml() {
-  const paths = ['/', '/calculators', '/calculators/bricks-and-blocks', '/calculators/concrete', '/calculators/plaster', '/guides', '/guides/house-extension-cost', '/guides/loft-conversion-cost', '/guides/extension-preliminaries', '/guides/garage-conversion-cost', '/guides/house-extension-cost-liverpool', '/guides/loft-conversion-cost-liverpool', '/insights', '/insights/steel-prices-mortgage-rates-october-2026', '/insights/construction-jobs-plan-builder-shortages-october-2026', '/insights/autumn-budget-2026-extensions-small-builders', '/refer', '/quote', '/terms', '/privacy'];
+  const paths = ['/', '/calculators', '/calculators/bricks-and-blocks', '/calculators/concrete', '/calculators/plaster', '/guides', '/guides/house-extension-cost', '/guides/loft-conversion-cost', '/guides/extension-preliminaries', '/guides/garage-conversion-cost', '/guides/house-extension-cost-liverpool', '/guides/loft-conversion-cost-liverpool', '/insights', '/insights/steel-prices-mortgage-rates-october-2026', '/insights/construction-jobs-plan-builder-shortages-october-2026', '/insights/autumn-budget-2026-extensions-small-builders', '/insights/builders-merchant-prices-construction-slowdown-november-2026', '/refer', '/quote', '/terms', '/privacy'];
   return '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
     paths.map(function (p) { return '  <url><loc>' + SITE + (p === '/' ? '/' : p) + '</loc></url>'; }).join('\n') + '\n</urlset>\n';
 }
@@ -1028,6 +1029,7 @@ function garageGuidePage() {
 // ------------------------------- Insights ----------------------------------
 // Newest first. Each insight: [path, date label, title, summary]
 const INSIGHTS = [
+  ['/insights/builders-merchant-prices-construction-slowdown-november-2026', '4 November 2026', 'Materials still rising as builders go quiet: pricing an extension this winter', 'Merchant prices were 6.2% higher in August while sales volumes fell 5.4%. What a slower building market means for extension quotes, start dates and small firms&rsquo; pricing.'],
   ['/insights/autumn-budget-2026-extensions-small-builders', '31 October 2026', 'Autumn Budget 2026: what it means for extensions and small builders', 'VAT stays at 20%, the National Living Wage rises to &pound;13.21 and major Building Regulations changes are paused. What it means for an extension price and for small firms.'],
   ['/insights/construction-jobs-plan-builder-shortages-october-2026', '25 October 2026', 'Builder shortages and the Construction Jobs Plan: what changes for extensions', 'The new jobs plan, the general builder apprenticeship and the &pound;2,000 hiring payment, and how to plan an extension around the shortage of electricians and other trades.'],
   ['/insights/steel-prices-mortgage-rates-october-2026', '18 October 2026', 'Structural steel up 21%, five-year fixes at 6%: pricing an extension this autumn', 'August&rsquo;s materials figures, the new steel import duty and dearer mortgages, and what homeowners and builders should do about them.']
@@ -1241,6 +1243,76 @@ function budgetInsightPage() {
 <li><a href="https://www.bankofengland.co.uk/monetary-policy/upcoming-mpc-dates" rel="noopener">Bank of England, Upcoming MPC dates</a></li>
 </ul>
 </div></section>` + ctaBand('Want to check a quote against current rates?', 'Send your drawings and every item is priced at current North West rates, with labour and materials on their own lines. From &pound;150 for a single-storey extension, in 3&ndash;5 working days.')
+  });
+}
+
+function merchantPricesInsightPage() {
+  const path = '/insights/builders-merchant-prices-construction-slowdown-november-2026';
+  const title = 'Materials still rising as builders go quiet: pricing an extension this winter';
+  return pageShell({
+    path: path,
+    title: 'Merchant Prices Up 6.2% as Building Slows: Extensions (Nov 2026)',
+    desc: 'Builders’ merchant prices were 6.2% higher in August 2026 while sales volumes fell 5.4%. What a quieter building market means for extension quotes this winter, for homeowners and small builders.',
+    schema: { '@context': 'https://schema.org', '@type': 'Article', headline: title, datePublished: '2026-11-04', author: { '@type': 'Organization', name: 'TheGo2Guys' }, publisher: { '@type': 'Organization', name: 'TheGo2Guys' }, mainEntityOfPage: SITE + path },
+    body: pageHero([['/', 'Home'], ['/insights', 'Insights'], [path, 'Merchant prices and a slower market']], title, 'Builders&rsquo; merchants charged 6.2% more in August than a year earlier but sold 5.4% less material, according to the Builders Merchant Building Index published on 28 October. The monthly survey of building firms has shown activity shrinking every month since January 2025, with house building the weakest part. For homeowners, materials still cost more, but a builder may be easier to book. Small firms have fewer orders and each job costs more to supply.') +
+      `<section class="plain"><div class="container prose">
+<p class="pub-date">Published 4 November 2026</p>
+<div class="callout"><p><strong>In short</strong></p><ul><li>Merchant prices were 6.2% higher in August 2026 than in August 2025, and 7.4% higher over June to August. Government figures for August show construction materials up 6.4% on a year earlier.</li><li>Merchants sold 5.4% less material in August than a year before, and 7.2% less over the first eight months of the year. Less is being built.</li><li>On a typical &pound;45,000 single-storey extension in Liverpool, a rise of that size adds roughly &pound;900&ndash;&pound;1,100 from materials alone.</li><li>A quieter market won&rsquo;t bring materials prices down. It may give you a firmer start date and a keener price from a builder who needs the work, so get quotes and compare them line by line.</li></ul></div>
+<h2>What the merchants&rsquo; figures say</h2>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Period, compared with a year earlier</th><th class="num">Value of sales</th><th class="num">Amount sold</th><th class="num">Prices</th></tr></thead><tbody>
+<tr><th>August 2026</th><td class="num">+0.5%</td><td class="num">&minus;5.4%</td><td class="num">+6.2%</td></tr>
+<tr><th>June to August 2026</th><td class="num">&minus;0.9%</td><td class="num">&minus;7.7%</td><td class="num">+7.4%</td></tr>
+<tr><th>January to August 2026</th><td class="num">&minus;1.6%</td><td class="num">&minus;7.2%</td><td class="num">+6.0%</td></tr>
+<tr><th>12 months to August 2026</th><td class="num">&minus;1.4%</td><td class="num">&minus;5.5%</td><td class="num">+4.3%</td></tr>
+</tbody></table></div>
+<p>Source: Builders Merchant Building Index, 28 October 2026. Figures are adjusted for the number of trading days. Value of sales is roughly the amount sold multiplied by the price.</p>
+<p>The Builders Merchant Building Index (BMBI) is compiled from till data from generalist builders&rsquo; merchants, which account for 88% of builders&rsquo; merchant sales in Great Britain. Takings went up slightly in August only because prices did. Take prices out and merchants sold about 5% less material than a year earlier.</p>
+<p>The BMBI price figure covers everything merchants sell, from bricks to workwear, so it is not a materials price index as such. The government&rsquo;s materials price index shows much the same: construction materials were 6.4% dearer in August than a year earlier, with fabricated structural steel up 21.2% and rigid pipes and fittings, which include drainage, up 15.5%. The <a href="/insights/steel-prices-mortgage-rates-october-2026">steel prices insight</a> has those figures in full.</p>
+<p>Heavy building materials, the group covering bricks, blocks, cement and aggregates among others, is the merchants&rsquo; largest category. Its sales by value were 3.3% lower over the 12 months to August, the weakest of any category. With prices up, the amount of heavy materials sold fell further than that. The index does not break its figures down by region, so there is no separate North West figure.</p>
+<h2>What the builders&rsquo; survey says</h2>
+<p>The S&amp;P Global UK Construction PMI is a monthly survey of building firms. A reading below 50 means activity is shrinking. In September it was 46.1, up from 44.3 in August. That was the slowest fall since January 2026, but activity was still shrinking. House building was the weakest sector at 40.7. Firms reported clients putting off decisions on larger projects, and employment fell at its fastest rate in five months.</p>
+<p>About a quarter of the firms surveyed said their purchase costs had gone up in September, blaming fuel surcharges, freight and raw materials. That is a count of firms, not the size of the rise. Tim Moore of S&amp;P Global said input price inflation had softened for the fourth month in a row, but that this &ldquo;seems unlikely to endure given recently escalating fuel prices and transportation costs.&rdquo;</p>
+<p>The BMBI report also cites official figures: construction output fell 0.2% in August, its fourth monthly fall in a row, and private house building fell 3.2% over three months. Mortgage approvals for house purchase were 54,918 in August, 16% fewer than a year earlier.</p>
+<p>The October PMI is due on 5 November and the next government materials figures on 2 December. Check those for the latest position before relying on the figures here.</p>
+</div></section>
+<section class="plain alt"><div class="container prose">
+<h2>If you are planning an extension</h2>
+<p>Materials won&rsquo;t get cheaper because the market is quiet: merchants are selling less and still charging more. The quieter market helps with booking a builder. When new-build work slows, some trades look for domestic jobs instead, and a builder with a gap in the diary is more likely to commit to a start date and less likely to quote high to put you off.</p>
+<ol>
+<li><strong>Get the drawings and approvals moving first.</strong> Builders can only give a firm price from drawings, and you will need planning permission or a permitted development check, plus Building Regulations approval, before work starts. A builder with a gap in January is of no use if your drawings aren&rsquo;t ready until spring.</li>
+<li><strong>Get two or three quotes rather than waiting for prices to drop.</strong> Nothing in these figures suggests they will.</li>
+<li><strong>Ask how long each quote is valid for</strong> and whether the price is fixed. A fixed price for 30 to 60 days is common. If a quote says materials may be repriced, ask for that to be limited to named items, such as steel, with the merchant&rsquo;s invoice as evidence. A quote valid for 30 days that you sign in week six may be repriced.</li>
+<li><strong>Ask for materials and labour on separate lines</strong>, so you can see where a difference between two builders comes from.</li>
+<li><strong>If one quote is far below the others, find out what it leaves out.</strong> The usual gaps are drainage, steelwork, foundations deeper than standard, building control and party wall fees, electrics, decorating and making good to the existing house.</li>
+<li><strong>Check the builder before you sign.</strong> On 26 October the Federation of Master Builders (FMB) said one in five homeowners (19%) had put off work because they could not find a builder they trust, and called for mandatory licensing of building companies. There is no licensing scheme yet. Ask to see recent work you can visit, check the builder has public liability insurance, ask whether an insurance-backed warranty is offered, and agree stage payments tied to work done rather than a large deposit up front.</li>
+<li><strong>Don&rsquo;t take out a wall yourself.</strong> The same FMB release said almost half (49%) of homeowners would tackle structural work such as knocking down a wall themselves rather than hire a professional. Removing a load-bearing wall is building work that building control must be told about before it starts, and they will expect a structural engineer&rsquo;s calculations, with a beam and temporary props to match. In a terrace or semi the new beam usually sits on the wall you share with next door, so you will normally need to serve notice under the Party Wall etc. Act 1996 at least a month before work starts.</li>
+</ol>
+<h2>If you run a small building firm</h2>
+<ol>
+<li><strong>Recheck the materials in older quotes.</strong> Prices are rising at 6 to 7% a year, roughly half a percent a month, so a quote priced in early September may already be short, and more so if it has a long steel or a lot of new drainage.</li>
+<li><strong>Put a validity period on every quote</strong> and say in writing what happens to materials prices after it.</li>
+<li><strong>Ask your merchant about increases already announced for the new year</strong> before fixing a price for work starting in January or February.</li>
+<li><strong>Allow for domestic work being slower than new-build.</strong> If you are taking on extensions to fill a gap left by new-build, allow for the extra time: protecting an occupied house, carrying materials through it and working around the family all slow the job compared with a new-build plot.</li>
+</ol>
+<h2>What this winter means for timing</h2>
+<p>Most extensions signed now will start in the new year. Frost holds up concrete, mortar and render, so a January start can lose days to the weather, and a contract should say how that is handled. Booking a builder now for a February or March start, once your approvals are in place, avoids the worst of it and still uses the quieter spell to agree a price.</p>
+<h2>An estimator&rsquo;s view</h2>
+<p>On a single-storey rear extension materials and plant typically make up 35 to 45% of the builder&rsquo;s cost before overheads and profit. Labour, including subcontract labour, is around half, and preliminaries such as scaffold, skips and welfare make up the rest. A 6% rise in materials therefore adds about 2 to 2.5% to the price. On a 20&nbsp;m&sup2; extension in Liverpool at around &pound;45,000 before VAT (standard finish, excluding the kitchen and professional fees; see the <a href="/guides/house-extension-cost-liverpool">Liverpool extension cost guide</a>), that is &pound;900 to &pound;1,100 from materials alone, before any change in labour rates. Designs with long steels or a lot of new drainage will rise by more, as those prices have gone up fastest.</p>
+<p>A quieter market may help a little on labour. A builder who wants the job is less likely to add a large allowance for risk. Fuel costs and April&rsquo;s rise in the National Living Wage pull the other way, so don&rsquo;t expect labour rates to fall.</p>
+<h2>Getting a price</h2>
+<p>TheGo2Guys is an estimating service based in Liverpool. We measure extensions and renovations from your drawings and price them at current North West rates, with materials and labour on separate lines. Homeowners use the estimate to check builders&rsquo; quotes before signing; builders use it to price a job without measuring the quantities themselves. A full estimate for a single-storey extension starts at &pound;150. Send your drawings through the <a href="/quote">quote form</a> and the fee and delivery date are confirmed within 24 hours.</p>
+<h2>Sources</h2>
+<ul>
+<li><a href="https://bmbi.co.uk/news-blogs/bmbi-august-year-on-year-value-sales-up-0-5-but-volumes-down-5-4/" rel="noopener">Builders Merchant Building Index, &ldquo;August year-on-year value sales up 0.5% but volumes down 5.4%&rdquo;, 28 October 2026</a></li>
+<li><a href="https://www.itv.com/news/2026-10-06/uk-construction-industry-declines-at-slowest-rate-for-eight-months" rel="noopener">ITV News, &ldquo;UK construction industry declines at slowest rate for eight months&rdquo;, 6 October 2026 (S&amp;P Global UK Construction PMI, September 2026)</a></li>
+<li><a href="https://www.pbctoday.co.uk/news/planning-construction-news/september-2026-pmi-shows-slowing-contraction/166419/" rel="noopener">PBC Today, &ldquo;September 2026 PMI shows slowing contraction&rdquo;, 7 October 2026</a></li>
+<li><a href="https://www.fmb.org.uk/resource/chancellor-must-unlock-112bn-of-home-improvements-says-fmb.html" rel="noopener">Federation of Master Builders, &ldquo;Chancellor must unlock &pound;11.2bn of home improvements&rdquo;, 26 October 2026</a></li>
+<li><a href="https://www.gov.uk/government/statistics/building-materials-and-components-statistics-september-2026/construction-building-materials-commentary-september-2026" rel="noopener">Department for Business and Trade, Building materials and components statistics, 7 October 2026</a></li>
+<li><a href="https://www.gov.uk/government/statistics/announcements/building-materials-and-components-statistics-november-2026" rel="noopener">GOV.UK, Building materials and components statistics: November 2026 (release announcement, 2 December 2026)</a></li>
+<li><a href="https://www.pmi.spglobal.com/Public/Release/ReleaseDates" rel="noopener">S&amp;P Global, PMI release calendar</a></li>
+<li><a href="https://www.legislation.gov.uk/ukpga/1996/40/contents" rel="noopener">Party Wall etc. Act 1996</a></li>
+</ul>
+</div></section>` + ctaBand('Want to check a quote against current prices?', 'Send your drawings and every item is priced at current North West rates, with labour and materials on their own lines. From &pound;150 for a single-storey extension, in 3&ndash;5 working days.')
   });
 }
 
