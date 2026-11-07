@@ -309,6 +309,7 @@ function routeExtraPage(path) {
     '/guides/garage-conversion-cost': garageGuidePage,
     '/guides/house-extension-cost-liverpool': extensionLiverpoolPage,
     '/guides/loft-conversion-cost-liverpool': loftLiverpoolPage,
+    '/guides/double-storey-extension-cost': doubleStoreyGuidePage,
     '/refer': referPage,
     '/quote': quotePage,
     '/insights': insightsIndexPage,
@@ -323,7 +324,7 @@ function routeExtraPage(path) {
 }
 
 function sitemapXml() {
-  const paths = ['/', '/calculators', '/calculators/bricks-and-blocks', '/calculators/concrete', '/calculators/plaster', '/calculators/roof-tiles', '/calculators/footings', '/calculators/screed', '/services/material-takeoffs', '/services/bills-of-quantities', '/services/tender-pricing', '/guides', '/guides/house-extension-cost', '/guides/loft-conversion-cost', '/guides/extension-preliminaries', '/guides/garage-conversion-cost', '/guides/house-extension-cost-liverpool', '/guides/loft-conversion-cost-liverpool', '/insights', '/insights/steel-prices-mortgage-rates-october-2026', '/insights/construction-jobs-plan-builder-shortages-october-2026', '/insights/autumn-budget-2026-extensions-small-builders', '/refer', '/quote', '/terms', '/privacy'];
+  const paths = ['/', '/calculators', '/calculators/bricks-and-blocks', '/calculators/concrete', '/calculators/plaster', '/calculators/roof-tiles', '/calculators/footings', '/calculators/screed', '/services/material-takeoffs', '/services/bills-of-quantities', '/services/tender-pricing', '/guides', '/guides/house-extension-cost', '/guides/loft-conversion-cost', '/guides/extension-preliminaries', '/guides/garage-conversion-cost', '/guides/house-extension-cost-liverpool', '/guides/loft-conversion-cost-liverpool', '/insights', '/insights/steel-prices-mortgage-rates-october-2026', '/insights/construction-jobs-plan-builder-shortages-october-2026', '/insights/autumn-budget-2026-extensions-small-builders', '/guides/double-storey-extension-cost', '/refer', '/quote', '/terms', '/privacy'];
   return '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
     paths.map(function (p) { return '  <url><loc>' + SITE + (p === '/' ? '/' : p) + '</loc></url>'; }).join('\n') + '\n</urlset>\n';
 }
@@ -990,6 +991,7 @@ function guidesIndexPage() {
       `<section class="plain"><div class="container"><div class="card-grid">
 <a class="card" href="/guides/house-extension-cost"><h3>House extension cost UK (2026)</h3><p>Cost per m² for single and double-storey extensions, where the money goes, and the extras people forget.</p><span class="card-go">Read the guide &rarr;</span></a>
 <a class="card" href="/guides/loft-conversion-cost"><h3>Loft conversion cost UK (2026)</h3><p>Velux, dormer, hip-to-gable and mansard conversions compared, with typical prices and timescales.</p><span class="card-go">Read the guide &rarr;</span></a>
+<a class="card" href="/guides/double-storey-extension-cost"><h3>Double-storey extension cost UK (2026)</h3><p>Prices by size for the UK and the North West, an all-in Liverpool budget, planning rules and fees.</p><span class="card-go">Read the guide &rarr;</span></a>
 <a class="card" href="/guides/garage-conversion-cost"><h3>Garage conversion cost UK (2026)</h3><p>Single, double and detached garage conversions, an all-in example budget, Building Regulations and Liverpool fees.</p><span class="card-go">Read the guide &rarr;</span></a>
 <a class="card" href="/guides/house-extension-cost-liverpool"><h3>House extension cost in Liverpool (2026)</h3><p>Cost per m² for extensions in Liverpool and Merseyside, with a real Merseyside estimate broken down.</p><span class="card-go">Read the guide &rarr;</span></a>
 <a class="card" href="/guides/loft-conversion-cost-liverpool"><h3>Loft conversion cost in Liverpool (2026)</h3><p>Velux, dormer, hip-to-gable and mansard prices for Liverpool and the North West.</p><span class="card-go">Read the guide &rarr;</span></a>
@@ -1410,6 +1412,104 @@ function garageGuidePage() {
 <li><a href="https://cncbuildingcontrol.gov.uk/wp-content/uploads/2025/02/CNCD-052-Garage-Conversion-Easy-Guide-V1.2.pdf" rel="noopener">CNC Building Control, Garage conversion easy guide</a></li>
 </ul>
 </div></section>` + ctaBand('Pricing a garage conversion?', 'Got drawings or quotes? We measure the job, from the infill wall to the skirting, and price it at current North West rates, so you can check a quote or build your own. Back in 3&ndash;5 working days.')
+  });
+}
+
+// ----------------------- Double-storey extension guide ---------------------
+const DOUBLE_STOREY_FAQ = [
+  ['Is a double-storey extension cheaper per m² than a single-storey one?', 'Yes, typically by 10&ndash;15%, because the two floors share one set of foundations and one roof. The total is still higher, as you are building twice the floor area.'],
+  ['How much does a 4m x 5m two-storey extension cost?', 'That gives about 40 m² over two floors. Allow around £68,000&ndash;£96,000 before VAT as a UK average, or £63,000&ndash;£89,000 in the North West, with a standard finish and no kitchen or bathroom fit-out. Fees, contingency and VAT come on top.'],
+  ['Can I build a second storey on my existing single-storey extension?', 'Sometimes. A structural engineer will want trial pits to check the existing foundations, and they may need strengthening or underpinning. BestBuilders puts the cost at about £1,900&ndash;£3,000 per m² of new floor including VAT, or roughly £1,600&ndash;£2,500 before VAT.'],
+  ['Do I need a party wall agreement?', 'Only if the work falls under the Party Wall etc. Act 1996: building a new wall on or astride the boundary, cutting into an existing party wall (for a steel or a flashing, say), or digging foundations within 3m of a neighbour&rsquo;s building and deeper than its foundations. Serving notice costs nothing. If the neighbour agrees in writing, there is no surveyor&rsquo;s fee. If they dissent, surveyors draw up an award, and that is where the cost comes in.'],
+  ['Are these prices with VAT?', 'No. Build costs on this page are before VAT unless a figure says otherwise. A VAT-registered builder adds 20%.']
+];
+
+function doubleStoreyGuidePage() {
+  const path = '/guides/double-storey-extension-cost';
+  return pageShell({
+    path: path,
+    title: 'Double-Storey Extension Cost UK 2026, with North West Prices | TheGo2Guys',
+    desc: 'What a double-storey extension costs in 2026: prices by size for the UK and the North West, an all-in Liverpool budget, planning rules, fees and what pushes the price up.',
+    schema: faqSchema(DOUBLE_STOREY_FAQ),
+    body: pageHero([['/', 'Home'], ['/guides', 'Cost guides'], [path, 'Double-storey extension cost']], 'How much does a double-storey extension cost in the UK?', 'For a mid-sized double-storey rear extension of about 40&nbsp;m² over two floors, budget around £1,700&ndash;£2,400 per m² to build in 2026 with a standard finish, before VAT. On a 4m &times; 5m footprint that comes to roughly £68,000&ndash;£96,000. Liverpool and the North West usually come in 5&ndash;10% below that. Kitchens, bathrooms, fees and VAT are extra.') +
+      `<section class="plain"><div class="container prose">
+<h2>Double-storey extension costs in 2026</h2>
+<p>The foundations and the roof cost much the same whether there are one or two floors between them. The foundations may need to be a little wider or deeper to carry the extra load, but the upper floor mainly adds walls, floor joists, windows and more weeks of scaffold. So the rate per m² is lower than for a single storey, while the total is higher. The FMB and Which? make the same point: two storeys does not mean double the price.</p>
+<p>Typical 2026 build costs for a rear extension with a standard finish, before VAT. Floor area is both storeys added together; the footprint is depth from the house &times; width.</p>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Footprint (depth &times; width)</th><th class="num">Total floor area</th><th class="num">UK rate per m²</th><th class="num">UK average</th><th class="num">North West</th></tr></thead><tbody>
+<tr><th>3m &times; 4m</th><td class="num">24 m²</td><td class="num">£1,900&ndash;£2,500</td><td class="num">£46,000&ndash;£60,000</td><td class="num">£42,500&ndash;£55,500</td></tr>
+<tr><th>4m &times; 5m</th><td class="num">40 m²</td><td class="num">£1,700&ndash;£2,400</td><td class="num">£68,000&ndash;£96,000</td><td class="num">£63,000&ndash;£89,000</td></tr>
+<tr><th>4m &times; 6m</th><td class="num">48 m²</td><td class="num">£1,650&ndash;£2,300</td><td class="num">£79,000&ndash;£110,000</td><td class="num">£73,000&ndash;£102,000</td></tr>
+<tr><th>5m &times; 6m</th><td class="num">60 m²</td><td class="num">£1,600&ndash;£2,200</td><td class="num">£96,000&ndash;£132,000</td><td class="num">£89,000&ndash;£122,000</td></tr>
+</tbody></table></div>
+<p><strong>Included:</strong> foundations, walls, first-floor structure, roof, windows and doors, the knock-through and steel at ground floor, scaffold, skips, plastering, first and second fix electrics and heating to the new rooms, and the builder&rsquo;s overheads and profit. <strong>Not included:</strong> kitchen and bathroom fittings, flooring, decorating, professional and council fees, contingency and VAT.</p>
+<p>These are our own rates, set from current North West estimates and in line with the single-storey figures in our <a href="/guides/house-extension-cost-liverpool">Liverpool extension guide</a>. Published guides vary widely. For a 40&nbsp;m² double storey, MyJobQuote (October 2026) gives £52,000&ndash;£60,000, and BestBuilders (August 2026) £62,000&ndash;£76,000 including VAT, which is about £52,000&ndash;£63,000 without it. Checkatrade (June 2026) is much higher at £1,800&ndash;£3,000 per m² before VAT, or £108,000&ndash;£180,000 for 60&nbsp;m².</p>
+<p>Part of the gap comes down to what each figure includes. On our <a href="/sample-estimate.pdf" target="_blank" rel="noopener">sample extension estimate</a>, preliminaries plus overheads, profit and contingency come to about 30% of the build cost, and a quick per-m² figure often leaves part of that out. MyJobQuote puts the North of England, including the North West, 5&ndash;10% below the UK average, and the North West column above uses 7.5%.</p>
+<p>Smaller extensions cost more per m², because scaffolding, the connection to the house and the roof take a bigger share of a small job.</p>
+<p>Most of the sizes in the table go beyond 3m deep, and a two-storey extension that deep needs planning permission (see below). A 6m-deep two-storey extension next to a neighbour is unlikely to be approved, so check what your council will accept before paying for drawings.</p>
+<h2>An all-in budget for a 4m &times; 5m in Liverpool</h2>
+<p>Taking the middle of the North West range for a 40&nbsp;m² extension, the full figure looks more like this:</p>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Item</th><th class="num">Cost</th></tr></thead><tbody>
+<tr><th>Build cost (standard finish)</th><td class="num">£76,000</td></tr>
+<tr><th>Drawings, at about 5% of build cost</th><td class="num">£3,800</td></tr>
+<tr><th>Structural engineer</th><td class="num">£800</td></tr>
+<tr><th>Householder planning application</th><td class="num">£548</td></tr>
+<tr><th>Liverpool building control, full plans, 10&ndash;40 m² (inc VAT)</th><td class="num">£822</td></tr>
+<tr><th>Contingency at 10% of build cost</th><td class="num">£7,600</td></tr>
+<tr><th>Total before VAT on the build</th><td class="num"><strong>£89,570</strong></td></tr>
+<tr><th>VAT at 20% on the build, if the builder is registered</th><td class="num">£15,200</td></tr>
+<tr><th>Total with VAT</th><td class="num"><strong>£104,770</strong></td></tr>
+</tbody></table></div>
+<p>A new kitchen adds roughly £8,000&ndash;£25,000, and a bathroom or en suite £5,000&ndash;£9,000. A party wall surveyor&rsquo;s award, if one is needed, is extra too.</p>
+<h2>Where the money goes</h2>
+<p>BestBuilders splits the whole project budget for a 4m &times; 4m double storey, fees included, like this:</p>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Part of the budget</th><th class="num">Share</th></tr></thead><tbody>
+<tr><th>Materials</th><td class="num">40&ndash;45%</td></tr>
+<tr><th>Labour</th><td class="num">35&ndash;40%</td></tr>
+<tr><th>Design and professional fees</th><td class="num">8&ndash;12%</td></tr>
+<tr><th>Statutory and site costs</th><td class="num">5&ndash;8%</td></tr>
+</tbody></table></div>
+<p>Compared with a single storey, the extra money goes on the first-floor joists and the additional brickwork, and on the scaffold, which stays up for longer. For how site running costs add up week by week, see our guide to <a href="/guides/extension-preliminaries">pricing preliminaries</a>.</p>
+</div></section>
+<section class="plain alt"><div class="container prose">
+<h2>Fees and approvals</h2>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Item</th><th class="num">Typical cost</th></tr></thead><tbody>
+<tr><th>Architect or technician drawings</th><td class="num">3&ndash;7% of build cost</td></tr>
+<tr><th>Structural engineer</th><td class="num">£500&ndash;£1,200</td></tr>
+<tr><th>Householder planning application (England)</th><td class="num">£548</td></tr>
+<tr><th>Lawful Development Certificate, if relying on permitted development</th><td class="num">£274</td></tr>
+<tr><th>Liverpool building control, 10&ndash;40 m²: full plans / building notice (inc VAT)</th><td class="num">£822 / £828</td></tr>
+<tr><th>Liverpool building control, over 40 m²: full plans / building notice (inc VAT)</th><td class="num">£1,134 / £1,140</td></tr>
+<tr><th>Party wall notice</th><td class="num">Free to serve</td></tr>
+<tr><th>Party wall award, if the neighbour dissents</th><td class="num">From about £700 per neighbour</td></tr>
+</tbody></table></div>
+<p>Liverpool prices building control by &ldquo;new floor area&rdquo;. A 40&nbsp;m² extension sits right on the line between two bands, so confirm with the council which band applies. Other councils and registered building control approvers charge their own rates. Planning fees are reviewed each April, so check the current figure on the Planning Portal before you apply.</p>
+<h2>Do you need planning permission?</h2>
+<p>Most double-storey extensions do. Under permitted development in England, an extension of more than one storey must:</p>
+<ul><li>go no more than 3m beyond the original rear wall of the house, and stay at least 7m from the rear boundary;</li><li>have eaves no higher than 3m if it is within 2m of a boundary, which rules out most two-storey extensions on semis and terraces;</li><li>keep its eaves and ridge no higher than the existing house, and match the roof pitch as far as practicable;</li><li>use materials similar in appearance to the house;</li><li>have upper-floor side windows obscure-glazed and non-opening, unless the opening part is more than 1.7m above the floor;</li><li>have no balcony or raised veranda, and, with other extensions and outbuildings, cover no more than half the land around the original house.</li></ul>
+<p>Two-storey side and front extensions always need planning permission, and so does any extension of more than one storey in a conservation area or on other designated land. Councils can also remove permitted development rights with an Article 4 direction. If you think you are within the rules, get a Lawful Development Certificate before building.</p>
+<p>A council has eight weeks from validating an application to decide it. Validation takes time too, so allow 10&ndash;12 weeks in total. All extensions also need Building Regulations approval.</p>
+<h2>What pushes the price up</h2>
+<ul><li><strong>Opening up on both floors.</strong> The ground-floor knock-through needs a steel beam and temporary propping. Opening the extension into an existing bedroom can need a second steel upstairs.</li><li><strong>Ground conditions.</strong> Clay, trees nearby or made ground can mean deeper footings, and the extra load of two storeys makes this more likely.</li><li><strong>Drains and access.</strong> Building over a public sewer needs consent from the water company, United Utilities across most of the North West. With no side access, materials go through the house or over the top.</li><li><strong>Kitchens and bathrooms</strong>, as above, plus the drainage runs and extract fans that go with them.</li><li><strong>Big openings.</strong> Bifolds and sliders cost far more than the brickwork they replace.</li><li><strong>The roof.</strong> Tying a pitched roof into the existing one takes more work than a flat roof, but councils usually want it to match the house.</li></ul>
+<h2>Extras people forget</h2>
+<ul><li>VAT at 20%. A builder big enough for a job this size will almost always be VAT-registered. Check every quote is on the same basis.</li><li>Flooring, decorating, and the kitchen or bathroom, if the quote stops at plaster.</li><li>Whether the boiler and consumer unit can take the extra rooms. If not, budget for an upgrade.</li><li>A contingency of 10&ndash;15%, more on an older house.</li><li>Somewhere to live, or at least to cook, while the back of the house is open.</li><li>Telling your mortgage lender and home insurer before work starts.</li><li>Agreeing the payment stages with the builder before signing, so you never pay ahead of the work done.</li></ul>
+<h2>How long it takes</h2>
+<p>A typical rear double-storey extension takes three to five months on site. Before that comes the paperwork: one to two months for drawings, 10&ndash;12 weeks for planning, then structural calculations, Building Regulations, quotes and any party wall notices. Notice has to be served at least one month ahead of excavation work and two months ahead of work to a party wall. Add your builder&rsquo;s waiting list, and 8&ndash;12 months from first drawings to a finished room is realistic.</p>
+<div class="callout"><p><strong>What to do next:</strong> check with your council what depth and design they will accept, get drawings and a structural engineer&rsquo;s calculations, apply for planning and Building Regulations, serve party wall notices if needed, then get two or three quotes against the same drawings and compare them line by line.</p></div>
+<h2>Common questions</h2>${faqHtml(DOUBLE_STOREY_FAQ)}
+<h2>Sources</h2>
+<ul>
+<li><a href="https://www.myjobquote.co.uk/costs/double-storey-extension" rel="noopener">MyJobQuote, Double storey extension cost guide, 1 October 2026</a></li>
+<li><a href="https://www.bestbuilders.co.uk/costs/double-storey-extension-cost-uk" rel="noopener">BestBuilders, Double-storey extension cost UK, 19 August 2026</a></li>
+<li><a href="https://www.checkatrade.com/blog/cost-guides/house-extension-cost/" rel="noopener">Checkatrade, House extension cost, updated June 2026</a></li>
+<li><a href="https://www.which.co.uk/reviews/extensions/article/extension-planning/extension-costs" rel="noopener">Which?, How much does a house extension cost in 2026, 15 May 2026</a></li>
+<li><a href="https://www.fmb.org.uk/resource/two-storey-extension-costs.html" rel="noopener">Federation of Master Builders, Two-storey extension costs, 13 January 2026</a></li>
+<li><a href="https://www.homebuilding.co.uk/advice/cost-of-a-two-storey-extension" rel="noopener">Homebuilding &amp; Renovating, Cost of a two-storey extension, updated May 2025</a></li>
+<li><a href="https://liverpool.gov.uk/planning-and-building-control/building-control/building-regulation-fees/fees-for-domestic-extensions-and-alterations/" rel="noopener">Liverpool City Council, Fees for domestic extensions and alterations, viewed November 2026</a></li>
+<li><a href="https://interactive.planningportal.co.uk/mini-guide/extensions-two-storey/9" rel="noopener">Planning Portal, Two-storey extensions: permitted development mini guide</a></li>
+<li><a href="https://www.gov.uk/guidance/party-wall-etc-act-1996-guidance" rel="noopener">GOV.UK, Party Wall etc. Act 1996 guidance</a></li>
+</ul>
+</div></section>` + ctaBand('Pricing a two-storey extension?', 'Send us the drawings and we measure every item, from the foundations to the roof tiles, and price it at current North West rates. Use it to check a builder&rsquo;s quote or to price the job yourself. From £250, back in 3&ndash;5 working days. No drawings yet? Get in touch and we can tell you what we need.')
   });
 }
 
