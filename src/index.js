@@ -309,6 +309,7 @@ function routeExtraPage(path) {
     '/guides/garage-conversion-cost': garageGuidePage,
     '/guides/house-extension-cost-liverpool': extensionLiverpoolPage,
     '/guides/loft-conversion-cost-liverpool': loftLiverpoolPage,
+    '/guides/house-extension-cost-wirral': extensionWirralPage,
     '/refer': referPage,
     '/quote': quotePage,
     '/insights': insightsIndexPage,
@@ -323,7 +324,7 @@ function routeExtraPage(path) {
 }
 
 function sitemapXml() {
-  const paths = ['/', '/calculators', '/calculators/bricks-and-blocks', '/calculators/concrete', '/calculators/plaster', '/calculators/roof-tiles', '/calculators/footings', '/calculators/screed', '/services/material-takeoffs', '/services/bills-of-quantities', '/services/tender-pricing', '/guides', '/guides/house-extension-cost', '/guides/loft-conversion-cost', '/guides/extension-preliminaries', '/guides/garage-conversion-cost', '/guides/house-extension-cost-liverpool', '/guides/loft-conversion-cost-liverpool', '/insights', '/insights/steel-prices-mortgage-rates-october-2026', '/insights/construction-jobs-plan-builder-shortages-october-2026', '/insights/autumn-budget-2026-extensions-small-builders', '/refer', '/quote', '/terms', '/privacy'];
+  const paths = ['/', '/calculators', '/calculators/bricks-and-blocks', '/calculators/concrete', '/calculators/plaster', '/calculators/roof-tiles', '/calculators/footings', '/calculators/screed', '/services/material-takeoffs', '/services/bills-of-quantities', '/services/tender-pricing', '/guides', '/guides/house-extension-cost', '/guides/loft-conversion-cost', '/guides/extension-preliminaries', '/guides/garage-conversion-cost', '/guides/house-extension-cost-liverpool', '/guides/loft-conversion-cost-liverpool', '/guides/house-extension-cost-wirral', '/insights', '/insights/steel-prices-mortgage-rates-october-2026', '/insights/construction-jobs-plan-builder-shortages-october-2026', '/insights/autumn-budget-2026-extensions-small-builders', '/refer', '/quote', '/terms', '/privacy'];
   return '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
     paths.map(function (p) { return '  <url><loc>' + SITE + (p === '/' ? '/' : p) + '</loc></url>'; }).join('\n') + '\n</urlset>\n';
 }
@@ -993,6 +994,7 @@ function guidesIndexPage() {
 <a class="card" href="/guides/garage-conversion-cost"><h3>Garage conversion cost UK (2026)</h3><p>Single, double and detached garage conversions, an all-in example budget, Building Regulations and Liverpool fees.</p><span class="card-go">Read the guide &rarr;</span></a>
 <a class="card" href="/guides/house-extension-cost-liverpool"><h3>House extension cost in Liverpool (2026)</h3><p>Cost per m² for extensions in Liverpool and Merseyside, with a real Merseyside estimate broken down.</p><span class="card-go">Read the guide &rarr;</span></a>
 <a class="card" href="/guides/loft-conversion-cost-liverpool"><h3>Loft conversion cost in Liverpool (2026)</h3><p>Velux, dormer, hip-to-gable and mansard prices for Liverpool and the North West.</p><span class="card-go">Read the guide &rarr;</span></a>
+<a class="card" href="/guides/house-extension-cost-wirral"><h3>House extension cost on the Wirral (2026)</h3><p>Cost per m², an all-in 20 m² budget, Wirral Council fees, conservation areas and local house types.</p><span class="card-go">Read the guide &rarr;</span></a>
 <a class="card" href="/guides/extension-preliminaries"><h3>Pricing preliminaries on an extension</h3><p>For builders: what goes in preliminaries, a real 2026 breakdown, and the items most often left out of a quote.</p><span class="card-go">Read the guide &rarr;</span></a>
 </div></div></section>` + CALC_CTA
   });
@@ -1258,6 +1260,106 @@ function loftLiverpoolPage() {
 <ul><li><strong>Steelwork.</strong> Most dormers and hip-to-gables need steel beams to carry the new roof and floor.</li><li><strong>Head height.</strong> Less than about 2.2m from the top of the ceiling joists to the ridge usually means a dormer or more roof work.</li><li><strong>Bathrooms.</strong> An en-suite adds plumbing, drainage runs and fittings.</li><li><strong>Fire safety.</strong> A protected escape route, fire doors and mains-wired smoke alarms are needed to meet building regulations.</li><li><strong>Party walls.</strong> On terraces and semis, steels bearing on the shared wall usually need a party wall agreement.</li></ul>
 <h2>Common questions</h2>${faqHtml(LOFT_LPL_FAQ)}
 </div></section>` + ctaBand('Pricing a loft conversion in Liverpool?', 'We are based in Liverpool. Send us the drawings and we measure and price the job, from steels and joists to fire doors, at current North West rates. Back in 3&ndash;5 working days.')
+  });
+}
+
+// ------------------------- Local guide: Wirral extensions --------------------
+// Same North of England rates as the Liverpool guide (national x 0.92), rounded to £50/m²; 20 m² examples worked from the rounded rates.
+// Wirral building control figures: Wirral Council standard charges from 1 October 2023 (incl. VAT). Planning fees: national, from 1 April 2026.
+const EXT_WIRRAL_FAQ = [
+  ['How much does a single-storey extension cost on the Wirral in 2026?', 'Budget £2,000 to £2,650 per m² before VAT for a standard finish. A 20 m² rear extension is roughly £40,000 to £53,000 to build, or £56,000 to £83,000 all in with contingency, fees, surveys and VAT.'],
+  ['Is it cheaper to build an extension on the Wirral than in Liverpool?', 'No. We use the same rates for both. The house makes more difference: a Birkenhead terrace with no side access costs more per m² than a Bebington semi with a drive down the side.'],
+  ['How much is building control for an extension in Wirral?', 'Wirral Council&rsquo;s published charge for a single-storey extension of 10 to 40 m² is £594 including VAT on a full plans application, or £623.70 as a building notice. Confirm with the council, as its 2026/27 fees directory refers you to building control for current charges.'],
+  ['Do I need planning permission for an extension on the Wirral?', 'Many single-storey rear extensions are permitted development: up to 3m deep on a terraced or semi-detached house, 4m on a detached house, no more than 4m high, and no more than 3m to the eaves within 2m of a boundary. Depth is measured from the original rear wall, so an earlier extension counts, and extensions and outbuildings can&rsquo;t cover more than half the garden. Some newer estates have had permitted development rights removed. In a conservation area, side extensions and rear extensions of more than one storey need planning. A lawful development certificate (£274) confirms in writing that the proposal is lawful.'],
+  ['How long does an extension take to build?', 'Usually 8 to 14 weeks on site for a single-storey rear extension. From first drawings to a builder starting, four to six months is common.']
+];
+
+function extensionWirralPage() {
+  return pageShell({
+    path: '/guides/house-extension-cost-wirral',
+    title: 'House Extension Cost Wirral 2026 | TheGo2Guys',
+    desc: 'What a house extension costs on the Wirral in 2026: cost per m², an all-in 20 m² budget, Wirral Council building control fees, conservation areas and local house types.',
+    schema: faqSchema(EXT_WIRRAL_FAQ),
+    body: pageHero([['/', 'Home'], ['/guides', 'Cost guides'], ['/guides/house-extension-cost-wirral', 'Extension cost Wirral']], 'House extension cost in the Wirral (2026)', 'A single-storey extension on the Wirral with a standard finish typically costs £2,000&ndash;£2,650 per m² to build in 2026, before VAT. A 20&nbsp;m² rear extension comes to roughly £40,000&ndash;£53,000 for the build alone, and £56,000&ndash;£83,000 once contingency, fees, surveys and VAT are added.') +
+      `<section class="plain alt"><div class="container prose">
+<p class="pub-date">Last checked 7 November 2026</p>
+<h2>Extension cost per m² on the Wirral</h2>
+<p>These are our own 2026 rates per m² of new internal floor area, before VAT. They cover the extension built to a plastered, decorated room: foundations, walls, roof, steelwork, windows and doors, the tie-in to the house, electrics, heating and plastering. They leave out the kitchen, flooring and furniture. The Wirral and Liverpool use the same rates, which are our <a href="/guides/house-extension-cost">UK figures</a> with a North of England adjustment of about 8%. We haven&rsquo;t collected separate Wirral tender prices.</p>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Extension</th><th class="num">Cost per m²</th><th class="num">20 m² example</th></tr></thead><tbody>
+<tr><th>Single-storey, basic finish</th><td class="num">£1,650&ndash;£2,000</td><td class="num">£33,000&ndash;£40,000</td></tr>
+<tr><th>Single-storey, standard finish</th><td class="num">£2,000&ndash;£2,650</td><td class="num">£40,000&ndash;£53,000</td></tr>
+<tr><th>Single-storey, high finish</th><td class="num">£2,650&ndash;£3,200</td><td class="num">£53,000&ndash;£64,000</td></tr>
+<tr><th>Double-storey, standard finish</th><td class="num">£1,650&ndash;£2,500</td><td class="num">Per m² of both floors</td></tr>
+</tbody></table></div>
+<p>Basic means stock brick, standard double glazing and a simple flat or pitched roof. Standard adds a pair of French or sliding doors and better finishes. High means large sliders, a roof lantern, underfloor heating and a more involved roof. Double-storey is cheaper per m² because one set of foundations and one roof serve two floors, though the total is higher.</p>
+<p>Online guides published this year put single-storey extensions at anywhere from about £1,700 to £2,400 per m². Those figures don&rsquo;t all include the same things or measure floor area the same way, so check before comparing.</p>
+<p>Small extensions cost more per m², because scaffolding, foundations, steelwork and the tie-in cost much the same whatever the size. Our <a href="/sample-estimate.pdf" target="_blank" rel="noopener">sample estimate</a> for a 16.28&nbsp;m² single-storey rear extension in Merseyside came to £46,451 before VAT, or £2,853 per m². That&rsquo;s above the standard band because the job is small; the specification was ordinary.</p>
+<h2>Will 20 m² fit under permitted development?</h2>
+<p>Often not. Permitted development allows a single-storey rear extension up to 3m deep on a terraced or semi-detached house. On a typical Wirral semi, 5.5&ndash;6m wide, that gives around 15&nbsp;m² inside. Getting to 20&nbsp;m² usually means going 3.5&ndash;4m deep, which needs either a prior approval application under the larger home extension scheme (up to 6m on a semi or terrace, 8m on a detached house, £249) or a full householder planning application (£548). The larger home extension scheme isn&rsquo;t available in a conservation area.</p>
+<h2>A 20 m² Wirral extension, all in</h2>
+<p>A budget for a 20&nbsp;m² single-storey rear extension with a standard finish, built by a VAT-registered builder. Fee lines include VAT where it is charged.</p>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Item</th><th class="num">Typical cost</th></tr></thead><tbody>
+<tr><th>Build cost, ex VAT</th><td class="num">£40,000&ndash;£53,000</td></tr>
+<tr><th>Contingency, 10&ndash;15%</th><td class="num">£4,000&ndash;£8,000</td></tr>
+<tr><th>VAT at 20% on build and contingency</th><td class="num">£8,800&ndash;£12,200</td></tr>
+<tr><th>Drawings (architect or architectural technologist)</th><td class="num">£1,500&ndash;£3,500</td></tr>
+<tr><th>Structural engineer&rsquo;s calculations</th><td class="num">£500&ndash;£1,200</td></tr>
+<tr><th>Wirral building control, full plans (10&ndash;40 m²)</th><td class="num">£594</td></tr>
+<tr><th>Prior approval or planning, if needed</th><td class="num">£0&ndash;£548</td></tr>
+<tr><th>CCTV drain survey and trial hole</th><td class="num">£450&ndash;£950</td></tr>
+<tr><th>Party wall surveyor, per neighbour, if needed</th><td class="num">£0&ndash;£3,000</td></tr>
+<tr><th>Total</th><td class="num"><strong>roughly £56,000&ndash;£83,000</strong></td></tr>
+</tbody></table></div>
+<p>Not included: the kitchen, flooring and decorating, a build-over agreement or manhole move if a sewer is in the way, and energy calculations if the glazing is large (see below).</p>
+<p>Builders turning over less than £90,000 a year don&rsquo;t charge VAT, which is why some quotes look much cheaper. They still pay VAT on materials and pass it on, so the saving is mostly on labour. A builder doing several extensions a year is likely to be over the threshold, so ask about any &ldquo;no VAT&rdquo; quote on a £50,000 job.</p>
+<h2>Wirral Council fees</h2>
+<h3>Building control</h3>
+<p>Wirral Council&rsquo;s standard charges took effect on 1 October 2023 and are still the schedule linked from the <a href="https://www.wirral.gov.uk/planning-and-building/building-control/building-control-charges-and-making-payments" rel="noopener">council&rsquo;s building control charges page</a> in November 2026. Including VAT:</p>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Work</th><th class="num">Full plans (plan + inspection)</th><th class="num">Building notice</th></tr></thead><tbody>
+<tr><th>Single-storey extension, up to 10 m²</th><td class="num">£468</td><td class="num">£491.40</td></tr>
+<tr><th>Single-storey extension, over 10 to 40 m²</th><td class="num">£594</td><td class="num">£623.70</td></tr>
+<tr><th>Single-storey extension, over 40 to 100 m²</th><td class="num">£774</td><td class="num">£812.70</td></tr>
+<tr><th>Two-storey extension, over 10 to 40 m²</th><td class="num">£648</td><td class="num">£680.40</td></tr>
+<tr><th>Two-storey extension, over 40 to 100 m²</th><td class="num">£864</td><td class="num">£907.20</td></tr>
+<tr><th>Garage conversion to a habitable room</th><td class="num">£378</td><td class="num">£396.90</td></tr>
+</tbody></table></div>
+<p>Combine an extension with other work, such as a garage conversion, and the council charges the higher fee plus half of the lower one. Regularising work already done without approval costs the building notice charge plus 40%. The council&rsquo;s 2026/27 fees directory refers you to building control for current charges, so ring 0151 691 8454 before you budget. You can use a registered building control approver instead of the council; their fees are set privately.</p>
+<h3>Planning</h3>
+<p>Planning fees in England are set nationally. Since 1 April 2026 a householder application has cost £548. A lawful development certificate for a proposed extension is half that, £274, and a larger home extension prior approval is £249. Another national rise is due on 8 December 2026 if Parliament approves it, and the <a href="https://blog.planningportal.co.uk/2026/10/23/english-planning-application-fees-increase-on-8th-december-2026/" rel="noopener">Planning Portal</a> says applications made by 5pm on Monday 7 December pay the current fees. We will update this page once the new figures are confirmed.</p>
+<h2>Conservation areas, Port Sunlight and Article 4</h2>
+<p>The Wirral has 26 conservation areas, among them Oxton Village, Birkenhead Park, Hamilton Square, Rock Park, Port Sunlight Village, Bromborough Pool, West Kirby, Caldy, Heswall Lower Village, Thornton Hough and Eastham Village. Inside one, side extensions, rear extensions of more than one storey, dormers and external cladding or render all need planning permission, even where they would be permitted development elsewhere. Felling or cutting back a tree needs six weeks&rsquo; written notice to the council, which matters if a tree sits near the new foundations.</p>
+<p>Almost every house in Port Sunlight is Grade II listed. Listed building consent is needed for most external changes and many internal ones. There is no fee for it, but carrying out works without it is a criminal offence. The Port Sunlight Village Trust&rsquo;s design guidance applies as well.</p>
+<p>The government&rsquo;s planning data lists Article 4 directions on the Wirral covering Bromborough Pool, Bromborough Village and parts of Caldy, Thurstaston and Heswall. An Article 4 direction removes some permitted development rights, so work that would normally go ahead without an application may need one. Check the council&rsquo;s conservation area map and the <a href="https://historicengland.org.uk/listing/the-list/" rel="noopener">Historic England list</a> before paying for drawings, and allow for matching materials in the price.</p>
+<h2>Wirral house types and what they mean for cost</h2>
+<h3>Victorian and Edwardian terraces</h3>
+<p>Much of Birkenhead, Tranmere, Rock Ferry, Wallasey and New Brighton. Narrow plots, shared drains, no side access and party walls on both sides. Materials and spoil go through the house by hand, which adds labour days. Party wall notices often go to both neighbours, because a steel bearing into a party wall or foundations dug within 3m of a neighbour&rsquo;s both bring in the Party Wall Act. A side-return infill is common here, and it is the dearer kind of opening-up (see below).</p>
+<h3>1930s and post-war semis</h3>
+<p>Bebington, Upton, Greasby, Prenton and Moreton. There is usually side access and room for a full-width rear extension, so these are often the easiest jobs to price. The exception is low-lying ground around Moreton and Leasowe, covered below.</p>
+<h3>Larger detached houses</h3>
+<p>Heswall, West Kirby, Caldy and Oxton. The bigger floor area brings the rate per m² down. On these, the budget goes up or down with the spec, mainly big sliders and roof lanterns.</p>
+<h2>Ground and drains</h2>
+<p>Boulder clay covers much of the Wirral&rsquo;s lower ground, and near trees it means deeper foundations. On the sandstone ridges at Bidston, Heswall and Thurstaston you will often hit rock that has to be broken out. Low-lying parts of north Wirral, including Moreton, Leasowe and Meols, have soft ground in places and sit in flood zones, where a planning application needs a flood risk assessment and foundations may have to go deeper. A trial hole before the price is fixed costs a few hundred pounds.</p>
+<p>Since October 2011, shared drains serving more than one house have been public sewers. Behind most terraces, and many semis, that means a build-over agreement for an extension within 3m of the sewer. Building control can approve straightforward cases under United Utilities&rsquo; protocol; anything else goes to United Utilities directly. You can&rsquo;t build over a manhole, so it often has to be moved, which can add £1,000&ndash;£3,000.</p>
+<h2>What pushes the price up</h2>
+<ul><li><strong>Opening up the back of the house.</strong> One steel beam and knock-through in a rear wall is typically £3,000&ndash;£6,000 of the build. A side-return infill with a goalpost frame or several steels, often bearing on the party wall, is more like £6,000&ndash;£12,000.</li><li><strong>Glazing.</strong> A large slider or roof lantern often costs more than the brickwork it replaces. If new glazing is more than 25% of the extension&rsquo;s floor area, Part L of the Building Regulations needs energy calculations to show it still complies, at around £150&ndash;£400, and sometimes better glass or extra insulation elsewhere.</li><li><strong>No side access.</strong> Allow extra labour days for barrowing everything through the house.</li><li><strong>Conservation finishes.</strong> Reclaimed brick, natural slate and timber windows cost more than standard ones.</li></ul>
+<h2>Extras people forget</h2>
+<ul><li>A new consumer unit if the existing one can&rsquo;t take the extra circuits: typically £500&ndash;£900.</li><li>Moving a boiler, gas meter or soil stack that&rsquo;s in the way.</li><li>Making good inside the house after the knock-through.</li><li>Skip permits and parking suspensions on terraced streets.</li><li>The kitchen, flooring and decorating, which are rarely in a builder&rsquo;s extension price.</li></ul>
+<h2>Order of work</h2>
+<ol><li>Check whether the house is in a conservation area, listed, covered by an Article 4 direction or in a flood zone.</li><li>Measured survey and drawings.</li><li>Prior approval, lawful development certificate or planning application. The council has eight weeks to decide a householder application.</li><li>Structural calculations, then a building control full plans application.</li><li>Party wall notices: at least one month before work starts for digging near a neighbour&rsquo;s foundations, two months for work on the party wall itself.</li><li>A build-over agreement if a sewer is nearby.</li><li>The same drawings and specification to at least three builders, so the quotes can be compared line by line.</li><li>The build: usually 8&ndash;14 weeks on site. Lead times on sliders, lanterns and steel are the usual cause of delay.</li></ol>
+<p>From first drawings to a builder on site, four to six months is common. For prices on the other side of the Mersey, see our <a href="/guides/house-extension-cost-liverpool">Liverpool extension cost guide</a>.</p>
+<h2>Common questions</h2>${faqHtml(EXT_WIRRAL_FAQ)}
+<h2>Sources</h2>
+<ul>
+<li><a href="https://www.wirral.gov.uk/files/standard-charges-and-guidance-notes-1st-october-2023.pdf/download?inline" rel="noopener">Wirral Council, Building control standard charges and guidance notes, from 1 October 2023</a></li>
+<li><a href="https://www.wirral.gov.uk/files/wirral-council-fees-and-charges-2026.pdf/download" rel="noopener">Wirral Council, Fees and charges 2026/27</a></li>
+<li><a href="https://www.ribblevalley.gov.uk/downloads/file/4972/planning-application-fees-from-1-april-2026-table-" rel="noopener">Planning application fees in England from 1 April 2026 (national fee table, published by Ribble Valley Borough Council)</a></li>
+<li><a href="https://blog.planningportal.co.uk/2026/10/23/english-planning-application-fees-increase-on-8th-december-2026/" rel="noopener">Planning Portal, English planning application fees increase on 8 December 2026, 23 October 2026</a></li>
+<li><a href="https://provide.planning.data.gov.uk/organisations/local-authority:WRL/conservation-area/overview" rel="noopener">Planning Data, Wirral conservation areas</a> and <a href="https://provide.planning.data.gov.uk/organisations/local-authority:WRL/article-4-direction/data" rel="noopener">Article 4 directions</a></li>
+<li><a href="https://www.wirral.gov.uk/files/conservation-area-guidance-leaflet-2018.pdf-1/download" rel="noopener">Wirral Council, Living in a conservation area</a></li>
+<li><a href="https://www.myjobquote.co.uk/costs/house-extension" rel="noopener">MyJobQuote, House extension cost guide, 19 October 2026</a></li>
+<li><a href="https://www.mybuilder.com/extensions/price-guides/house-extension-cost" rel="noopener">MyBuilder, House extension cost guide</a></li>
+</ul>
+</div></section>` + ctaBand('Get an itemised estimate', 'We price extensions from your drawings, line by line, at current North West rates. Homeowners use them to check builders&rsquo; quotes; builders use them to tender. We&rsquo;re over the water in Liverpool. From £150, back in 3&ndash;5 working days.')
   });
 }
 
