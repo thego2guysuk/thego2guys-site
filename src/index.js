@@ -101,8 +101,8 @@ async function serveUpload(path, env) {
 // Quote form, shared by the homepage and /quote
 const QUOTE_FORM = `<form class="contact-form" id="quoteForm" novalidate><div class="form-row"><div class="form-group"><label for="name">Full name *</label><input type="text" id="name" name="name" required autocomplete="name"></div><div class="form-group"><label for="company">Company</label><input type="text" id="company" name="company" autocomplete="organization"></div></div><div class="form-row"><div class="form-group"><label for="email">Email *</label><input type="email" id="email" name="email" required autocomplete="email"></div><div class="form-group"><label for="phone">Phone</label><input type="tel" id="phone" name="phone" autocomplete="tel"></div></div><div class="form-group"><label for="service">Service *</label><select id="service" name="service" required><option value="">Select a service</option><option value="Material Takeoffs">Material takeoff</option><option value="Cost Estimates">Cost estimate</option><option value="Bills of Quantities">Bill of quantities</option><option value="Tender Pricing">Tender pricing</option><option value="Tender Pack">Tender Pack (premium)</option><option value="Multiple Services">Not sure / more than one</option></select></div><div class="form-group"><label for="message">Project details *</label><textarea id="message" name="message" required placeholder="Type of project, approximate size, location and when you need the estimate"></textarea></div><div class="form-group"><label for="referrer">Referred by another builder?</label><input type="text" id="referrer" name="referrer" placeholder="Their name or company (optional)" autocomplete="off"></div><div class="form-group"><label for="file">Drawings</label><input type="file" id="file" name="file" accept=".pdf,.dwg,.dxf,.jpg,.jpeg,.png,.zip" multiple><p class="form-hint">PDF, DWG, DXF, JPG, PNG or ZIP. Up to 10 files, 25MB each.</p></div><div style="position:absolute;left:-9999px;" aria-hidden="true"><label for="hp">Leave this empty</label><input type="text" id="hp" name="_honey" tabindex="-1" autocomplete="off"></div><input type="hidden" id="source" name="source" value=""><button type="submit" class="form-submit" id="quoteSubmit">Send request</button><div class="form-status" id="formStatus" role="status" aria-live="polite"></div><p class="form-note">Files too large? Email them to <a href="mailto:hello@thego2guys.uk">hello@thego2guys.uk</a> or send a WeTransfer link.</p></form>`;
 // Fills 'Referred by' from ?ref= and records where the visitor came from (?src=, e.g. flyer QR code)
-const QUOTE_PREFILL = "<script>(function(){try{var q=new URLSearchParams(location.search);var r=q.get('ref');var f=document.getElementById('referrer');if(r&&f){f.value=r.slice(0,80);}var s=q.get('src');var h=document.getElementById('source');if(s&&h){h.value=s.slice(0,40);}}catch(e){}})();</script>";
-const HTML = `<!DOCTYPE html><html lang="en-GB"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5.0"><title>Building Estimating Services UK | TheGo2Guys</title><meta name="description" content="Building estimates for UK builders: extensions, loft conversions and new homes. Measured from your drawings, priced at current UK rates. From £120, 3–5 working days."><link rel="canonical" href="https://thego2guys.uk/"><meta property="og:title" content="Building Estimating Services UK | TheGo2Guys"><meta property="og:description" content="Building estimates for UK builders: extensions, loft conversions and new homes. Measured from your drawings. From £120, 3–5 working days."><meta property="og:url" content="https://thego2guys.uk/"><meta property="og:type" content="website"><meta property="og:site_name" content="TheGo2Guys"><meta property="og:image" content="https://thego2guys.uk/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="theme-color" content="#18211D"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,500..800&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="icon" type="image/png" sizes="96x96" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="stylesheet" href="/styles.css"><script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","name":"TheGo2Guys","url":"https://thego2guys.uk/","description":"Building estimating service for UK builders and homeowners: extensions, loft conversions and new homes, measured from drawings and priced at current UK rates.","telephone":"+441516621274","email":"hello@thego2guys.uk","address":{"@type":"PostalAddress","addressLocality":"Liverpool","addressRegion":"Merseyside","addressCountry":"GB"},"areaServed":[{"@type":"City","name":"Liverpool"},{"@type":"AdministrativeArea","name":"North West England"},{"@type":"Country","name":"United Kingdom"}],"priceRange":"From £120"}</script></head><body><a class="skip" href="#main">Skip to content</a><header><div class="container nav-bar"><a href="#top" class="logo"><div class="logo-icon">G2G</div>TheGo2Guys</a><ul class="nav-links" id="navLinks"><li><a href="#services">Services</a></li><li><a href="/calculators">Free tools</a></li><li><a href="/guides">Cost guides</a></li><li><a href="/insights">Insights</a></li><li><a href="#pricing">Pricing</a></li><li><a href="tel:01516621274" class="nav-phone">0151 662 1274</a></li><li><a href="#contact" class="nav-cta">Request a quote</a></li></ul><button class="mobile-menu-btn" aria-label="Menu" aria-controls="navLinks" onclick="document.getElementById('navLinks').classList.toggle('open')">&#9776;</button></div></header><main id="main"><section class="hero" id="top"><div class="container"><div class="hero-copy"><h1>Building estimates for extensions and new homes</h1><p class="lede">Send us your drawings. We measure every item, price it at current UK rates and return a clear, itemised estimate within 3&ndash;5 working days.</p><div class="hero-cta"><a href="#contact" class="btn-primary">Request a quote</a><a href="#sample" class="btn-ghost">See an example estimate</a></div><dl class="facts"><div><dt>Fixed fee</dt><dd>Confirmed before we start</dd></div><div><dt>Turnaround</dt><dd>3&ndash;5 days</dd></div><div><dt>Express</dt><dd>48 hours</dd></div><div><dt>Coverage</dt><dd>UK-wide</dd></div></dl></div></div></section><section class="services" id="services"><div class="container split"><div class="split-head"><h2>What we prepare</h2><p>Estimates for builders and contractors working on residential projects, from single-storey extensions to new-build houses.</p><div class="includes"><h3>Every estimate includes</h3><ul><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>An elemental summary with cost per m²</li><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Every item measured, with quantities and rates</li><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Assumptions and exclusions set out clearly</li><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>A PDF with revision control, ready to share</li></ul></div></div><dl class="service-list"><div><dt>Material takeoffs</dt><dd>Measured quantities from your drawings, set out so you can order from your merchant.</dd></div><div><dt>Cost estimates</dt><dd>Labour, materials and plant priced at current UK rates, with an elemental summary and cost per m².</dd></div><div><dt>Bills of quantities</dt><dd>Itemised and measured generally to RICS NRM2, ready to send to subcontractors or your client.</dd></div><div><dt>Tender pricing</dt><dd>Priced schedules for tender returns, set out so every figure is easy to check.</dd></div></dl></div></section><section class="process" id="process"><div class="container"><h2>How it works</h2><ol class="steps"><li><span class="step-n">1</span><h3>Send your drawings and specification</h3><p>Upload plans, sections, elevations and any specification through the form below, or email them. We confirm the scope and price within 24 hours.</p></li><li><span class="step-n">2</span><h3>We measure and price</h3><p>We do a full takeoff from your drawings and price it at current rates for your region.</p></li><li><span class="step-n">3</span><h3>You receive your estimate</h3><p>An itemised PDF in 3&ndash;5 working days, or 48 hours with express. If you have any questions about it, we'll go through them with you directly.</p></li></ol></div></section><section class="sample" id="sample"><div class="container sample-grid"><div class="sample-copy"><h2>See an example</h2><p>A sample estimate for a single-storey rear extension, in the same format your project would be issued in.</p><p>It runs to seven pages: an elemental summary, every measured item with quantities and rates, and the assumptions and exclusions behind the figures.</p><a href="/sample-estimate.pdf" target="_blank" rel="noopener" class="btn-ghost">Open the sample estimate (PDF)</a></div><div class="sample-doc"><a href="/sample-estimate.pdf" target="_blank" rel="noopener" class="doc" aria-label="Open the full sample estimate (PDF)"><span class="doc-stamp">Sample</span><div class="doc-head"><span class="logo-icon sm">G2G</span><span>Cost estimate</span><span class="doc-ref">G2G-EST-0001 Rev P02</span></div><p class="doc-title">Single-storey rear extension</p><p class="doc-sub">Estimate summary, Merseyside, Q4 2026 prices</p><dl class="doc-kpis"><div><dt>Total excl. VAT</dt><dd>£46,451</dd></div><div><dt>Cost per m²</dt><dd>£2,853</dd></div><div><dt>Floor area</dt><dd>16.28 m²</dd></div><div><dt>Programme</dt><dd>10 weeks</dd></div></dl><table class="doc-table"><thead><tr><th>Ref</th><th>Element</th><th>£</th></tr></thead><tbody><tr><td>1</td><td>Preliminaries</td><td>6,210</td></tr><tr><td>2</td><td>Demolitions and alterations</td><td>3,888</td></tr><tr><td>3</td><td>Substructure</td><td>4,545</td></tr><tr><td>4</td><td>Ground floor</td><td>1,743</td></tr><tr><td>5</td><td>External walls</td><td>6,370</td></tr><tr><td>6</td><td>Roof</td><td>6,347</td></tr><tr><td>7</td><td>Windows and external doors</td><td>5,820</td></tr><tr><td>8</td><td>Internal finishes</td><td>1,781</td></tr><tr><td>9</td><td>Services</td><td>2,200</td></tr><tr><td>10</td><td>Drainage</td><td>1,038</td></tr><tr><td>11</td><td>External works</td><td>450</td></tr></tbody><tfoot><tr><td></td><td>Construction cost</td><td>40,393</td></tr><tr><td></td><td>Overheads, profit and contingency</td><td>6,059</td></tr><tr class="doc-total"><td></td><td>Estimate total excl. VAT</td><td>46,451</td></tr></tfoot></table><span class="doc-open">Open the full 7-page PDF</span></a></div></div></section><section class="pricing" id="pricing"><div class="container split"><div class="split-head"><h2>Pricing</h2><p>Typical starting prices. Send your drawings and we confirm the exact price before any work starts. Larger or unusual projects are quoted individually.</p></div><div><table class="price-table"><thead><tr><th scope="col">Work</th><th scope="col">Scope</th><th scope="col" class="num">Tender Pack<span class="col-sub">from</span></th><th scope="col" class="num col-pick">Standard<span class="col-sub">from</span></th></tr></thead><tbody><tr><th scope="row">Material takeoff</th><td>Quantities only, for jobs you price yourself</td><td class="num muted">&ndash;</td><td class="num col-pick">£120</td></tr><tr><th scope="row">Single-storey extension</th><td>Full measured estimate</td><td class="num">£395</td><td class="num col-pick">£150</td></tr><tr><th scope="row">Double-storey extension</th><td>Full measured estimate</td><td class="num">£595</td><td class="num col-pick">£250</td></tr><tr><th scope="row">New-build house</th><td>Full measured estimate, single dwelling</td><td class="num">£845</td><td class="num col-pick">£450</td></tr></tbody></table><div class="includes pack"><h3>The Tender Pack includes everything in Standard, plus</h3><ul><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>48-hour express turnaround</li><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>A bill of quantities measured to RICS NRM2, as an editable Excel file you can send to subcontractors for pricing</li><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>A client-facing PDF branded with your company name and logo, ready to send to the homeowner</li><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>One free re-price when revised drawings come in</li></ul></div><div class="price-notes"><p><strong>Standard turnaround:</strong> 3&ndash;5 working days from receipt of full drawings.</p><p><strong>Express on Standard:</strong> 48 hours, at an extra 50%. Included in the Tender Pack.</p></div><a href="#contact" class="btn-primary">Request a quote</a></div></div></section><section class="contact" id="contact"><div class="container contact-grid"><div class="contact-info"><h2>Request a quote</h2><p>Send your drawings and a few details. We reply within 24 hours with a price and a delivery date.</p><dl class="contact-list"><div><dt>Email</dt><dd><a href="mailto:hello@thego2guys.uk">hello@thego2guys.uk</a></dd></div><div><dt>Phone</dt><dd><a href="tel:01516621274">0151 662 1274</a></dd></div><div><dt>Based in</dt><dd>Liverpool</dd></div></dl></div>${QUOTE_FORM}</div></section></main><footer><div class="container"><div class="footer-top"><div class="footer-brand"><a href="#top" class="logo"><div class="logo-icon">G2G</div>TheGo2Guys</a><p>Building estimates for UK builders and contractors.</p></div><div class="footer-col"><h4>Services</h4><ul><li><a href="#services">Material takeoffs</a></li><li><a href="#services">Cost estimates</a></li><li><a href="#services">Bills of quantities</a></li><li><a href="#services">Tender pricing</a></li></ul></div><div class="footer-col"><h4>Company</h4><ul><li><a href="#process">How it works</a></li><li><a href="#pricing">Pricing</a></li><li><a href="/calculators">Free calculators</a></li><li><a href="/guides">Cost guides</a></li><li><a href="/insights">Insights</a></li><li><a href="/sample-estimate.pdf" target="_blank" rel="noopener">Sample estimate</a></li><li><a href="/refer">Refer a builder</a></li><li><a href="/terms">Terms and conditions</a></li><li><a href="/privacy">Privacy policy</a></li></ul></div><div class="footer-col"><h4>Contact</h4><ul><li><a href="mailto:hello@thego2guys.uk">hello@thego2guys.uk</a></li><li><a href="tel:01516621274">0151 662 1274</a></li></ul></div></div><div class="footer-bottom"><p>&copy; 2026 TheGo2Guys. Building estimating services, UK.</p></div></div></footer><script src="/script.js"></script>${QUOTE_PREFILL}</body></html>`;
+const QUOTE_PREFILL = "<script>(function(){try{var q=new URLSearchParams(location.search);var r=q.get('ref');var f=document.getElementById('referrer');if(r&&f){f.value=r.slice(0,80);}var s=q.get('src');var h=document.getElementById('source');if(s&&h){h.value=s.slice(0,40);}var sv=q.get('service');var sel=document.getElementById('service');if(sv&&sel){for(var i=0;i<sel.options.length;i++){if(sel.options[i].value===sv){sel.selectedIndex=i;break;}}}}catch(e){}})();</script>";
+const HTML = `<!DOCTYPE html><html lang="en-GB"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5.0"><title>Building Estimating Services UK | TheGo2Guys</title><meta name="description" content="Building estimates for UK builders: extensions, loft conversions and new homes. Measured from your drawings, priced at current UK rates. From £120, 3–5 working days."><link rel="canonical" href="https://thego2guys.uk/"><meta property="og:title" content="Building Estimating Services UK | TheGo2Guys"><meta property="og:description" content="Building estimates for UK builders: extensions, loft conversions and new homes. Measured from your drawings. From £120, 3–5 working days."><meta property="og:url" content="https://thego2guys.uk/"><meta property="og:type" content="website"><meta property="og:site_name" content="TheGo2Guys"><meta property="og:image" content="https://thego2guys.uk/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="theme-color" content="#18211D"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,500..800&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="icon" type="image/png" sizes="96x96" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="stylesheet" href="/styles.css"><script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","name":"TheGo2Guys","url":"https://thego2guys.uk/","description":"Building estimating service for UK builders and homeowners: extensions, loft conversions and new homes, measured from drawings and priced at current UK rates.","telephone":"+441516621274","email":"hello@thego2guys.uk","address":{"@type":"PostalAddress","addressLocality":"Liverpool","addressRegion":"Merseyside","addressCountry":"GB"},"areaServed":[{"@type":"City","name":"Liverpool"},{"@type":"AdministrativeArea","name":"North West England"},{"@type":"Country","name":"United Kingdom"}],"priceRange":"From £120"}</script></head><body><a class="skip" href="#main">Skip to content</a><header><div class="container nav-bar"><a href="#top" class="logo"><div class="logo-icon">G2G</div>TheGo2Guys</a><ul class="nav-links" id="navLinks"><li><a href="#services">Services</a></li><li><a href="/calculators">Free tools</a></li><li><a href="/guides">Cost guides</a></li><li><a href="/insights">Insights</a></li><li><a href="#pricing">Pricing</a></li><li><a href="tel:01516621274" class="nav-phone">0151 662 1274</a></li><li><a href="#contact" class="nav-cta">Request a quote</a></li></ul><button class="mobile-menu-btn" aria-label="Menu" aria-controls="navLinks" onclick="document.getElementById('navLinks').classList.toggle('open')">&#9776;</button></div></header><main id="main"><section class="hero" id="top"><div class="container"><div class="hero-copy"><h1>Building estimates for extensions and new homes</h1><p class="lede">Send us your drawings. We measure every item, price it at current UK rates and return a clear, itemised estimate within 3&ndash;5 working days.</p><div class="hero-cta"><a href="#contact" class="btn-primary">Request a quote</a><a href="#sample" class="btn-ghost">See an example estimate</a></div><dl class="facts"><div><dt>Fixed fee</dt><dd>Confirmed before we start</dd></div><div><dt>Turnaround</dt><dd>3&ndash;5 days</dd></div><div><dt>Express</dt><dd>48 hours</dd></div><div><dt>Coverage</dt><dd>UK-wide</dd></div></dl></div></div></section><section class="services" id="services"><div class="container split"><div class="split-head"><h2>What we prepare</h2><p>Estimates for builders and contractors working on residential projects, from single-storey extensions to new-build houses.</p><div class="includes"><h3>Every estimate includes</h3><ul><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>An elemental summary with cost per m²</li><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Every item measured, with quantities and rates</li><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Assumptions and exclusions set out clearly</li><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>A PDF with revision control, ready to share</li></ul></div></div><dl class="service-list"><div><dt>Material takeoffs</dt><dd>Measured quantities from your drawings, set out so you can order from your merchant. <a href="/services/material-takeoffs">More about takeoffs</a></dd></div><div><dt>Cost estimates</dt><dd>Labour, materials and plant priced at current UK rates, with an elemental summary and cost per m².</dd></div><div><dt>Bills of quantities</dt><dd>Itemised and measured generally to RICS NRM2, ready to send to subcontractors or your client. <a href="/services/bills-of-quantities">More about bills of quantities</a></dd></div><div><dt>Tender pricing</dt><dd>Priced schedules for tender returns, set out so every figure is easy to check. <a href="/services/tender-pricing">More about tender pricing</a></dd></div></dl></div></section><section class="process" id="process"><div class="container"><h2>How it works</h2><ol class="steps"><li><span class="step-n">1</span><h3>Send your drawings and specification</h3><p>Upload plans, sections, elevations and any specification through the form below, or email them. We confirm the scope and price within 24 hours.</p></li><li><span class="step-n">2</span><h3>We measure and price</h3><p>We do a full takeoff from your drawings and price it at current rates for your region.</p></li><li><span class="step-n">3</span><h3>You receive your estimate</h3><p>An itemised PDF in 3&ndash;5 working days, or 48 hours with express. If you have any questions about it, we'll go through them with you directly.</p></li></ol></div></section><section class="sample" id="sample"><div class="container sample-grid"><div class="sample-copy"><h2>See an example</h2><p>A sample estimate for a single-storey rear extension, in the same format your project would be issued in.</p><p>It runs to seven pages: an elemental summary, every measured item with quantities and rates, and the assumptions and exclusions behind the figures.</p><a href="/sample-estimate.pdf" target="_blank" rel="noopener" class="btn-ghost">Open the sample estimate (PDF)</a></div><div class="sample-doc"><a href="/sample-estimate.pdf" target="_blank" rel="noopener" class="doc" aria-label="Open the full sample estimate (PDF)"><span class="doc-stamp">Sample</span><div class="doc-head"><span class="logo-icon sm">G2G</span><span>Cost estimate</span><span class="doc-ref">G2G-EST-0001 Rev P02</span></div><p class="doc-title">Single-storey rear extension</p><p class="doc-sub">Estimate summary, Merseyside, Q4 2026 prices</p><dl class="doc-kpis"><div><dt>Total excl. VAT</dt><dd>£46,451</dd></div><div><dt>Cost per m²</dt><dd>£2,853</dd></div><div><dt>Floor area</dt><dd>16.28 m²</dd></div><div><dt>Programme</dt><dd>10 weeks</dd></div></dl><table class="doc-table"><thead><tr><th>Ref</th><th>Element</th><th>£</th></tr></thead><tbody><tr><td>1</td><td>Preliminaries</td><td>6,210</td></tr><tr><td>2</td><td>Demolitions and alterations</td><td>3,888</td></tr><tr><td>3</td><td>Substructure</td><td>4,545</td></tr><tr><td>4</td><td>Ground floor</td><td>1,743</td></tr><tr><td>5</td><td>External walls</td><td>6,370</td></tr><tr><td>6</td><td>Roof</td><td>6,347</td></tr><tr><td>7</td><td>Windows and external doors</td><td>5,820</td></tr><tr><td>8</td><td>Internal finishes</td><td>1,781</td></tr><tr><td>9</td><td>Services</td><td>2,200</td></tr><tr><td>10</td><td>Drainage</td><td>1,038</td></tr><tr><td>11</td><td>External works</td><td>450</td></tr></tbody><tfoot><tr><td></td><td>Construction cost</td><td>40,393</td></tr><tr><td></td><td>Overheads, profit and contingency</td><td>6,059</td></tr><tr class="doc-total"><td></td><td>Estimate total excl. VAT</td><td>46,451</td></tr></tfoot></table><span class="doc-open">Open the full 7-page PDF</span></a></div></div></section><section class="pricing" id="pricing"><div class="container split"><div class="split-head"><h2>Pricing</h2><p>Typical starting prices. Send your drawings and we confirm the exact price before any work starts. Larger or unusual projects are quoted individually.</p></div><div><table class="price-table"><thead><tr><th scope="col">Work</th><th scope="col">Scope</th><th scope="col" class="num">Tender Pack<span class="col-sub">from</span></th><th scope="col" class="num col-pick">Standard<span class="col-sub">from</span></th></tr></thead><tbody><tr><th scope="row">Material takeoff</th><td>Quantities only, for jobs you price yourself</td><td class="num muted">&ndash;</td><td class="num col-pick">£120</td></tr><tr><th scope="row">Single-storey extension</th><td>Full measured estimate</td><td class="num">£395</td><td class="num col-pick">£150</td></tr><tr><th scope="row">Double-storey extension</th><td>Full measured estimate</td><td class="num">£595</td><td class="num col-pick">£250</td></tr><tr><th scope="row">New-build house</th><td>Full measured estimate, single dwelling</td><td class="num">£845</td><td class="num col-pick">£450</td></tr></tbody></table><div class="includes pack"><h3>The Tender Pack includes everything in Standard, plus</h3><ul><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>48-hour express turnaround</li><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>A bill of quantities measured to RICS NRM2, as an editable Excel file you can send to subcontractors for pricing</li><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>A client-facing PDF branded with your company name and logo, ready to send to the homeowner</li><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>One free re-price when revised drawings come in</li></ul></div><div class="price-notes"><p><strong>Standard turnaround:</strong> 3&ndash;5 working days from receipt of full drawings.</p><p><strong>Express on Standard:</strong> 48 hours, at an extra 50%. Included in the Tender Pack.</p></div><a href="#contact" class="btn-primary">Request a quote</a></div></div></section><section class="contact" id="contact"><div class="container contact-grid"><div class="contact-info"><h2>Request a quote</h2><p>Send your drawings and a few details. We reply within 24 hours with a price and a delivery date.</p><dl class="contact-list"><div><dt>Email</dt><dd><a href="mailto:hello@thego2guys.uk">hello@thego2guys.uk</a></dd></div><div><dt>Phone</dt><dd><a href="tel:01516621274">0151 662 1274</a></dd></div><div><dt>Based in</dt><dd>Liverpool</dd></div></dl></div>${QUOTE_FORM}</div></section></main><footer><div class="container"><div class="footer-top"><div class="footer-brand"><a href="#top" class="logo"><div class="logo-icon">G2G</div>TheGo2Guys</a><p>Building estimates for UK builders and contractors.</p></div><div class="footer-col"><h4>Services</h4><ul><li><a href="/services/material-takeoffs">Material takeoffs</a></li><li><a href="#services">Cost estimates</a></li><li><a href="/services/bills-of-quantities">Bills of quantities</a></li><li><a href="/services/tender-pricing">Tender pricing</a></li></ul></div><div class="footer-col"><h4>Company</h4><ul><li><a href="#process">How it works</a></li><li><a href="#pricing">Pricing</a></li><li><a href="/calculators">Free calculators</a></li><li><a href="/guides">Cost guides</a></li><li><a href="/insights">Insights</a></li><li><a href="/sample-estimate.pdf" target="_blank" rel="noopener">Sample estimate</a></li><li><a href="/refer">Refer a builder</a></li><li><a href="/terms">Terms and conditions</a></li><li><a href="/privacy">Privacy policy</a></li></ul></div><div class="footer-col"><h4>Contact</h4><ul><li><a href="mailto:hello@thego2guys.uk">hello@thego2guys.uk</a></li><li><a href="tel:01516621274">0151 662 1274</a></li></ul></div></div><div class="footer-bottom"><p>&copy; 2026 TheGo2Guys. Building estimating services, UK.</p></div></div></footer><script src="/script.js"></script>${QUOTE_PREFILL}</body></html>`;
 const STYLES = `:root{--ink:#18211D;--ink-2:#2B3530;--paper:#fff;--mist:#F2F4F1;--rule:#D8DDD8;--muted:#5B6660;--green:#1E7046;--green-dark:#155535;--green-tint:#E5F0E9;--amber:#B57A00;
 --navy:var(--ink);--navy-light:var(--ink-2);--blue:var(--green);--blue-light:#2A8A58;--blue-50:var(--green-tint);--green-light:var(--green-tint);--steel:var(--muted);--steel-50:var(--mist);--gray-50:var(--mist);--gray-100:#E8ECE8;--gray-200:var(--rule);--gray-300:#C5CCC6;--gray-500:var(--muted);--gray-700:#36403B;--gray-800:var(--ink);--gray-900:#121915;--white:#fff;--radius:6px;--shadow-lg:0 1px 2px rgba(24,33,29,.06),0 8px 24px -12px rgba(24,33,29,.18);--shadow-xl:0 2px 4px rgba(24,33,29,.06),0 24px 48px -20px rgba(24,33,29,.35);
 --display:'Archivo','Arial Narrow',Arial,sans-serif;--body:'Public Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
@@ -296,6 +296,12 @@ function routeExtraPage(path) {
     '/calculators/bricks-and-blocks': brickCalcPage,
     '/calculators/concrete': concreteCalcPage,
     '/calculators/plaster': plasterCalcPage,
+    '/calculators/roof-tiles': roofCalcPage,
+    '/calculators/footings': footingsCalcPage,
+    '/calculators/screed': screedCalcPage,
+    '/services/material-takeoffs': takeoffServicePage,
+    '/services/bills-of-quantities': boqServicePage,
+    '/services/tender-pricing': tenderServicePage,
     '/guides': guidesIndexPage,
     '/guides/house-extension-cost': extensionGuidePage,
     '/guides/loft-conversion-cost': loftGuidePage,
@@ -318,7 +324,7 @@ function routeExtraPage(path) {
 }
 
 function sitemapXml() {
-  const paths = ['/', '/calculators', '/calculators/bricks-and-blocks', '/calculators/concrete', '/calculators/plaster', '/guides', '/guides/house-extension-cost', '/guides/loft-conversion-cost', '/guides/extension-preliminaries', '/guides/garage-conversion-cost', '/guides/house-extension-cost-liverpool', '/guides/loft-conversion-cost-liverpool', '/insights', '/insights/steel-prices-mortgage-rates-october-2026', '/insights/construction-jobs-plan-builder-shortages-october-2026', '/insights/autumn-budget-2026-extensions-small-builders', '/insights/builders-merchant-prices-construction-slowdown-november-2026', '/refer', '/quote', '/terms', '/privacy'];
+  const paths = ['/', '/calculators', '/calculators/bricks-and-blocks', '/calculators/concrete', '/calculators/plaster', '/calculators/roof-tiles', '/calculators/footings', '/calculators/screed', '/services/material-takeoffs', '/services/bills-of-quantities', '/services/tender-pricing', '/guides', '/guides/house-extension-cost', '/guides/loft-conversion-cost', '/guides/extension-preliminaries', '/guides/garage-conversion-cost', '/guides/house-extension-cost-liverpool', '/guides/loft-conversion-cost-liverpool', '/insights', '/insights/steel-prices-mortgage-rates-october-2026', '/insights/construction-jobs-plan-builder-shortages-october-2026', '/insights/autumn-budget-2026-extensions-small-builders', '/insights/builders-merchant-prices-construction-slowdown-november-2026', '/refer', '/quote', '/terms', '/privacy'];
   return '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
     paths.map(function (p) { return '  <url><loc>' + SITE + (p === '/' ? '/' : p) + '</loc></url>'; }).join('\n') + '\n</urlset>\n';
 }
@@ -327,7 +333,7 @@ function sitemapXml() {
 function inlineScript(fn) { return '<script>(' + fn.toString() + ')();</script>'; }
 
 function pageShell(o) {
-  return `<!DOCTYPE html><html lang="en-GB"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5.0"><title>${o.title}</title><meta name="description" content="${o.desc}">${o.noindex ? '<meta name="robots" content="noindex">' : '<link rel="canonical" href="' + SITE + o.path + '">'}<meta property="og:title" content="${o.title}"><meta property="og:description" content="${o.desc}"><meta property="og:url" content="${SITE}${o.path}"><meta property="og:type" content="website"><meta property="og:site_name" content="TheGo2Guys"><meta property="og:image" content="${SITE}/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="theme-color" content="#18211D"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,500..800&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="icon" type="image/png" sizes="96x96" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="stylesheet" href="/styles.css">${o.schema ? '<script type="application/ld+json">' + JSON.stringify(o.schema) + '</script>' : ''}</head><body><a class="skip" href="#main">Skip to content</a><header><div class="container nav-bar"><a href="/" class="logo"><div class="logo-icon">G2G</div>TheGo2Guys</a><ul class="nav-links" id="navLinks"><li><a href="/#services">Services</a></li><li><a href="/calculators">Free tools</a></li><li><a href="/guides">Cost guides</a></li><li><a href="/insights">Insights</a></li><li><a href="/#pricing">Pricing</a></li><li><a href="tel:01516621274" class="nav-phone">0151 662 1274</a></li><li><a href="/quote" class="nav-cta">Request a quote</a></li></ul><button class="mobile-menu-btn" aria-label="Menu" aria-controls="navLinks" onclick="document.getElementById('navLinks').classList.toggle('open')">&#9776;</button></div></header><main id="main">${o.body}</main><footer><div class="container"><div class="footer-top"><div class="footer-brand"><a href="/" class="logo"><div class="logo-icon">G2G</div>TheGo2Guys</a><p>Building estimates for UK builders and contractors.</p></div><div class="footer-col"><h4>Free tools</h4><ul><li><a href="/calculators/bricks-and-blocks">Brick and block calculator</a></li><li><a href="/calculators/concrete">Concrete calculator</a></li><li><a href="/calculators/plaster">Plaster calculator</a></li><li><a href="/guides/house-extension-cost">Extension cost guide</a></li><li><a href="/guides/loft-conversion-cost">Loft conversion cost guide</a></li></ul></div><div class="footer-col"><h4>Company</h4><ul><li><a href="/#services">Services</a></li><li><a href="/#pricing">Pricing</a></li><li><a href="/sample-estimate.pdf" target="_blank" rel="noopener">Sample estimate</a></li><li><a href="/refer">Refer a builder</a></li><li><a href="/terms">Terms and conditions</a></li><li><a href="/privacy">Privacy policy</a></li></ul></div><div class="footer-col"><h4>Contact</h4><ul><li><a href="mailto:hello@thego2guys.uk">hello@thego2guys.uk</a></li><li><a href="tel:01516621274">0151 662 1274</a></li></ul></div></div><div class="footer-bottom"><p>&copy; 2026 TheGo2Guys. Building estimating services, UK.</p></div></div></footer><script src="/script.js"></script>${o.script || ''}</body></html>`;
+  return `<!DOCTYPE html><html lang="en-GB"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5.0"><title>${o.title}</title><meta name="description" content="${o.desc}">${o.noindex ? '<meta name="robots" content="noindex">' : '<link rel="canonical" href="' + SITE + o.path + '">'}<meta property="og:title" content="${o.title}"><meta property="og:description" content="${o.desc}"><meta property="og:url" content="${SITE}${o.path}"><meta property="og:type" content="website"><meta property="og:site_name" content="TheGo2Guys"><meta property="og:image" content="${SITE}/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="theme-color" content="#18211D"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,500..800&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="icon" type="image/png" sizes="96x96" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="stylesheet" href="/styles.css">${o.schema ? '<script type="application/ld+json">' + JSON.stringify(o.schema) + '</script>' : ''}</head><body><a class="skip" href="#main">Skip to content</a><header><div class="container nav-bar"><a href="/" class="logo"><div class="logo-icon">G2G</div>TheGo2Guys</a><ul class="nav-links" id="navLinks"><li><a href="/#services">Services</a></li><li><a href="/calculators">Free tools</a></li><li><a href="/guides">Cost guides</a></li><li><a href="/insights">Insights</a></li><li><a href="/#pricing">Pricing</a></li><li><a href="tel:01516621274" class="nav-phone">0151 662 1274</a></li><li><a href="/quote" class="nav-cta">Request a quote</a></li></ul><button class="mobile-menu-btn" aria-label="Menu" aria-controls="navLinks" onclick="document.getElementById('navLinks').classList.toggle('open')">&#9776;</button></div></header><main id="main">${o.body}</main><footer><div class="container"><div class="footer-top"><div class="footer-brand"><a href="/" class="logo"><div class="logo-icon">G2G</div>TheGo2Guys</a><p>Building estimates for UK builders and contractors.</p></div><div class="footer-col"><h4>Free tools</h4><ul><li><a href="/calculators/bricks-and-blocks">Brick and block calculator</a></li><li><a href="/calculators/concrete">Concrete calculator</a></li><li><a href="/calculators/plaster">Plaster calculator</a></li><li><a href="/calculators/roof-tiles">Roof tile calculator</a></li><li><a href="/calculators/footings">Footings calculator</a></li><li><a href="/calculators/screed">Screed calculator</a></li><li><a href="/guides/house-extension-cost">Extension cost guide</a></li><li><a href="/guides/loft-conversion-cost">Loft conversion cost guide</a></li></ul></div><div class="footer-col"><h4>Company</h4><ul><li><a href="/services/material-takeoffs">Material takeoffs</a></li><li><a href="/services/bills-of-quantities">Bills of quantities</a></li><li><a href="/services/tender-pricing">Tender pricing</a></li><li><a href="/#pricing">Pricing</a></li><li><a href="/sample-estimate.pdf" target="_blank" rel="noopener">Sample estimate</a></li><li><a href="/refer">Refer a builder</a></li><li><a href="/terms">Terms and conditions</a></li><li><a href="/privacy">Privacy policy</a></li></ul></div><div class="footer-col"><h4>Contact</h4><ul><li><a href="mailto:hello@thego2guys.uk">hello@thego2guys.uk</a></li><li><a href="tel:01516621274">0151 662 1274</a></li></ul></div></div><div class="footer-bottom"><p>&copy; 2026 TheGo2Guys. Building estimating services, UK.</p></div></div></footer><script src="/script.js"></script>${o.script || ''}</body></html>`;
 }
 
 function pageHero(crumbs, h1, lede) {
@@ -346,12 +352,15 @@ function calculatorsIndexPage() {
   return pageShell({
     path: '/calculators',
     title: 'Free Building Material Calculators UK | TheGo2Guys',
-    desc: 'Free calculators for UK builders: bricks and blocks, mortar, concrete and plaster. Quick quantities for pricing and ordering.',
+    desc: 'Free calculators for UK builders: bricks and blocks, mortar, concrete, footings, screed, roof tiles and plaster. Quick quantities for pricing and ordering.',
     body: pageHero([['/', 'Home'], ['/calculators', 'Free tools']], 'Free building calculators', 'Quick quantities for pricing a job or putting an order together with your merchant. No sign-up.') +
       `<section class="plain"><div class="container"><div class="card-grid">
 <a class="card" href="/calculators/bricks-and-blocks"><h3>Bricks, blocks and mortar</h3><p>Bricks or blocks for a wall, with the cement and building sand for the mortar.</p><span class="card-go">Open calculator &rarr;</span></a>
 <a class="card" href="/calculators/concrete"><h3>Concrete</h3><p>How much concrete you need for a slab, shed base, basement floor or footing, as ready-mix or bags to mix yourself.</p><span class="card-go">Open calculator &rarr;</span></a>
 <a class="card" href="/calculators/plaster"><h3>Plaster and plasterboard</h3><p>Bags of skim and undercoat, and sheets of board, for a room or a set area.</p><span class="card-go">Open calculator &rarr;</span></a>
+<a class="card" href="/calculators/roof-tiles"><h3>Roof tiles</h3><p>Tiles or slates, battens, underlay and ridge for a pitched roof, worked out from the plan size and pitch.</p><span class="card-go">Open calculator &rarr;</span></a>
+<a class="card" href="/calculators/footings"><h3>Footings</h3><p>Concrete, digging and spoil for trench-fill or strip foundations on an extension.</p><span class="card-go">Open calculator &rarr;</span></a>
+<a class="card" href="/calculators/screed"><h3>Floor screed</h3><p>Sand and cement or liquid screed, with the insulation boards and membrane under it.</p><span class="card-go">Open calculator &rarr;</span></a>
 <a class="card" href="/guides/house-extension-cost"><h3>Extension cost calculator</h3><p>A rough cost range for a single or double-storey extension by size, specification and region.</p><span class="card-go">Open calculator &rarr;</span></a>
 <a class="card" href="/guides/loft-conversion-cost"><h3>Loft conversion budget</h3><p>A rough cost range for a Velux, dormer, hip-to-gable or mansard conversion.</p><span class="card-go">Open calculator &rarr;</span></a>
 </div></div></section>` + CALC_CTA
@@ -480,7 +489,7 @@ function concreteCalcPage() {
 <tr><th>Basement floor slab</th><td class="num">Often 150&ndash;250mm, reinforced</td></tr>
 <tr><th>Trench-fill footing (extension)</th><td class="num">Often 1&ndash;1.5m deep, 600mm wide</td></tr>
 </tbody></table></div>
-<p>These are only rules of thumb. Footing depth depends on the ground, nearby trees and drains, and is set by your engineer or building control.</p>
+<p>These are only rules of thumb. Footing depth depends on the ground, nearby trees and drains, and is set by your engineer or building control. For footings, the <a href="/calculators/footings">footings calculator</a> also works out the digging and spoil.</p>
 <h2>How much concrete do I need? Worked examples</h2>
 <div class="table-wrap"><table class="data-table"><thead><tr><th>Job</th><th>Size</th><th class="num">Concrete (incl. 5% waste)</th></tr></thead><tbody>
 <tr><th>Shed base</th><td>2.4m x 1.8m x 100mm</td><td class="num">0.45 m³</td></tr>
@@ -590,6 +599,385 @@ function plasterCalcPage() {
       document.getElementById('calc').addEventListener('change', run);
       run();
     })
+  });
+}
+
+// ------------------------------- Roof tiles --------------------------------
+const ROOF_FAQ = [
+  ['How many roof tiles do I need per m²?', 'About 9.7 large-format concrete interlocking tiles per m² at a 345mm gauge, 60 plain tiles per m² at a 100mm gauge, around 20 slates per m² for 500 x 250mm slates and around 13 per m² for 600 x 300mm slates, both at a 100mm head lap. Add 5% for cutting, and more on roofs with hips and valleys.'],
+  ['How do I work out the area of a pitched roof?', 'Measure the roof on plan, including the eaves and verge overhangs, then divide the plan area by the cosine of the pitch. A 6m x 8m house with a 35&deg; duo-pitch roof has a plan area of 48m² and a slope area of 48 &divide; cos 35&deg;, which is about 58.6m².'],
+  ['How many metres of batten do I need?', 'Divide 1 by the gauge in metres. At a 345mm gauge that is 2.9m of batten per m² of roof; plain tiles at a 100mm gauge need 10m per m². Battens are normally sold in 4.8m lengths.'],
+  ['What is the minimum pitch for roof tiles?', 'It depends on the tile and the exposure. As a rough guide, many large concrete interlocking tiles go down to 17.5&deg;, plain tiles need 35&deg; and natural slates usually 20&ndash;25&deg; or more. Always check the manufacturer\'s figure for your tile and your site.']
+];
+
+function roofCalcPage() {
+  return pageShell({
+    path: '/calculators/roof-tiles',
+    title: 'Roof Tile Calculator UK: Tiles, Battens and Underlay | TheGo2Guys',
+    desc: 'How many roof tiles do you need? Enter the roof size and pitch to get tiles or slates, battens, underlay and ridge tiles for concrete interlocking tiles, plain tiles and slate.',
+    schema: faqSchema(ROOF_FAQ),
+    body: pageHero([['/', 'Home'], ['/calculators', 'Free tools'], ['/calculators/roof-tiles', 'Roof tiles']], 'Roof tile calculator', 'Tiles or slates, battens, underlay and ridge for a pitched roof. Enter the size of the roof on plan and its pitch, and the calculator works out the slope.') +
+      `<section class="plain"><div class="container tool-grid"><form class="calc" id="calc" onsubmit="return false"><h2>Your roof</h2>
+<div class="form-group"><label for="shape">Roof shape</label><select id="shape"><option value="duo">Duo-pitch (gable roof, two slopes)</option><option value="lean">Lean-to (against a wall)</option><option value="mono">Mono-pitch (free-standing, one slope)</option></select></div>
+<div class="form-row"><div class="form-group"><label for="len">Length along the eaves (m)</label><input id="len" type="number" inputmode="decimal" min="0" step="0.01" value="8"></div><div class="form-group"><label for="wid" id="wid-label">Width on plan, eaves to eaves (m)</label><input id="wid" type="number" inputmode="decimal" min="0" step="0.01" value="6"></div></div>
+<p class="form-hint">Measure on plan to the outside of the eaves and verges, so the overhangs are included.</p>
+<div class="form-row"><div class="form-group"><label for="pitch">Roof pitch (degrees)</label><input id="pitch" type="number" inputmode="decimal" min="0" max="75" step="0.5" value="35"></div><div class="form-group"><label for="waste">Wastage (%)</label><input id="waste" type="number" inputmode="decimal" min="0" max="50" step="1" value="5"></div></div>
+<div class="form-group"><label for="tile">Covering</label><select id="tile"><option value="inter">Concrete interlocking tile, large format (about 420 x 330mm)</option><option value="plain">Plain tile (265 x 165mm)</option><option value="s500">Slate, 500 x 250mm</option><option value="s600">Slate, 600 x 300mm (natural or fibre cement)</option></select></div>
+</form>
+<div class="calc-out" aria-live="polite"><h2>You'll need about</h2><dl class="out-list">
+<div><dt>Roof slope area</dt><dd id="o-area">&ndash;</dd></div>
+<div class="big"><dt id="o-tile-label">Tiles</dt><dd id="o-tiles">&ndash;</dd></div>
+<div><dt>Tile battens</dt><dd id="o-batten">&ndash;</dd></div>
+<div><dt>Battens in 4.8m lengths</dt><dd id="o-lengths">&ndash;</dd></div>
+<div><dt>Underlay (incl. laps)</dt><dd id="o-felt">&ndash;</dd></div>
+<div><dt id="o-top-label">Ridge tiles</dt><dd id="o-top">&ndash;</dd></div>
+<div><dt>Eaves length</dt><dd id="o-eaves">&ndash;</dd></div>
+<div><dt>Verge length</dt><dd id="o-verge">&ndash;</dd></div>
+</dl><p class="out-note" id="o-warn"></p><p class="out-note">Includes your wastage allowance on tiles and battens. Gauges and coverage vary between products; check the manufacturer's figures for your tile before ordering.</p><a class="btn-primary" href="/quote">Get the full job measured</a></div></div></section>
+<section class="plain alt"><div class="container prose"><h2>How the numbers are worked out</h2>
+<p>The slope area is the plan area divided by the cosine of the pitch. That figure is then multiplied by the coverage for the covering you pick:</p>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Covering</th><th class="num">Gauge</th><th class="num">Per m²</th><th class="num">Batten per m²</th><th class="num">Typical min. pitch</th></tr></thead><tbody>
+<tr><th>Concrete interlocking, large format</th><td class="num">345mm</td><td class="num">9.7 tiles</td><td class="num">2.9 m</td><td class="num">17.5&deg;</td></tr>
+<tr><th>Plain tile, 265 x 165mm</th><td class="num">100mm</td><td class="num">60 tiles</td><td class="num">10.0 m</td><td class="num">35&deg;</td></tr>
+<tr><th>Slate, 500 x 250mm (100mm head lap)</th><td class="num">200mm</td><td class="num">20 slates</td><td class="num">5.0 m</td><td class="num">25&deg;</td></tr>
+<tr><th>Slate, 600 x 300mm (100mm head lap)</th><td class="num">250mm</td><td class="num">13 slates</td><td class="num">4.0 m</td><td class="num">22.5&deg;</td></tr>
+</tbody></table></div>
+<p>Underlay is the slope area plus 10% for laps, in 50m² rolls. Ridge tiles are taken at about 2.2 per metre of ridge. A lean-to has a wall abutment at the top instead of a ridge, which is usually dressed in lead; a free-standing mono-pitch has a mono ridge.</p>
+<h3>Things the calculator doesn't cover</h3>
+<ul><li>Hips and valleys. Work each roof slope out separately and add 10&ndash;15% wastage for the extra cutting, plus hip tiles or valley troughs.</li><li>Eaves and top courses on plain tiles, which need extra short tiles.</li><li>Dry verge or mortar, tile clips, nails and eaves ventilation.</li><li>Rafters, fascias, soffits and gutters.</li><li>Slate head lap, which goes up on lower pitches and exposed sites. A bigger lap means a shorter gauge and more slates.</li></ul>
+<h2>Roof pitch and slope area</h2>
+<p>Pitch makes more difference than most people expect. For every 10m² of roof on plan:</p>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Pitch</th><th class="num">Slope area</th><th class="num">Interlocking tiles</th></tr></thead><tbody>
+<tr><th>22.5&deg;</th><td class="num">10.8 m²</td><td class="num">105</td></tr>
+<tr><th>30&deg;</th><td class="num">11.5 m²</td><td class="num">112</td></tr>
+<tr><th>35&deg;</th><td class="num">12.2 m²</td><td class="num">118</td></tr>
+<tr><th>40&deg;</th><td class="num">13.1 m²</td><td class="num">127</td></tr>
+<tr><th>45&deg;</th><td class="num">14.1 m²</td><td class="num">137</td></tr>
+</tbody></table></div>
+<p>Tile counts above are before wastage. If you don't know the pitch, it is usually on the section drawing. On an existing roof, the rafter length divided into the horizontal run gives it: pitch = cos&#8315;&sup1;(run &divide; rafter length).</p>
+<h2>Lean-to and extension roofs</h2>
+<p>Single-storey extensions with a pitched roof are often a lean-to against the house. These tend to be shallow, which can rule out plain tiles and some slates; check the minimum pitch for the tile before the roof is designed rather than after. Where the pitch is too low, a low-pitch interlocking tile or a flat roof with a rooflight is the usual answer.</p>
+<h2>Common questions</h2>${faqHtml(ROOF_FAQ)}
+</div></section>` + CALC_CTA,
+    script: inlineScript(function () {
+      var TILES = { inter: { per: 9.7, bat: 2.9, min: 17.5, label: 'Interlocking tiles' }, plain: { per: 60, bat: 10, min: 35, label: 'Plain tiles' }, s500: { per: 20, bat: 5, min: 25, label: 'Slates' }, s600: { per: 13.1, bat: 4, min: 22.5, label: 'Slates' } };
+      function num(id) { var v = parseFloat(document.getElementById(id).value); return isFinite(v) && v > 0 ? v : 0; }
+      function set(id, t) { document.getElementById(id).textContent = t; }
+      function fmt(n, dp) { return n.toLocaleString('en-GB', { minimumFractionDigits: dp || 0, maximumFractionDigits: dp || 0 }); }
+      function up(n) { return Math.ceil(n - 1e-9); }
+      function run() {
+        var shape = document.getElementById('shape').value;
+        var t = TILES[document.getElementById('tile').value];
+        var L = num('len'), W = num('wid'), p = Math.min(num('pitch'), 75);
+        var cos = Math.cos(p * Math.PI / 180);
+        var area = L * W / cos;
+        var w = 1 + num('waste') / 100;
+        var rafter = (shape === 'duo' ? W / 2 : W) / cos;
+        var bat = area * t.bat * w;
+        set('wid-label', shape === 'duo' ? 'Width on plan, eaves to eaves (m)' : 'Projection on plan (m)');
+        set('o-area', fmt(area, 2) + ' m²');
+        set('o-tile-label', t.label);
+        set('o-tiles', fmt(up(area * t.per * w)));
+        set('o-batten', fmt(bat, 1) + ' m');
+        set('o-lengths', fmt(up(bat / 4.8)));
+        set('o-felt', fmt(area * 1.1, 1) + ' m² (' + fmt(up(area * 1.1 / 50)) + ' x 50m² rolls)');
+        if (shape === 'duo') { set('o-top-label', 'Ridge tiles'); set('o-top', fmt(up(L * 2.2))); }
+        else if (shape === 'lean') { set('o-top-label', 'Wall abutment (flashing)'); set('o-top', fmt(L, 2) + ' m'); }
+        else { set('o-top-label', 'Mono ridge'); set('o-top', fmt(L, 2) + ' m'); }
+        set('o-eaves', fmt(shape === 'duo' ? 2 * L : L, 2) + ' m');
+        set('o-verge', fmt((shape === 'duo' ? 4 : 2) * rafter, 2) + ' m');
+        set('o-warn', p > 0 && p < t.min ? 'Warning: ' + p + '° is below the usual minimum of about ' + t.min + '° for this covering. Check the manufacturer\'s figure before you order.' : '');
+      }
+      document.getElementById('calc').addEventListener('input', run);
+      document.getElementById('calc').addEventListener('change', run);
+      run();
+    })
+  });
+}
+
+// --------------------------------- Footings --------------------------------
+const FOOTINGS_FAQ = [
+  ['How much concrete do I need for extension footings?', 'Multiply the length of trench by the width and the depth of concrete. A typical single-storey extension with 13m of trench, 600mm wide and filled to 850mm deep, needs about 6.6m³, or about 7.3m³ with 10% wastage. Trenches are rarely dug to the exact size, so allow at least 10%.'],
+  ['What is the difference between trench fill and strip foundations?', 'Trench fill fills the trench with concrete to just below ground level, so there is little or no brickwork below ground. A strip footing is a thinner band of concrete, often 225mm or more, at the bottom of the trench, with blockwork built up from it to ground level. Trench fill uses more concrete but is quicker and needs less labour in the trench.'],
+  ['How deep should extension foundations be?', 'Usually at least 1m on clay soils, and deeper near trees, drains or on made ground. The depth is set by building control or your structural engineer when the trench is dug and inspected, so price a sensible allowance for going deeper.'],
+  ['How much does soil bulk up when it is dug out?', 'Typically by 20&ndash;30% for clay and 10&ndash;20% for sand and gravel. The calculator uses 30%, so 1m³ dug becomes about 1.3m³ to cart away.']
+];
+
+function footingsCalcPage() {
+  return pageShell({
+    path: '/calculators/footings',
+    title: 'Footings Calculator UK: Trench Fill and Strip Foundations | TheGo2Guys',
+    desc: 'Concrete, excavation and spoil for extension footings. Enter the trench length, width and depth to get m³ of concrete to order, spoil to cart away and the walling below ground.',
+    schema: faqSchema(FOOTINGS_FAQ),
+    body: pageHero([['/', 'Home'], ['/calculators', 'Free tools'], ['/calculators/footings', 'Footings']], 'Footings calculator', 'Concrete, digging and spoil for trench-fill or strip foundations. Enter the length of trench, its width and depth, and see what to order and what to cart away.') +
+      `<section class="plain"><div class="container tool-grid"><form class="calc" id="calc" onsubmit="return false"><h2>Your foundations</h2>
+<div class="form-group"><label for="type">Foundation type</label><select id="type"><option value="trench">Trench fill</option><option value="strip">Strip footing</option></select></div>
+<div class="form-group"><label for="run">Total length of trench (m)</label><input id="run" type="number" inputmode="decimal" min="0" step="0.1" value="13"><p class="form-hint">Measure along the centre of the wall, and count each corner once.</p></div>
+<div class="form-row"><div class="form-group"><label for="wid">Trench width (mm)</label><input id="wid" type="number" inputmode="decimal" min="0" step="25" value="600"></div><div class="form-group"><label for="dep">Trench depth (mm)</label><input id="dep" type="number" inputmode="decimal" min="0" step="25" value="1000"></div></div>
+<div class="form-row"><div class="form-group"><label for="conc" id="conc-label">Top of concrete below ground (mm)</label><input id="conc" type="number" inputmode="decimal" min="0" step="25" value="150"></div><div class="form-group"><label for="waste">Concrete wastage (%)</label><input id="waste" type="number" inputmode="decimal" min="0" max="50" step="1" value="10"></div></div>
+</form>
+<div class="calc-out" aria-live="polite"><h2>You'll need about</h2><dl class="out-list">
+<div><dt>Excavation</dt><dd id="o-dig">&ndash;</dd></div>
+<div><dt>Spoil to remove (bulked)</dt><dd id="o-spoil">&ndash;</dd></div>
+<div><dt>Spoil weight</dt><dd id="o-weight">&ndash;</dd></div>
+<div class="big"><dt>Concrete</dt><dd id="o-conc">&ndash;</dd></div>
+<div><dt>Ready-mix to order</dt><dd id="o-order">&ndash;</dd></div>
+<div><dt>Walling to ground level, per leaf</dt><dd id="o-wall">&ndash;</dd></div>
+</dl><p class="out-note">Concrete includes your wastage. Spoil assumes 30% bulking and 1.9 tonnes per m³ as dug. The foundation depth and width on your job are set by building control or your engineer.</p><a class="btn-primary" href="/quote">Get the full job measured</a></div></div></section>
+<section class="plain alt"><div class="container prose"><h2>How the numbers are worked out</h2>
+<ul><li><strong>Excavation</strong> is length x width x depth of trench.</li><li><strong>Concrete</strong> for trench fill is the trench filled to the level you enter below ground, usually 150&ndash;225mm. For a strip footing it is the thickness of concrete you enter. Wastage is then added, and the order figure is rounded up to the next 0.25m³.</li><li><strong>Spoil</strong> is the whole excavation, increased by 30% for bulking. If some is kept on site for backfill or landscaping, take that off.</li><li><strong>Walling to ground level</strong> is the area of masonry from the top of the concrete up to ground level, for each leaf of the wall. Add the courses from ground level to the damp-proof course, at least 150mm, when you price the walls.</li></ul>
+<h2>Trench fill or strip footing?</h2>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>13m of trench, 600 x 1000mm</th><th class="num">Trench fill</th><th class="num">Strip (225mm)</th></tr></thead><tbody>
+<tr><th>Concrete, with 10% wastage</th><td class="num">7.29 m³</td><td class="num">1.93 m³</td></tr>
+<tr><th>Walling to ground level, per leaf</th><td class="num">1.95 m²</td><td class="num">10.08 m²</td></tr>
+<tr><th>Spoil to remove</th><td class="num">10.14 m³</td><td class="num">10.14 m³</td></tr>
+</tbody></table></div>
+<p>Trench fill uses nearly four times the concrete here, but it saves about 8m² of below-ground blockwork on each leaf and the labour of building in a deep, narrow trench. On most domestic extensions trench fill works out quicker, and often cheaper overall. Strip footings make more sense where concrete is expensive to get to site, or where the engineer has designed a wider, reinforced footing.</p>
+<h2>Getting the spoil away</h2>
+<p>Soil is heavy. A cubic metre as dug weighs around 1.8&ndash;2 tonnes, and many skip firms limit how much soil goes in a skip. Once you are over about 10 tonnes, a grab lorry is usually cheaper and quicker than several skips, if there is room for it to park. Keep some spoil back if you need it for backfilling around the foundations.</p>
+<p>For a slab or shed base rather than footings, use the <a href="/calculators/concrete">concrete calculator</a>.</p>
+<h2>Common questions</h2>${faqHtml(FOOTINGS_FAQ)}
+</div></section>` + CALC_CTA,
+    script: inlineScript(function () {
+      function num(id) { var v = parseFloat(document.getElementById(id).value); return isFinite(v) && v > 0 ? v : 0; }
+      function set(id, t) { document.getElementById(id).textContent = t; }
+      function fmt(n, dp) { return n.toLocaleString('en-GB', { minimumFractionDigits: dp || 0, maximumFractionDigits: dp || 0 }); }
+      var type = document.getElementById('type');
+      function run() {
+        var trench = type.value === 'trench';
+        var run = num('run'), W = num('wid') / 1000, D = num('dep') / 1000, c = num('conc') / 1000;
+        var concDepth = trench ? Math.max(0, D - c) : Math.min(c, D);
+        var dig = run * W * D;
+        var conc = run * W * concDepth * (1 + num('waste') / 100);
+        set('conc-label', trench ? 'Top of concrete below ground (mm)' : 'Concrete thickness (mm)');
+        set('o-dig', fmt(dig, 2) + ' m³');
+        set('o-spoil', fmt(dig * 1.3, 2) + ' m³');
+        set('o-weight', fmt(dig * 1.9, 1) + ' t');
+        set('o-conc', fmt(conc, 2) + ' m³');
+        set('o-order', fmt(Math.ceil(conc * 4 - 1e-9) / 4, 2) + ' m³');
+        set('o-wall', fmt(run * (D - concDepth), 2) + ' m²');
+      }
+      type.addEventListener('change', function () { document.getElementById('conc').value = type.value === 'trench' ? 150 : 225; run(); });
+      document.getElementById('calc').addEventListener('input', run);
+      run();
+    })
+  });
+}
+
+// ---------------------------------- Screed ---------------------------------
+const SCREED_FAQ = [
+  ['How much screed do I need per m²?', 'At 65mm thick, each m² of floor needs 0.065m³ of screed. A 20m² extension floor at 65mm is 1.3m³, or about 1.37m³ with 5% wastage. For a 1:4 sand and cement screed that is around 21 bags of cement and 2.3 tonnes of sharp sand.'],
+  ['How thick should a floor screed be?', 'A sand and cement screed laid on insulation (a floating screed) should be at least 65mm in a house, and is often 75mm over underfloor heating. A screed bonded straight to the slab can be thinner, around 25&ndash;40mm. Liquid anhydrite screeds can go down to about 35&ndash;40mm floating, depending on the product.'],
+  ['How many bags of cement for 1m³ of screed?', 'For a 1:4 cement to sharp sand mix, about 15 or 16 bags of 25kg cement and 1.7 tonnes of sharp sand per m³ of laid screed. Semi-dry screed bulks down a lot when it is compacted, which is why it uses more dry material than you might expect.'],
+  ['Is liquid screed better than sand and cement?', 'Liquid screed goes down faster, can be thinner and gives a flatter finish, which suits underfloor heating. It usually costs more per m³, needs a minimum order, and has to dry properly before floor finishes go down. Sand and cement is cheaper on small areas and can be laid by hand.']
+];
+
+function screedCalcPage() {
+  return pageShell({
+    path: '/calculators/screed',
+    title: 'Screed Calculator UK: Sand and Cement or Liquid Screed | TheGo2Guys',
+    desc: 'How much screed do you need? Enter the floor size and depth to get bags of cement and tonnes of sharp sand, or m³ of liquid screed, plus insulation boards and DPM for the floor.',
+    schema: faqSchema(SCREED_FAQ),
+    body: pageHero([['/', 'Home'], ['/calculators', 'Free tools'], ['/calculators/screed', 'Screed']], 'Screed calculator', 'Sand and cement or liquid screed for a floor, with the insulation boards and membrane that go under it.') +
+      `<section class="plain"><div class="container tool-grid"><form class="calc" id="calc" onsubmit="return false"><h2>Your floor</h2>
+<div class="form-row"><div class="form-group"><label for="len">Floor length (m)</label><input id="len" type="number" inputmode="decimal" min="0" step="0.01" value="5"></div><div class="form-group"><label for="wid">Floor width (m)</label><input id="wid" type="number" inputmode="decimal" min="0" step="0.01" value="4"></div></div>
+<div class="form-group"><label for="area">Or enter a total area (m²)</label><input id="area" type="number" inputmode="decimal" min="0" step="0.1" placeholder="Leave blank to use the floor sizes"></div>
+<div class="form-row"><div class="form-group"><label for="type">Screed</label><select id="type"><option value="sc">Sand and cement, 1:4</option><option value="liq">Liquid (anhydrite)</option></select></div><div class="form-group"><label for="dep">Screed depth (mm)</label><input id="dep" type="number" inputmode="decimal" min="0" step="5" value="65"></div></div>
+<div class="form-row"><div class="form-group"><label for="ins">Insulation under the screed</label><select id="ins"><option value="1">PIR boards, 2400 x 1200</option><option value="0">None</option></select></div><div class="form-group"><label for="waste">Wastage (%)</label><input id="waste" type="number" inputmode="decimal" min="0" max="50" step="1" value="5"></div></div>
+</form>
+<div class="calc-out" aria-live="polite"><h2>You'll need about</h2><dl class="out-list">
+<div><dt>Floor area</dt><dd id="o-area">&ndash;</dd></div>
+<div class="big"><dt>Screed volume</dt><dd id="o-vol">&ndash;</dd></div>
+<div id="r-cem"><dt>Cement (25kg bags)</dt><dd id="o-cem">&ndash;</dd></div>
+<div id="r-sand"><dt>Sharp sand</dt><dd id="o-sand">&ndash;</dd></div>
+<div id="r-liq"><dt>Liquid screed to order</dt><dd id="o-liq">&ndash;</dd></div>
+<div id="r-ins"><dt>Insulation boards</dt><dd id="o-ins">&ndash;</dd></div>
+<div><dt>Membrane (incl. laps)</dt><dd id="o-dpm">&ndash;</dd></div>
+<div><dt>Perimeter edge strip</dt><dd id="o-edge">&ndash;</dd></div>
+</dl><p class="out-note" id="o-warn"></p><p class="out-note">Includes your wastage allowance on the screed. Insulation thickness and screed depth come from your drawings or building control; the calculator counts boards, not thickness.</p><a class="btn-primary" href="/quote">Get the full job measured</a></div></div></section>
+<section class="plain alt"><div class="container prose"><h2>How the numbers are worked out</h2>
+<ul><li><strong>Screed volume</strong> is floor area x depth, plus wastage.</li><li><strong>Sand and cement</strong> at 1:4: the laid volume is increased by a third to allow for the semi-dry mix compacting down, then split one part cement (1,440kg/m³) to four parts sharp sand (1.6 tonnes/m³). That works out at about 15&ndash;16 bags of cement and 1.7 tonnes of sand per m³.</li><li><strong>Liquid screed</strong> is ordered by the m³ and rounded up here to the next 0.25m³. Most suppliers have a minimum order, often around 3m³, and charge for the pump.</li><li><strong>Insulation</strong> is the floor area plus 5% for cutting, in 2.88m² boards.</li><li><strong>Membrane</strong> is the floor area plus 15% for laps and turning up at the walls.</li><li><strong>Edge strip</strong> is the room perimeter. It isn't shown if you enter a total area instead of sizes.</li></ul>
+<h2>A typical extension floor</h2>
+<p>A ground floor in a new extension is usually built up like this, from the bottom:</p>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Layer</th><th class="num">Typical thickness</th></tr></thead><tbody>
+<tr><th>Compacted hardcore</th><td class="num">150mm</td></tr>
+<tr><th>Sand blinding</th><td class="num">25&ndash;50mm</td></tr>
+<tr><th>Damp-proof membrane</th><td class="num">1200 gauge</td></tr>
+<tr><th>Concrete slab</th><td class="num">100&ndash;150mm</td></tr>
+<tr><th>PIR insulation</th><td class="num">Often 100&ndash;150mm</td></tr>
+<tr><th>Separating layer (polythene)</th><td class="num">&ndash;</td></tr>
+<tr><th>Screed</th><td class="num">65&ndash;75mm</td></tr>
+</tbody></table></div>
+<p>Use the <a href="/calculators/concrete">concrete calculator</a> for the slab. The insulation thickness needed to meet Building Regulations depends on the product and the size of the floor, so take it from your drawings.</p>
+<h2>Matching the existing floor level</h2>
+<p>On an extension, the finished floor normally has to line up with the floor in the house. Work down from that level: floor finish, screed, insulation, slab, then hardcore. If the existing floor is low, it is usually the insulation or the hardcore that has to give, not the screed, because a floating screed thinner than about 65mm is likely to crack.</p>
+<h2>Common questions</h2>${faqHtml(SCREED_FAQ)}
+</div></section>` + CALC_CTA,
+    script: inlineScript(function () {
+      function num(id) { var v = parseFloat(document.getElementById(id).value); return isFinite(v) && v > 0 ? v : 0; }
+      function set(id, t) { document.getElementById(id).textContent = t; }
+      function show(id, on) { document.getElementById(id).style.display = on ? '' : 'none'; }
+      function fmt(n, dp) { return n.toLocaleString('en-GB', { minimumFractionDigits: dp || 0, maximumFractionDigits: dp || 0 }); }
+      function run() {
+        var L = num('len'), W = num('wid'), typed = num('area');
+        var area = typed || L * W;
+        var liq = document.getElementById('type').value === 'liq';
+        var ins = document.getElementById('ins').value === '1';
+        var d = num('dep');
+        var vol = area * d / 1000 * (1 + num('waste') / 100);
+        var dry = vol * 1.33;
+        set('o-area', fmt(area, 2) + ' m²');
+        set('o-vol', fmt(vol, 2) + ' m³');
+        set('o-cem', fmt(Math.ceil(dry / 5 * 1440 / 25 - 1e-9)));
+        set('o-sand', fmt(dry * 4 / 5 * 1.6, 2) + ' t');
+        set('o-liq', fmt(Math.ceil(vol * 4 - 1e-9) / 4, 2) + ' m³');
+        set('o-ins', fmt(Math.ceil(area * 1.05 / 2.88 - 1e-9)) + ' boards');
+        set('o-dpm', fmt(area * 1.15, 1) + ' m²');
+        set('o-edge', typed ? '–' : fmt(2 * (L + W), 2) + ' m');
+        show('r-cem', !liq); show('r-sand', !liq); show('r-liq', liq); show('r-ins', ins);
+        var min = liq ? 35 : (ins ? 65 : 25);
+        set('o-warn', d > 0 && d < min ? 'Warning: ' + d + 'mm is thinner than the usual minimum of about ' + min + 'mm for this type of screed' + (ins && !liq ? ' laid on insulation' : '') + '.' : '');
+      }
+      document.getElementById('calc').addEventListener('input', run);
+      document.getElementById('calc').addEventListener('change', run);
+      run();
+    })
+  });
+}
+
+// ------------------------------ Service pages ------------------------------
+function serviceSchema(name, desc, path) {
+  return { '@context': 'https://schema.org', '@type': 'Service', name: name, description: desc, url: SITE + path, serviceType: name, areaServed: { '@type': 'Country', name: 'United Kingdom' }, provider: { '@type': 'ProfessionalService', name: 'TheGo2Guys', url: SITE + '/', telephone: '+441516621274', address: { '@type': 'PostalAddress', addressLocality: 'Liverpool', addressRegion: 'Merseyside', addressCountry: 'GB' } } };
+}
+
+function serviceCta(h, p, service) {
+  return `<section class="cta-band"><div class="container cta-inner"><div><h2>${h}</h2><p>${p}</p></div><a class="btn-primary" href="/quote?service=${encodeURIComponent(service)}">Request a quote</a></div></section>`;
+}
+
+const TAKEOFF_FAQ = [
+  ['What drawings do you need for a takeoff?', 'Plans, sections and elevations, either to a stated scale or with dimensions on them. The structural engineer\'s details and any specification help a lot, because they set things like foundation depth, steel sizes and the roof and floor build-ups. Where something isn\'t shown, we state the assumption on that line.'],
+  ['Do the quantities include waste?', 'No. Quantities are measured net from the drawings, so you can add waste to suit how you buy and how your team works. Our <a href="/calculators/bricks-and-blocks">brick and block calculator</a> shows typical allowances.'],
+  ['Can you do a takeoff for one trade only?', 'Yes, for example just the groundworks, the brickwork or the roof. The price depends on how much of the job is measured.'],
+  ['How do I send the drawings?', 'Upload them through the <a href="/quote?service=Material%20Takeoffs">quote form</a>, or email them to hello@thego2guys.uk. For large files, a WeTransfer link is fine.']
+];
+
+function takeoffServicePage() {
+  const desc = 'Measured material takeoffs from your drawings: bricks, blocks, concrete, timber, roofing and more, set out by element so you can price the job or order from your merchant. From £120.';
+  return pageShell({
+    path: '/services/material-takeoffs',
+    title: 'Material Takeoff Service UK for Builders | TheGo2Guys',
+    desc: desc,
+    schema: [serviceSchema('Material takeoffs', desc, '/services/material-takeoffs'), faqSchema(TAKEOFF_FAQ)],
+    body: pageHero([['/', 'Home'], ['/#services', 'Services'], ['/services/material-takeoffs', 'Material takeoffs']], 'Material takeoff service', 'Send us the drawings and we measure the materials on them. You get a schedule of quantities, set out by element, ready to price the job yourself or send to your merchant. From £120, in 3&ndash;5 working days.') +
+      `<section class="plain alt"><div class="container prose">
+<h2>What a takeoff is</h2>
+<p>A takeoff is the measured quantities for a job, without rates or totals. It suits builders who price their own work and know their labour costs, but don't have the evenings to sit with a scale rule working out how many blocks, how much concrete and how many joists the job needs.</p>
+<h2>What you get</h2>
+<ul><li>Every item measured from the drawings, with its quantity and unit (m, m², m³ or number).</li><li>Items grouped by element: substructure, walls, floors, roof, windows and doors, finishes and drainage.</li><li>Openings counted and deducted, with the basis of measurement stated on each line.</li><li>A list of anything the drawings don't show or leave unclear, so you know what to ask the designer before you price.</li><li>A PDF with a reference and revision number.</li></ul>
+<h2>Part of an example takeoff</h2>
+<p>A few lines from a single-storey rear extension, about 4.0m wide and 4.5m deep, with a bifold door and one window:</p>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Item</th><th class="num">Qty</th><th class="num">Unit</th></tr></thead><tbody>
+<tr><th>Excavate foundation trench, 600mm wide, 1.0m deep</th><td class="num">7.62</td><td class="num">m³</td></tr>
+<tr><th>Concrete trench fill, to 150mm below ground level</th><td class="num">6.48</td><td class="num">m³</td></tr>
+<tr><th>Facing brickwork, outer leaf, half-brick thick (openings deducted)</th><td class="num">25.41</td><td class="num">m²</td></tr>
+<tr><th>Facing bricks, at 60 per m²</th><td class="num">1,525</td><td class="num">nr</td></tr>
+<tr><th>Blockwork, inner leaf, 100mm (openings deducted)</th><td class="num">23.88</td><td class="num">m²</td></tr>
+<tr><th>Concrete blocks, 440 x 215mm, at 10 per m²</th><td class="num">239</td><td class="num">nr</td></tr>
+<tr><th>Flat roof joists, 47 x 200mm C24 at 400mm centres, 4.2m long</th><td class="num">13</td><td class="num">nr</td></tr>
+<tr><th>Roof deck, 18mm OSB3</th><td class="num">18.00</td><td class="num">m²</td></tr>
+</tbody></table></div>
+<p>The figures are from an example drawing, not a client's job.</p>
+<h2>What we need from you</h2>
+<p>Drawings on their own don't always say enough to measure everything. The more of these you can send, the fewer assumptions we have to make:</p>
+<ul><li>Plans, sections and elevations</li><li>The structural engineer's drawings and calculations</li><li>A specification, or the notes on the Building Regulations drawings</li><li>Anything agreed with the client that isn't on the drawings, such as a particular brick or roof tile</li></ul>
+<h2>Price and turnaround</h2>
+<p>A takeoff for a typical extension starts at £120. Larger jobs are quoted on the drawings, and we confirm the price before starting. It comes back in 3&ndash;5 working days, or in 48 hours with express for an extra 50%.</p>
+<h2>Takeoff or full estimate?</h2>
+<p>If you'd rather have the job priced as well, a <a href="/#pricing">full measured estimate</a> adds rates built up from labour, materials and plant, with an elemental summary and cost per m². It starts at £150 for a single-storey extension. If you are sending the job out to subcontractors, a <a href="/services/bills-of-quantities">bill of quantities</a> may suit you better.</p>
+<h2>Common questions</h2>${faqHtml(TAKEOFF_FAQ)}
+</div></section>` + serviceCta('Need a job measured?', 'Send us the drawings and we come back within 24 hours with a price and a delivery date.', 'Material Takeoffs'),
+    script: ''
+  });
+}
+
+const BOQ_FAQ = [
+  ['What is NRM2?', 'NRM2 is the RICS New Rules of Measurement for detailed measurement of building works. It sets out how each item is measured and described, so anyone reading the bill reads it the same way.'],
+  ['Is a bill of quantities the same as a takeoff?', 'No. A takeoff lists materials, such as numbers of bricks and lengths of timber. A bill of quantities measures items of work, each with a full description, in a standard order, so it can be priced and checked line by line and used to value work as the job goes on.'],
+  ['Can my subcontractors price it in Excel?', 'Yes. The bill comes as an editable Excel file with the rate and total columns left blank. They fill in the rates and the totals work out.'],
+  ['Does a small job need a bill of quantities?', 'Not always. For a job one trade is pricing, a <a href="/services/material-takeoffs">takeoff</a> is usually enough. A bill is worth having when several subcontractors or builders are pricing the same work and you want to compare them like for like.']
+];
+
+function boqServicePage() {
+  const desc = 'Bills of quantities for extensions, loft conversions and new homes, measured from your drawings generally to RICS NRM2 and supplied as an editable Excel file for subcontractors and clients.';
+  return pageShell({
+    path: '/services/bills-of-quantities',
+    title: 'Bill of Quantities Service UK (NRM2) | TheGo2Guys',
+    desc: desc,
+    schema: [serviceSchema('Bills of quantities', desc, '/services/bills-of-quantities'), faqSchema(BOQ_FAQ)],
+    body: pageHero([['/', 'Home'], ['/#services', 'Services'], ['/services/bills-of-quantities', 'Bills of quantities']], 'Bills of quantities', 'An itemised bill measured from your drawings, generally to RICS NRM2, with blank rate columns ready to send to subcontractors or builders for pricing. Supplied as an editable Excel file.') +
+      `<section class="plain alt"><div class="container prose">
+<h2>What a bill of quantities is</h2>
+<p>A bill of quantities describes every item of work on a job, with its measured quantity and unit, in a set order. Everyone pricing it works from the same quantities, so their prices can be compared line by line. The same bill is then used to value the work as it goes and to price any changes.</p>
+<h2>Who it's for</h2>
+<ul><li><strong>Builders</strong> sending packages out to groundworkers, bricklayers and roofers, so each one prices the same quantities.</li><li><strong>Homeowners and architects</strong> asking several builders to tender the same job.</li><li><strong>Builders</strong> who want a priced bill behind their quote, so the client can see where the money goes.</li></ul>
+<h2>How it's set out</h2>
+<p>The bill follows the NRM2 work sections, so items are where a subcontractor or QS expects to find them. On a typical extension that means sections such as:</p>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>NRM2 section</th><th>Covers</th></tr></thead><tbody>
+<tr><th>1 Preliminaries</th><td>Site set-up, scaffolding, welfare, skips, supervision</td></tr>
+<tr><th>3 Demolitions</th><td>Taking down walls, outbuildings and existing finishes</td></tr>
+<tr><th>5 Excavating and filling</th><td>Digging, disposal, hardcore and backfill</td></tr>
+<tr><th>11 In-situ concrete works</th><td>Foundations and floor slabs</td></tr>
+<tr><th>14 Masonry</th><td>Brick and block walls, cavity insulation, DPCs</td></tr>
+<tr><th>16 Carpentry</th><td>Roof and floor joists, rafters, studwork</td></tr>
+<tr><th>18 Tile and slate roof coverings</th><td>Tiles, battens, underlay and ridges</td></tr>
+<tr><th>34 Drainage below ground</th><td>Pipework, manholes and connections</td></tr>
+</tbody></table></div>
+<p>Each item has a full description, so it can be priced without guessing what was meant:</p>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Item</th><th class="num">Qty</th><th class="num">Unit</th><th class="num">Rate</th><th class="num">&pound;</th></tr></thead><tbody>
+<tr><th>Mass concrete trench fill foundations, poured on or against earth</th><td class="num">6</td><td class="num">m³</td><td class="num"></td><td class="num"></td></tr>
+<tr><th>Walls, 102.5mm thick, facing bricks in cement mortar, stretcher bond, outer leaf of cavity wall</th><td class="num">25</td><td class="num">m²</td><td class="num"></td><td class="num"></td></tr>
+<tr><th>Walls, 100mm thick, dense concrete blocks in cement mortar, inner leaf of cavity wall</th><td class="num">24</td><td class="num">m²</td><td class="num"></td><td class="num"></td></tr>
+</tbody></table></div>
+<h2>What you get</h2>
+<ul><li>An editable Excel bill, with the rate and total columns left blank for pricing.</li><li>Preliminaries, provisional sums and prime cost sums as separate items, so they aren't hidden in the rates.</li><li>A note of the drawings and revisions it was measured from, and the assumptions made.</li><li>A list of the items the drawings leave open, to settle before the job is priced.</li><li>A PDF copy for the client.</li></ul>
+<h2>Price and turnaround</h2>
+<p>A bill of quantities comes as part of the <a href="/#pricing">Tender Pack</a>, from £395 for a single-storey extension, £595 for a double-storey extension and £845 for a new-build house. That also includes our priced estimate, 48-hour turnaround, a client-facing PDF with your company's branding and one free re-price when revised drawings come in. For larger jobs, send the drawings and we quote individually.</p>
+<h2>Common questions</h2>${faqHtml(BOQ_FAQ)}
+</div></section>` + serviceCta('Sending a job out to price?', 'Send us the drawings and we come back within 24 hours with a price and a delivery date for the bill.', 'Bills of Quantities'),
+    script: ''
+  });
+}
+
+const TENDER_FAQ = [
+  ['Can you price a bill of quantities sent by the client\'s QS?', 'Yes. We put rates against the bill in the format it was issued in, and list anything in it that is unclear or missing so you can raise it before the tender closes.'],
+  ['Will you submit the tender for me?', 'No. We price the work and you check it, set your margin and submit it under your own name. Overheads and profit are shown separately, so the final number is your decision.'],
+  ['What kind of jobs do you price?', 'Mainly residential work: extensions, loft conversions, refurbishments and new houses. For other jobs, send the documents and we\'ll tell you straight away whether it is something we can price well.'],
+  ['What if the drawings change during the tender?', 'Send the revised drawings and we re-price the items that have changed. The Tender Pack includes one free re-price.']
+];
+
+function tenderServicePage() {
+  const desc = 'Tender pricing for builders: we measure and price residential jobs at current UK rates, or price the bill your client issued, so you can submit a checked tender on time.';
+  return pageShell({
+    path: '/services/tender-pricing',
+    title: 'Tender Pricing Service for Builders UK | TheGo2Guys',
+    desc: desc,
+    schema: [serviceSchema('Tender pricing', desc, '/services/tender-pricing'), faqSchema(TENDER_FAQ)],
+    body: pageHero([['/', 'Home'], ['/#services', 'Services'], ['/services/tender-pricing', 'Tender pricing']], 'Tender pricing', 'When a tender lands and there isn\'t time to price it properly, send it to us. We measure and price the job, or price the bill the client sent, and return a schedule you can check line by line before you submit.') +
+      `<section class="plain alt"><div class="container prose">
+<h2>What we price</h2>
+<ul><li><strong>Tenders issued with drawings only.</strong> We measure everything from the drawings and price it.</li><li><strong>Tenders issued with a bill of quantities.</strong> We price the client's bill in the format it was issued in.</li><li><strong>Subcontract packages.</strong> Groundworks, masonry, roofing and so on, priced so you can check the quotes your subcontractors send back.</li></ul>
+<h2>How the rates are built up</h2>
+<p>Each rate is built up from its parts: labour (gang size and hours), materials (quantity and price, with waste) and plant, at current prices for the region the job is in. That is why the rates aren't round numbers, and why you can see exactly what is in each one and change it if your costs are different.</p>
+<p>Preliminaries are priced as their own section, not spread across the rates. They are the part of a small job most often under-priced; our <a href="/guides/extension-preliminaries">guide to pricing preliminaries</a> shows a real breakdown. Overheads and profit are shown separately, so you set your own margin.</p>
+<h2>What you get back</h2>
+<ul><li>A priced schedule, or the client's bill priced, as an Excel file, with a PDF summary.</li><li>Preliminaries itemised.</li><li>Provisional sums and anything the tender documents leave open, listed so you can qualify them.</li><li>The assumptions and exclusions behind the price, ready to go in your covering letter.</li></ul>
+<h2>Tender deadlines</h2>
+<p>Tender return dates don't move. Tell us the date when you send the documents, and we confirm whether we can meet it before we start. Standard turnaround is 3&ndash;5 working days, or 48 hours with express for an extra 50%. Express is included in the <a href="/#pricing">Tender Pack</a>.</p>
+<h2>Price</h2>
+<p>Each tender is quoted once we've seen the documents. As a guide, a full measured estimate starts at £150 for a single-storey extension and £250 for a double-storey, and the Tender Pack, which adds a bill of quantities, starts at £395. See <a href="/#pricing">pricing</a> for the full list.</p>
+<h2>Common questions</h2>${faqHtml(TENDER_FAQ)}
+</div></section>` + serviceCta('Got a tender to price?', 'Send us the documents and the return date. We reply within 24 hours with a price and confirm we can meet the deadline.', 'Tender Pricing'),
+    script: ''
   });
 }
 
