@@ -314,7 +314,8 @@ function routeExtraPage(path) {
     '/insights': insightsIndexPage,
     '/insights/autumn-budget-2026-extensions-small-builders': budgetInsightPage,
     '/insights/steel-prices-mortgage-rates-october-2026': steelMortgageInsightPage,
-    '/insights/construction-jobs-plan-builder-shortages-october-2026': jobsPlanInsightPage
+    '/insights/construction-jobs-plan-builder-shortages-october-2026': jobsPlanInsightPage,
+    '/insights/bank-rate-rise-house-building-november-2026': rateRisePmiInsightPage
   };
   if (pages[path]) { return new Response(pages[path](), { headers: PAGE_HEADERS }); }
   if (path === '/sitemap.xml') { return new Response(sitemapXml(), { headers: { 'Content-Type': 'application/xml; charset=utf-8', 'Cache-Control': 'public, max-age=3600' } }); }
@@ -323,7 +324,7 @@ function routeExtraPage(path) {
 }
 
 function sitemapXml() {
-  const paths = ['/', '/calculators', '/calculators/bricks-and-blocks', '/calculators/concrete', '/calculators/plaster', '/calculators/roof-tiles', '/calculators/footings', '/calculators/screed', '/services/material-takeoffs', '/services/bills-of-quantities', '/services/tender-pricing', '/guides', '/guides/house-extension-cost', '/guides/loft-conversion-cost', '/guides/extension-preliminaries', '/guides/garage-conversion-cost', '/guides/house-extension-cost-liverpool', '/guides/loft-conversion-cost-liverpool', '/insights', '/insights/steel-prices-mortgage-rates-october-2026', '/insights/construction-jobs-plan-builder-shortages-october-2026', '/insights/autumn-budget-2026-extensions-small-builders', '/refer', '/quote', '/terms', '/privacy'];
+  const paths = ['/', '/calculators', '/calculators/bricks-and-blocks', '/calculators/concrete', '/calculators/plaster', '/calculators/roof-tiles', '/calculators/footings', '/calculators/screed', '/services/material-takeoffs', '/services/bills-of-quantities', '/services/tender-pricing', '/guides', '/guides/house-extension-cost', '/guides/loft-conversion-cost', '/guides/extension-preliminaries', '/guides/garage-conversion-cost', '/guides/house-extension-cost-liverpool', '/guides/loft-conversion-cost-liverpool', '/insights', '/insights/steel-prices-mortgage-rates-october-2026', '/insights/construction-jobs-plan-builder-shortages-october-2026', '/insights/autumn-budget-2026-extensions-small-builders', '/insights/bank-rate-rise-house-building-november-2026', '/refer', '/quote', '/terms', '/privacy'];
   return '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
     paths.map(function (p) { return '  <url><loc>' + SITE + (p === '/' ? '/' : p) + '</loc></url>'; }).join('\n') + '\n</urlset>\n';
 }
@@ -1416,10 +1417,81 @@ function garageGuidePage() {
 // ------------------------------- Insights ----------------------------------
 // Newest first. Each insight: [path, date label, title, summary]
 const INSIGHTS = [
+  ['/insights/bank-rate-rise-house-building-november-2026', '10 November 2026', 'Bank Rate rises to 4% as house building slumps: the cost to homeowners and builders', 'What the 5 November rate rise and October&rsquo;s construction survey mean for borrowing to build an extension, and for builders&rsquo; prices and delivery times.'],
   ['/insights/autumn-budget-2026-extensions-small-builders', '31 October 2026', 'Autumn Budget 2026: what it means for extensions and small builders', 'VAT stays at 20%, the National Living Wage rises to &pound;13.21 and major Building Regulations changes are paused. What it means for an extension price and for small firms.'],
   ['/insights/construction-jobs-plan-builder-shortages-october-2026', '25 October 2026', 'Builder shortages and the Construction Jobs Plan: what changes for extensions', 'The new jobs plan, the general builder apprenticeship and the &pound;2,000 hiring payment, and how to plan an extension around the shortage of electricians and other trades.'],
   ['/insights/steel-prices-mortgage-rates-october-2026', '18 October 2026', 'Structural steel up 21%, five-year fixes at 6%: pricing an extension this autumn', 'August&rsquo;s materials figures, the new steel import duty and dearer mortgages, and what homeowners and builders should do about them.']
 ];
+
+function rateRisePmiInsightPage() {
+  const path = '/insights/bank-rate-rise-house-building-november-2026';
+  const title = 'Bank Rate rises to 4% as house building slumps: the cost to homeowners and builders';
+  return pageShell({
+    path: path,
+    title: 'Bank Rate Rises to 4%: Extension Costs (Nov 2026)',
+    desc: 'The Bank of England raised rates to 4% on 5 November 2026 as house building fell to its lowest since December 2025. What it means for borrowing for an extension and for builders’ prices.',
+    schema: { '@context': 'https://schema.org', '@type': 'Article', headline: title, datePublished: '2026-11-10', author: { '@type': 'Organization', name: 'TheGo2Guys' }, publisher: { '@type': 'Organization', name: 'TheGo2Guys' }, mainEntityOfPage: SITE + path },
+    body: pageHero([['/', 'Home'], ['/insights', 'Insights'], [path, 'Bank Rate rise and house building']], title, 'On 5 November the Bank of England raised Bank Rate from 3.75% to 4%, its first rise in three years. The same day, the monthly survey of UK building firms showed house building shrinking at its fastest rate since December 2025, while the share of firms reporting higher costs almost doubled. Both matter if you&rsquo;re borrowing for an extension or pricing one for a client.') +
+      `<section class="plain"><div class="container prose">
+<p class="pub-date">Published 10 November 2026</p>
+<div class="callout"><p><strong>In short</strong></p><ul><li>Bank Rate went up 0.25 points to 4% on 5 November. Fixed mortgage rates had already risen ahead of it: the average two-year fix was 5.97% at the start of November, against 5.59% at the start of September.</li><li>Borrowing &pound;50,000 over 25 years for building work costs about &pound;321 a month at 5.97%, against about &pound;310 at 5.59%. The bigger risk is a fixed deal ending and the loan moving onto the lender&rsquo;s standard variable rate, which averaged 7.13% even before the rise.</li><li>Construction firms reported less work for a 22nd month running, with house building down hardest. Almost half the firms surveyed (48%) said their costs went up in October, against a quarter in September, and suppliers were taking longer to deliver.</li></ul></div>
+<h2>The rate rise</h2>
+<p>Bank Rate is the Bank of England&rsquo;s own interest rate, sometimes called the base rate. Its Monetary Policy Committee voted 8&ndash;1 to raise it to 4%; the one dissenting member wanted a rise of half a point. The Bank said energy prices had stayed high because of the conflict in the Middle East. Inflation was 3.5% in September, and the Bank now expects it to reach about 5% by mid-2027.</p>
+<p>The Governor, Andrew Bailey, said the rise &ldquo;shouldn&rsquo;t be seen as the first in an inevitable long sequence of hikes&rdquo;, but that unless the conflict is resolved it did not seem likely to be the last either. He said the committee would judge the outlook at each meeting. October&rsquo;s inflation figure is out on 18 November, and the next rate decision is on 17 December.</p>
+<h2>What has happened to mortgage rates</h2>
+<p>Lenders had been raising fixed rates for weeks before the decision. A fixed rate stays the same for the length of the deal. A tracker moves with Bank Rate, usually from the next monthly payment. The standard variable rate (SVR) is the rate most loans move onto when a deal ends, and the lender sets it.</p>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Moneyfacts average</th><th class="num">Start of September 2026</th><th class="num">Start of November 2026</th></tr></thead><tbody>
+<tr><th>Two-year fixed rate</th><td class="num">5.59%</td><td class="num">5.97%</td></tr>
+<tr><th>Five-year fixed rate</th><td class="num">5.63%</td><td class="num">6.00%</td></tr>
+<tr><th>Two-year tracker</th><td class="num">&ndash;</td><td class="num">4.68%</td></tr>
+<tr><th>Standard variable rate</th><td class="num">&ndash;</td><td class="num">7.13%</td></tr>
+</tbody></table></div>
+<p>Source: Moneyfacts, 5 November 2026. Moneyfacts did not give September figures for trackers or the SVR. The November figures are from before the rise. Existing tracker borrowers will see their rate go up by 0.25 points, and many lenders are likely to raise their SVR too.</p>
+<p>What that means for the cost of borrowing for building work, repaying &pound;50,000 over 25 years:</p>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Interest rate</th><th class="num">Monthly repayment</th></tr></thead><tbody>
+<tr><th>4.68% (average tracker, before the rise)</th><td class="num">about &pound;283</td></tr>
+<tr><th>4.93% (same tracker, after the rise)</th><td class="num">about &pound;290</td></tr>
+<tr><th>5.59% (average two-year fix, September)</th><td class="num">about &pound;310</td></tr>
+<tr><th>5.97% (average two-year fix, November)</th><td class="num">about &pound;321</td></tr>
+<tr><th>7.13% (average SVR, before the rise)</th><td class="num">about &pound;358</td></tr>
+</tbody></table></div>
+<p>Our calculation, standard repayment mortgage. Your own rate depends on your lender, how much you borrow against the value of the house (the loan-to-value) and any deal you are already on.</p>
+<p>For scale, our <a href="/guides/house-extension-cost-liverpool">sample estimate</a> for a 16&nbsp;m&sup2; single-storey rear extension in Merseyside came to &pound;46,451 before VAT, or about &pound;55,700 if your builder charges VAT. Funding most of that through the mortgage costs &pound;10 to &pound;15 a month more at November&rsquo;s fixed rates than at September&rsquo;s. Rates alone are not a reason to cancel a project. The real cost comes if your fixed deal runs out and you don&rsquo;t arrange another: on the average SVR, &pound;50,000 costs about &pound;36 a month more than on a new two-year fix, though a new deal often carries an arrangement fee. The monthly figure also hides the total: &pound;50,000 at 5.97% over 25 years means repaying about &pound;96,000, nearly half of it interest.</p>
+<h2>What the building firms reported</h2>
+<p>The S&amp;P Global UK Construction PMI is a monthly survey of construction firms; a reading below 50 means activity fell. October&rsquo;s figures, published on 5 November:</p>
+<ul><li>Total activity: 43.6, down from 46.1 in September, the 22nd month in a row below 50.</li><li>House building: 35.1, down from 40.7, its lowest since December 2025 and by far the weakest part of the industry. This category is mainly new homes rather than extensions and repairs.</li><li>Commercial building was 46.3 and civil engineering 45.9, so both were also shrinking.</li><li>48% of firms said their purchase costs went up, against 25% in September. They named fuel surcharges, energy, aggregates, concrete, electrical items and steel. The survey counts how many firms saw rises, not how big the rises were.</li><li>Suppliers&rsquo; delivery times lengthened for the third month running, by the most since May. Firms blamed low stocks, transport delays and stretched manufacturers.</li></ul>
+<p>Tim Moore of S&amp;P Global said firms reported &ldquo;severe headwinds in the house building sector from rising borrowing costs, weak consumer confidence and elevated economic uncertainty&rdquo;. The survey covers the whole UK and has no regional breakdown, so it can&rsquo;t tell us whether the North West is doing better or worse.</p>
+</div></section>
+<section class="plain alt"><div class="container prose">
+<h2>If you are planning an extension</h2>
+<p>Arrange the money before you sign with a builder. There are three common routes:</p>
+<ul><li><strong>A further advance from your current lender.</strong> This is extra borrowing added to your mortgage, usually as a separate part with its own rate and end date. It normally avoids early repayment charges on your existing deal.</li><li><strong>A remortgage to a new lender for the larger amount.</strong> Check first for early repayment charges if you are part-way through a fixed deal; they can run to thousands of pounds.</li><li><strong>A personal loan, for smaller sums.</strong> The rate is usually higher and the term shorter, so it costs more each month but often less in total interest.</li></ul>
+<p>A lender will usually want to see the drawings, builders&rsquo; quotes and, where needed, planning and Building Regulations approval. Its valuer may not add the full cost of the extension to the value of the house. If your fixed deal ends in the next few months, ask a broker about securing a new rate early: many lenders let you do this three to six months before the deal ends.</p>
+<p>Don&rsquo;t count on rates coming down soon. The Bank expects inflation to keep rising into next year.</p>
+<p>Some builders may have more room in the diary than a year ago, but don&rsquo;t expect lower prices: the same survey shows their costs rising again. A builder who is short of work may also be short of cash. Don&rsquo;t pay large sums up front. Pay in stages against work done, and keep back a small retention, often 2.5&ndash;5%, until the job is finished and building control has issued its completion certificate. A deposit for made-to-order items such as windows and bifold doors is normal; pay it once the builder shows you the supplier&rsquo;s order confirmation.</p>
+<p>Ask about delivery times when you agree a start date. Glazing is the usual hold-up: bifold doors, roof lanterns and windows can take several weeks to make. Steel beams usually come from a local fabricator more quickly, but only once the engineer&rsquo;s calculations are approved.</p>
+<h2>If you run a small building firm</h2>
+<p>Recheck any price you gave before October. Nearly half the firms in the survey reported higher costs last month, and merchants&rsquo; and hauliers&rsquo; fuel surcharges are part of it. Get your merchant&rsquo;s prices in writing, with a date, before you fix a price for work in the new year.</p>
+<p>Put a validity period on every quote; 30 days is common. Price glazing and steel from a dated supplier quote, and state that those items will be adjusted if the supplier&rsquo;s price changes before you place the order. Use a PC (prime cost) sum where the client hasn&rsquo;t yet chosen the product. With a homeowner client, any price adjustment term has to be clear and agreed before the contract is signed.</p>
+<p>Order long-lead items as soon as the client has signed and the sizes are confirmed. If a late delivery could stop work on site, allow for the extra time in your <a href="/guides/extension-preliminaries">preliminaries</a>, since scaffold, welfare and supervision are charged by the week.</p>
+<p>Ask early whether the client&rsquo;s finance is arranged. With mortgage rates this high, more clients will need a lender&rsquo;s approval before they can commit. Asking early saves you pricing jobs that won&rsquo;t go ahead. Agree stage payments that match the work so unpaid work doesn&rsquo;t build up.</p>
+<h2>An estimator&rsquo;s view</h2>
+<p>The rate rise will mostly decide whether people go ahead with an extension, not what the extension costs. For builders the cost side is the bigger concern: the October survey shows input costs rising faster again after the summer. On a typical single-storey extension, materials are roughly 40&ndash;50% of the builder&rsquo;s cost, so if materials went up by, say, 2&ndash;3%, the price would rise by about 1%. That is an illustration only. Delivery times can cost as much as price rises: if glazing arrives two weeks late and holds up the job, that is up to two more weeks of scaffold and site costs.</p>
+<h2>Getting a price</h2>
+<p>TheGo2Guys is an estimating service based in Liverpool. We price extensions and renovations from drawings at current North West rates, with materials, labour and preliminaries on separate lines. Homeowners use the estimate to check builders&rsquo; quotes and to know how much to borrow before speaking to a lender. Builders use it to price work without measuring the quantities themselves. A full estimate for a single-storey extension starts at &pound;150 and takes 3&ndash;5 working days. If you don&rsquo;t have drawings yet, you will need an architect or designer first. Send your drawings through the <a href="/quote">quote form</a>.</p>
+<h2>Sources</h2>
+<ul>
+<li><a href="https://www.bankofengland.co.uk/monetary-policy/the-interest-rate-bank-rate" rel="noopener">Bank of England, &ldquo;Bank Rate raised to 4%&rdquo;, Interest rates and Bank Rate, 5 November 2026</a></li>
+<li><a href="https://moneyweek.com/economy/news/live/uk-interest-rates-november-bank-of-england" rel="noopener">MoneyWeek, live coverage of the November rate decision (vote, inflation figures, Andrew Bailey&rsquo;s comments), 5 November 2026</a></li>
+<li><a href="https://moneyfactscompare.co.uk/news/banking/bank-of-england-base-rate-november-2026/" rel="noopener">Moneyfacts, &ldquo;Base Rate at 4%: BoE makes first increase in three years&rdquo;, 5 November 2026</a></li>
+<li><a href="https://www.mpamag.com/uk/mortgage-types/residential/mortgage-rates-hit-three-year-high-as-lenders-reprice-aggressively-ahead-of-base-rate-rise/596193" rel="noopener">Mortgage Introducer, &ldquo;Mortgage rates hit three-year high as lenders reprice aggressively ahead of base rate rise&rdquo;, 4 November 2026 (Moneyfacts data)</a></li>
+<li><a href="https://www.pmi.spglobal.com/Public/Home/PressRelease/20c809d6a93e465f8a4687e96a4fa999" rel="noopener">S&amp;P Global UK Construction PMI, October 2026, published 5 November 2026</a></li>
+<li><a href="https://www.buildersmerchantsnews.co.uk/news/construction/weaker-housing-activity-weighs-uk-construction-sector-october-pmi" rel="noopener">Builders Merchants News, &ldquo;Weaker housing activity weighs on UK construction sector in October&rdquo;, 5 November 2026</a></li>
+<li><a href="https://www.pbctoday.co.uk/news/planning-construction-news/september-2026-pmi-shows-slowing-contraction/166419/" rel="noopener">PBC Today, &ldquo;September 2026 PMI shows slowing contraction&rdquo;, 7 October 2026 (September figures)</a></li>
+</ul>
+</div></section>` + ctaBand('Want to know what to borrow?', 'Send your drawings and the job is priced at current North West rates, with materials, labour and preliminaries on separate lines. From &pound;150 for a single-storey extension, in 3&ndash;5 working days.')
+  });
+}
 
 function insightsIndexPage() {
   const cards = INSIGHTS.map(function (i) { return '<a class="card" href="' + i[0] + '"><p class="card-date">' + i[1] + '</p><h3>' + i[2] + '</h3><p>' + i[3] + '</p><span class="card-go">Read more &rarr;</span></a>'; }).join('\n');
