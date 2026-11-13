@@ -309,6 +309,7 @@ function routeExtraPage(path) {
     '/guides/garage-conversion-cost': garageGuidePage,
     '/guides/house-extension-cost-liverpool': extensionLiverpoolPage,
     '/guides/loft-conversion-cost-liverpool': loftLiverpoolPage,
+    '/guides/house-extension-cost-st-helens': extensionStHelensPage,
     '/refer': referPage,
     '/quote': quotePage,
     '/insights': insightsIndexPage,
@@ -323,7 +324,7 @@ function routeExtraPage(path) {
 }
 
 function sitemapXml() {
-  const paths = ['/', '/calculators', '/calculators/bricks-and-blocks', '/calculators/concrete', '/calculators/plaster', '/calculators/roof-tiles', '/calculators/footings', '/calculators/screed', '/services/material-takeoffs', '/services/bills-of-quantities', '/services/tender-pricing', '/guides', '/guides/house-extension-cost', '/guides/loft-conversion-cost', '/guides/extension-preliminaries', '/guides/garage-conversion-cost', '/guides/house-extension-cost-liverpool', '/guides/loft-conversion-cost-liverpool', '/insights', '/insights/steel-prices-mortgage-rates-october-2026', '/insights/construction-jobs-plan-builder-shortages-october-2026', '/insights/autumn-budget-2026-extensions-small-builders', '/refer', '/quote', '/terms', '/privacy'];
+  const paths = ['/', '/calculators', '/calculators/bricks-and-blocks', '/calculators/concrete', '/calculators/plaster', '/calculators/roof-tiles', '/calculators/footings', '/calculators/screed', '/services/material-takeoffs', '/services/bills-of-quantities', '/services/tender-pricing', '/guides', '/guides/house-extension-cost', '/guides/loft-conversion-cost', '/guides/extension-preliminaries', '/guides/garage-conversion-cost', '/guides/house-extension-cost-liverpool', '/guides/loft-conversion-cost-liverpool', '/guides/house-extension-cost-st-helens', '/insights', '/insights/steel-prices-mortgage-rates-october-2026', '/insights/construction-jobs-plan-builder-shortages-october-2026', '/insights/autumn-budget-2026-extensions-small-builders', '/refer', '/quote', '/terms', '/privacy'];
   return '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
     paths.map(function (p) { return '  <url><loc>' + SITE + (p === '/' ? '/' : p) + '</loc></url>'; }).join('\n') + '\n</urlset>\n';
 }
@@ -993,6 +994,7 @@ function guidesIndexPage() {
 <a class="card" href="/guides/garage-conversion-cost"><h3>Garage conversion cost UK (2026)</h3><p>Single, double and detached garage conversions, an all-in example budget, Building Regulations and Liverpool fees.</p><span class="card-go">Read the guide &rarr;</span></a>
 <a class="card" href="/guides/house-extension-cost-liverpool"><h3>House extension cost in Liverpool (2026)</h3><p>Cost per m² for extensions in Liverpool and Merseyside, with a real Merseyside estimate broken down.</p><span class="card-go">Read the guide &rarr;</span></a>
 <a class="card" href="/guides/loft-conversion-cost-liverpool"><h3>Loft conversion cost in Liverpool (2026)</h3><p>Velux, dormer, hip-to-gable and mansard prices for Liverpool and the North West.</p><span class="card-go">Read the guide &rarr;</span></a>
+<a class="card" href="/guides/house-extension-cost-st-helens"><h3>House extension cost in St Helens (2026)</h3><p>Cost per m², an all-in 20 m² budget, St Helens Council fees, conservation areas and coalfield ground.</p><span class="card-go">Read the guide &rarr;</span></a>
 <a class="card" href="/guides/extension-preliminaries"><h3>Pricing preliminaries on an extension</h3><p>For builders: what goes in preliminaries, a real 2026 breakdown, and the items most often left out of a quote.</p><span class="card-go">Read the guide &rarr;</span></a>
 </div></div></section>` + CALC_CTA
   });
@@ -1414,6 +1416,91 @@ function garageGuidePage() {
 }
 
 // ------------------------------- Insights ----------------------------------
+// ----------------------- Local guide: St Helens extensions -------------------
+// Same North of England rates as the Liverpool guide (national x 0.92), rounded to £50/m²; 20 m² examples worked from the rounded rates.
+// St Helens building control: Schedule 2 (domestic extensions and alterations), effective 16 December 2024, incl. VAT. Full plans = plan charge + inspection charge.
+// Planning fees: national, from 1 April 2026. A further national rise is due from 8 December 2026: update this page then.
+const EXT_STH_FAQ = [
+  ['How much does a single-storey extension cost in St Helens in 2026?', 'About £2,000 to £2,650 per m² plus VAT for a standard finish, more per m² on a small extension. For a typical 20 m² rear extension, budget £56,000 to £83,000 all in, with contingency, fees, surveys and VAT.'],
+  ['Is it cheaper to extend in St Helens than in Liverpool?', 'Not on our rates, which are the same across Merseyside. What affects the price more is the house itself. A terrace with a narrow back entry costs more per m² than a semi with a drive down the side.'],
+  ['How much is building control for an extension in St Helens?', 'For a single-storey extension of 10 to 40 m², St Helens Council charges £573.60 including VAT on a full plans application: £207.60 when you submit and £366 for the inspections. A building notice costs £667.20.'],
+  ['Do I need planning permission for an extension in St Helens?', 'Many single-storey rear extensions are permitted development: up to 3m deep on a terrace or semi, 4m on a detached house, and no more than 4m high. Going deeper needs a larger home extension prior approval or a planning application. In a conservation area, prior approval isn&rsquo;t available, and side extensions and rear extensions of more than one storey need planning. A lawful development certificate (£274) confirms in writing that a proposal doesn&rsquo;t need permission.'],
+  ['Does coal mining affect my extension?', 'It can. Check the address on the Mining Remediation Authority&rsquo;s map before the foundations are designed. If the house is in a Development High Risk Area, the structural engineer may want drilling first.'],
+  ['How long does an extension take to build?', 'Usually 8&ndash;14 weeks on site for a single-storey rear extension. From first drawings to a builder starting, 4&ndash;6 months is common.']
+];
+
+function extensionStHelensPage() {
+  return pageShell({
+    path: '/guides/house-extension-cost-st-helens',
+    title: 'House Extension Cost St Helens 2026 | TheGo2Guys',
+    desc: 'What a house extension costs in St Helens in 2026: cost per m², an all-in 20 m² budget, St Helens Council building control fees, conservation areas and coalfield ground.',
+    schema: faqSchema(EXT_STH_FAQ),
+    body: pageHero([['/', 'Home'], ['/guides', 'Cost guides'], ['/guides/house-extension-cost-st-helens', 'Extension cost St Helens']], 'House extension cost in St Helens (2026)', 'A single-storey extension in St Helens with a standard finish typically costs £2,000&ndash;£2,650 per m² to build in 2026, before VAT. A 20&nbsp;m² rear extension comes to roughly £40,000&ndash;£53,000 for the build, and £56,000&ndash;£83,000 once contingency, fees, surveys and VAT are added. An extension of around 15&nbsp;m² will cost more per m² than this.') +
+      `<section class="plain alt"><div class="container prose">
+<p class="pub-date">Last checked 13 November 2026</p>
+<h2>Extension cost per m² in St Helens</h2>
+<p>These are our own 2026 rates per m² of new internal floor area, before VAT. They cover the extension built to a plastered room ready for decorating: foundations, walls, roof, steelwork, windows and doors, the connection to the existing house, electrics, heating and plastering. They leave out the kitchen, flooring and decorating. We use the same rates across Merseyside, which are our <a href="/guides/house-extension-cost">UK figures</a> less about 8% for the North of England. We haven&rsquo;t collected separate St Helens tender prices, so treat them as a Merseyside figure.</p>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Extension</th><th class="num">Cost per m²</th><th class="num">20 m² example</th></tr></thead><tbody>
+<tr><th>Single-storey, basic finish</th><td class="num">£1,650&ndash;£2,000</td><td class="num">£33,000&ndash;£40,000</td></tr>
+<tr><th>Single-storey, standard finish</th><td class="num">£2,000&ndash;£2,650</td><td class="num">£40,000&ndash;£53,000</td></tr>
+<tr><th>Single-storey, high finish</th><td class="num">£2,650&ndash;£3,200</td><td class="num">£53,000&ndash;£64,000</td></tr>
+<tr><th>Double-storey, standard finish</th><td class="num">£1,650&ndash;£2,500</td><td class="num">20 m² footprint, 40 m² of floor: £66,000&ndash;£100,000</td></tr>
+</tbody></table></div>
+<p>Basic means facing brick to match, standard double glazing and a simple flat or pitched roof. Standard adds a pair of French or sliding doors and better finishes. High means large sliders, a roof lantern, underfloor heating and a more involved roof. The bottom of each band assumes an easy site: side access, good ground and drains out of the way. Double-storey is cheaper per m² because one set of foundations and one roof serve two floors, but the total is higher.</p>
+<p>Small extensions cost more per m², because scaffolding, foundations, steelwork and the connection to the house cost much the same whatever the size. Our <a href="/sample-estimate.pdf" target="_blank" rel="noopener">sample estimate</a> for a 16.28&nbsp;m² single-storey rear extension in Merseyside came to £46,451 before VAT, or £2,853 per m², on an ordinary specification. If your extension is around 15&nbsp;m², budget from that figure, not from the bottom of the table.</p><p>For Liverpool figures, see our <a href="/guides/house-extension-cost-liverpool">Liverpool extension cost guide</a>.</p>
+<h2>A 20 m² St Helens extension, all in</h2>
+<p>A budget for a 20&nbsp;m² single-storey rear extension with a standard finish, built by a VAT-registered builder. Fee lines include VAT where it is charged.</p>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Item</th><th class="num">Typical cost</th></tr></thead><tbody>
+<tr><th>Build cost, ex VAT</th><td class="num">£40,000&ndash;£53,000</td></tr>
+<tr><th>Contingency, 10&ndash;15%</th><td class="num">£4,000&ndash;£8,000</td></tr>
+<tr><th>VAT at 20% on build and contingency</th><td class="num">£8,800&ndash;£12,200</td></tr>
+<tr><th>Drawings (architect or architectural technologist)</th><td class="num">£1,500&ndash;£3,500</td></tr>
+<tr><th>Structural engineer&rsquo;s calculations</th><td class="num">£500&ndash;£1,200</td></tr>
+<tr><th>St Helens building control, full plans (10&ndash;40 m²)</th><td class="num">£573.60</td></tr>
+<tr><th>Prior approval or planning application</th><td class="num">£249&ndash;£548</td></tr>
+<tr><th>CCTV drain survey and trial hole (a small dig to see the existing foundations)</th><td class="num">£450&ndash;£950</td></tr>
+<tr><th>Party wall surveyor, per neighbour, if needed</th><td class="num">£0&ndash;£3,000</td></tr>
+<tr><th>Total</th><td class="num"><strong>roughly £56,000&ndash;£83,000</strong></td></tr>
+</tbody></table></div>
+<p>The party wall line is £0 if the neighbour agrees in writing. On a mid-terrace with notices to both sides, the top of the range can double. Not included: the kitchen, flooring and decorating, taking down an old conservatory, a build-over agreement or manhole move if a sewer is in the way, and any drilling or treatment for old mine workings (see below).</p>
+<p>Builders turning over less than £90,000 a year don&rsquo;t have to register for VAT, which is why some quotes look much cheaper. They still pay VAT on materials and pass it on, so the real saving is the VAT on labour, not the full 20%. A builder doing several extensions a year will usually be over the threshold. If a quote on a £50,000 job has no VAT, ask whether the builder is registered and, if they are, ask for their VAT number.</p>
+<h2>Will 20 m² fit under permitted development?</h2>
+<p>Often not. Permitted development allows a single-storey rear extension up to 3m deep on a terraced or semi-detached house and 4m on a detached house, no more than 4m high, and no more than 3m to the eaves within 2m of a boundary. Depth is measured from the original rear wall, so an earlier extension counts against it. Materials have to match the house, and extensions and outbuildings can&rsquo;t cover more than half the garden. On a semi around 5.5&ndash;6m wide, 3m deep gives roughly 13&ndash;15&nbsp;m² inside once the walls are taken off.</p>
+<p>Going to 3.5&ndash;4m deep for 20&nbsp;m² needs either a larger home extension prior approval (up to 6m on a semi or terrace, 8m detached; £249), where the council consults the neighbours and has 42 days to decide, or a householder planning application (£548). Prior approval isn&rsquo;t available in a conservation area. On a narrow terrace in Thatto Heath or Parr, 3m deep may give only 10&ndash;12&nbsp;m², so side-return and wrap-around extensions are common there. These normally need full planning permission.</p>
+<h2>Before you spend anything</h2>
+<ol><li>Measure from the original back wall and check what permitted development allows.</li><li>Check whether the house is in a conservation area, an Article 4 area or an estate where permitted development rights were removed.</li><li>Check the address on the Mining Remediation Authority&rsquo;s map.</li><li>Find out where the drains and manholes run. A CCTV survey settles it.</li><li>Get drawings and structural calculations done.</li><li>Apply for prior approval, planning or a lawful development certificate, as needed.</li><li>Make a full plans application to building control.</li><li>Serve party wall notices at least a month before work near the boundary, two months for a new wall on the line.</li><li>Get itemised quotes from two or three builders against the same drawings.</li></ol>
+<h2>St Helens Council fees</h2>
+<h3>Building control</h3>
+<p>St Helens Council&rsquo;s domestic charges (<a href="https://sthelens.gov.uk/media/10089/BC-Charges-Schedule-2-Domestic-Extensions-Alterations-Dec-2024/pdf/BC_Charges_-_Schedule_2_Domestic_Extensions___Alterations___Dec_2024_.pdf" rel="noopener">Schedule 2</a>) took effect on 16 December 2024 and were still the schedule linked from the council&rsquo;s <a href="https://sthelens.gov.uk/article/5008/How-to-make-a-building-regulation-application" rel="noopener">building regulations page</a> in November 2026. Full plans is paid in two parts: a plan charge when you submit and an inspection charge once work is under way. Figures include VAT.</p>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Work</th><th class="num">Full plans (plan + inspection)</th><th class="num">Building notice</th></tr></thead><tbody>
+<tr><th>Single-storey extension, under 10 m²</th><td class="num">£422.40</td><td class="num">£480.00</td></tr>
+<tr><th>Single-storey extension, 10&ndash;40 m²</th><td class="num">£573.60</td><td class="num">£667.20</td></tr>
+<tr><th>Single-storey extension, 40&ndash;100 m²</th><td class="num">£768.00</td><td class="num">£862.80</td></tr>
+<tr><th>Two-storey extension, under 40 m²</th><td class="num">£651.60</td><td class="num">£703.20</td></tr>
+<tr><th>Two-storey extension, 40&ndash;100 m²</th><td class="num">£832.80</td><td class="num">£937.20</td></tr>
+<tr><th>Garage conversion to a habitable room, under 20 m²</th><td class="num">£189.60</td><td class="num">£220.80</td></tr>
+</tbody></table></div>
+<p>A building notice costs more and gives you no approved plans before work starts, so on an extension with steelwork full plans is the usual route. It can&rsquo;t be used at all if you are building within 3m of a public sewer, which is common behind St Helens terraces and semis. Approval for work already done without consent (regularisation) costs £695 for a 10&ndash;40&nbsp;m² single-storey extension, with no VAT. Some smaller items, such as replacement windows, are charged at a reduced rate when they go in with the extension. Ring building control on 01744 676240 or 01744 676353 to confirm before you budget. You can use a registered building control approver (a private inspector) instead; their fees are set privately.</p>
+<h3>Planning</h3>
+<p>Planning fees in England are set nationally. Since 1 April 2026 a householder application has cost £548, a lawful development certificate for a proposed extension £274, and a householder prior approval £249. The <a href="https://blog.planningportal.co.uk/2026/10/23/english-planning-application-fees-increase-on-8th-december-2026/" rel="noopener">Planning Portal</a> says fees go up again for applications made from 8 December 2026, so check the current figure before you submit. We will update this page once the new fees apply.</p>
+<h2>Conservation areas and Article 4 directions</h2>
+<p>St Helens has <a href="https://www.sthelens.gov.uk/article/3497/Conservation-areas" rel="noopener">eight conservation areas</a>, including Victoria Square in the town centre, George Street, Earlestown, Newton-le-Willows, Rainford, Rainhill and Vulcan Village. Check the council&rsquo;s map for the full list and boundaries. In a conservation area, side extensions and rear extensions of more than one storey need planning permission even where they would be permitted development elsewhere. Work to a tree with a trunk more than 75mm across, measured 1.5m above the ground, needs six weeks&rsquo; written notice to the council.</p>
+<p>There are also Article 4 directions for High Street in Newton-le-Willows, Rainford, Rainhill and Vulcan Village. These typically remove permitted development rights for changes the public can see, such as uPVC windows and doors, taking down front garden walls and paving the front for parking. A rear extension is usually less affected. A side extension that can be seen from the street may need timber windows and matching brick, which add cost. Read the Article 4 documents on the council&rsquo;s conservation area page before paying for drawings.</p>
+<h2>St Helens house types and what they mean for cost</h2>
+<h3>Terraces</h3>
+<p>Thatto Heath, Parr, Sutton, Peasley Cross and Earlestown have a lot of late-Victorian and Edwardian terraces. Narrow plots, shared drains, back entries and no side access are common. If the entry is too narrow for a dumper, materials and spoil are barrowed down the alley or carried through the house, which adds labour days. Building a new wall on the boundary, bearing a steel on a party wall, or digging foundations within 3m of a neighbour&rsquo;s and below the bottom of theirs all bring in the Party Wall Act, often with both neighbours.</p>
+<h3>Inter-war and post-war semis</h3>
+<p>Eccleston, Windle, Rainhill and Haydock have plenty of 1930s and post-war semis with side access and room for a full-width rear extension. These are usually the simplest to price. Watch for a shared drain running across the back of a pair of semis, which can mean a build-over agreement with United Utilities.</p>
+<h3>Newer estates</h3>
+<p>On estates built from the 1970s onwards, some planning permissions removed permitted development rights when the houses were built. Check the original permission before you pay for drawings that assume you can build without an application.</p>
+<h2>Old mine workings</h2>
+<p>Much of St Helens sits on the former Lancashire coalfield, and parts of the borough are in the Development High Risk Area kept by the Mining Remediation Authority (formerly the Coal Authority), where shallow workings or old mine shafts may be present. A householder extension doesn&rsquo;t need a coal mining risk assessment with the planning application, but the risk to the foundations is the same either way. Check the address on the authority&rsquo;s interactive map, and look out the mining search from when you bought the house. If it&rsquo;s in a high risk area, ask the structural engineer whether probe drilling is needed before the foundation design is fixed. That is outside the budget above: allow a few thousand pounds for drilling, and much more if old workings have to be filled with grout.</p>
+<p>Clay soil near trees can also mean deeper foundations. The trial hole will usually show this.</p>
+<h2>Common questions</h2>${faqHtml(EXT_STH_FAQ)}
+</div></section>` + ctaBand('Got drawings for a St Helens extension?', 'Send them to us and we will send back an itemised estimate at current Merseyside rates, to budget with or check builders&rsquo; quotes against. From £150, in 3&ndash;5 working days. We are based in Liverpool.')
+  });
+}
+
 // Newest first. Each insight: [path, date label, title, summary]
 const INSIGHTS = [
   ['/insights/autumn-budget-2026-extensions-small-builders', '31 October 2026', 'Autumn Budget 2026: what it means for extensions and small builders', 'VAT stays at 20%, the National Living Wage rises to &pound;13.21 and major Building Regulations changes are paused. What it means for an extension price and for small firms.'],
