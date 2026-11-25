@@ -331,6 +331,7 @@ function routeExtraPage(path) {
     '/refer': referPage,
     '/quote': quotePage,
     '/insights': insightsIndexPage,
+    '/insights/planning-fees-rise-december-2026-liverpool-hmo': planningFeesHmoInsightPage,
     '/insights/autumn-budget-2026-extensions-small-builders': budgetInsightPage,
     '/insights/steel-prices-mortgage-rates-october-2026': steelMortgageInsightPage,
     '/insights/construction-jobs-plan-builder-shortages-october-2026': jobsPlanInsightPage
@@ -342,7 +343,7 @@ function routeExtraPage(path) {
 }
 
 function sitemapXml() {
-  const paths = ['/', '/calculators', '/calculators/bricks-and-blocks', '/calculators/concrete', '/calculators/plaster', '/calculators/roof-tiles', '/calculators/footings', '/calculators/screed', '/services/material-takeoffs', '/services/bills-of-quantities', '/services/tender-pricing', '/guides', '/guides/house-extension-cost', '/guides/loft-conversion-cost', '/guides/extension-preliminaries', '/guides/garage-conversion-cost', '/guides/house-extension-cost-liverpool', '/guides/loft-conversion-cost-liverpool', '/guides/house-extension-cost-st-helens', '/insights', '/insights/steel-prices-mortgage-rates-october-2026', '/insights/construction-jobs-plan-builder-shortages-october-2026', '/insights/autumn-budget-2026-extensions-small-builders', '/refer', '/quote', '/terms', '/privacy'];
+  const paths = ['/', '/calculators', '/calculators/bricks-and-blocks', '/calculators/concrete', '/calculators/plaster', '/calculators/roof-tiles', '/calculators/footings', '/calculators/screed', '/services/material-takeoffs', '/services/bills-of-quantities', '/services/tender-pricing', '/guides', '/guides/house-extension-cost', '/guides/loft-conversion-cost', '/guides/extension-preliminaries', '/guides/garage-conversion-cost', '/guides/house-extension-cost-liverpool', '/guides/loft-conversion-cost-liverpool', '/guides/house-extension-cost-st-helens', '/insights', '/insights/steel-prices-mortgage-rates-october-2026', '/insights/construction-jobs-plan-builder-shortages-october-2026', '/insights/autumn-budget-2026-extensions-small-builders', '/insights/planning-fees-rise-december-2026-liverpool-hmo', '/refer', '/quote', '/terms', '/privacy'];
   return '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
     paths.map(function (p) { return '  <url><loc>' + SITE + (p === '/' ? '/' : p) + '</loc></url>'; }).join('\n') + '\n</urlset>\n';
 }
@@ -1521,6 +1522,7 @@ function extensionStHelensPage() {
 
 // Newest first. Each insight: [path, date label, title, summary]
 const INSIGHTS = [
+  ['/insights/planning-fees-rise-december-2026-liverpool-hmo', '25 November 2026', 'Planning fees rise on 8 December, and Liverpool tightens its HMO rules', 'Householder planning fees go from &pound;548 to &pound;575 and larger extension prior approval from &pound;249 to &pound;310. Plus the five new Liverpool areas where a small HMO now needs planning permission.'],
   ['/insights/autumn-budget-2026-extensions-small-builders', '31 October 2026', 'Autumn Budget 2026: what it means for extensions and small builders', 'VAT stays at 20%, the National Living Wage rises to &pound;13.21 and major Building Regulations changes are paused. What it means for an extension price and for small firms.'],
   ['/insights/construction-jobs-plan-builder-shortages-october-2026', '25 October 2026', 'Builder shortages and the Construction Jobs Plan: what changes for extensions', 'The new jobs plan, the general builder apprenticeship and the &pound;2,000 hiring payment, and how to plan an extension around the shortage of electricians and other trades.'],
   ['/insights/steel-prices-mortgage-rates-october-2026', '18 October 2026', 'Structural steel up 21%, five-year fixes at 6%: pricing an extension this autumn', 'August&rsquo;s materials figures, the new steel import duty and dearer mortgages, and what homeowners and builders should do about them.']
@@ -1536,6 +1538,70 @@ function insightsIndexPage() {
       `<section class="plain"><div class="container"><div class="card-grid">
 ${cards}
 </div></div></section>` + CALC_CTA
+  });
+}
+
+function planningFeesHmoInsightPage() {
+  const path = '/insights/planning-fees-rise-december-2026-liverpool-hmo';
+  const title = 'Planning fees rise on 8 December, and Liverpool tightens its HMO rules';
+  return pageShell({
+    path: path,
+    title: 'Planning Fees Rise 8 Dec 2026: Extensions &amp; Liverpool HMOs',
+    desc: 'Householder planning fees rise from &pound;548 to &pound;575 on 8 December 2026. What it adds to an extension, and what Liverpool&rsquo;s new Article 4 HMO areas mean for owners and builders.',
+    schema: { '@context': 'https://schema.org', '@type': 'Article', headline: title, datePublished: '2026-11-25', author: { '@type': 'Organization', name: 'TheGo2Guys' }, publisher: { '@type': 'Organization', name: 'TheGo2Guys' }, mainEntityOfPage: SITE + path },
+    body: pageHero([['/', 'Home'], ['/insights', 'Insights'], [path, 'Planning fees and Liverpool HMOs']], title, 'Planning application fees in England go up on 8 December 2026. A householder application for an extension rises from &pound;548 to &pound;575, and prior approval for a larger single-storey rear extension from &pound;249 to &pound;310. Separately, since 5 November, turning a family house into a small HMO in parts of Kirkdale, Walton, Tuebrook, Old Swan, Penny Lane and Sefton Park has needed planning permission.') +
+      `<section class="plain"><div class="container prose">
+<p class="pub-date">Published 25 November 2026</p>
+<div class="callout"><p><strong>In short</strong></p><ul><li>Any planning application made on or after 8 December pays the new fee. One made before then pays the current fee, however long the decision takes.</li><li>The biggest percentage rise for homeowners comes after approval: each request to discharge a planning condition goes from &pound;89 to &pound;125, up 40%.</li><li>In five areas of Liverpool, converting a house into a small HMO now needs planning permission. HMOs already lawfully in use before 5 November are not affected.</li></ul></div>
+<h2>What changes on 8 December</h2>
+<p>The new fees are set by the Town and Country Planning (Fees) (Amendment and Transitional Provision) Regulations 2026, S.I. 2026/1192. They were made on 10 November and come into force on 8 December. Every national planning fee in England goes up, and some prior approval applications that used to be free now cost &pound;310.</p>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Application</th><th class="num">Up to 7 Dec 2026</th><th class="num">From 8 Dec 2026</th></tr></thead><tbody>
+<tr><th>Householder application: extension or alteration to one house</th><td class="num">&pound;548</td><td class="num">&pound;575</td></tr>
+<tr><th>Householder application: outbuilding, wall, fence or gate</th><td class="num">&pound;272</td><td class="num">&pound;285</td></tr>
+<tr><th>Prior approval for a larger rear extension (6m, or 8m detached)</th><td class="num">&pound;249</td><td class="num">&pound;310</td></tr>
+<tr><th>Discharge of conditions, householder (each request)</th><td class="num">&pound;89</td><td class="num">&pound;125</td></tr>
+<tr><th>Varying or removing a condition, householder</th><td class="num">&pound;89</td><td class="num">&pound;112</td></tr>
+<tr><th>Non-material amendment (a small change to approved plans), householder</th><td class="num">&pound;46</td><td class="num">&pound;53</td></tr>
+<tr><th>Lawful Development Certificate for a proposed extension (half the householder fee)</th><td class="num">&pound;274</td><td class="num">&pound;287.50</td></tr>
+<tr><th>Change of use of a house to a large HMO (7 or more people)</th><td class="num">&pound;610</td><td class="num">&pound;732</td></tr>
+</tbody></table></div>
+<p>Regulation 12 says the new fees do not apply to an application made before 8 December. If the council returns an application as invalid and you resubmit it on or after 8 December, expect to pay the new fee.</p>
+<p>Under the same regulations the new fees go up again by 3.5% on 1 April 2027. That takes a householder application to about &pound;595.</p>
+<h2>What it means for an extension</h2>
+<p>The fee is a small part of the cost of getting permission. A 20m&sup2; single-storey rear extension in Liverpool comes to roughly &pound;40,500 to &pound;53,500 before VAT at our current rates (see our <a href="/guides/house-extension-cost-liverpool">Liverpool extension cost guide</a>). Against that, the extra &pound;27 on a householder application makes no real difference. Drawings, a structural engineer&rsquo;s calculations and building control fees each cost far more, and so do any reports the council asks for, such as a tree survey or a heritage statement.</p>
+<p>So don&rsquo;t rush an application to beat the deadline. If the council returns it as invalid you lose weeks, which costs more than the &pound;27 you saved. If your drawings are finished and checked, submit before 8 December. If not, finish them first.</p>
+<p>Many single-storey rear extensions don&rsquo;t need planning permission. Under permitted development rules, a terraced or semi-detached house can extend up to 3m at the back, or 4m if detached, within limits on height, eaves height near the boundary, how much of the garden is covered, and materials. The Planning Portal&rsquo;s interactive guide and the government&rsquo;s technical guidance set out the full rules.</p>
+<p>Prior approval allows a longer extension: up to 6m on a terraced or semi-detached house, or 8m detached. The council notifies the neighbours. If any of them object, it considers the effect on their light, outlook and privacy before deciding. That application now costs &pound;310 instead of &pound;249.</p>
+<p>Some houses don&rsquo;t have these rights. Flats and maisonettes have none. Listed buildings need listed building consent. Where a condition on an earlier permission or an Article 4 Direction has removed the rights, you need a full application. Houses in conservation areas keep the basic 3m and 4m rights, but not the 6m and 8m prior approval route, side extensions or extensions of more than one storey. Liverpool publishes maps of its conservation areas, and its planning team offers pre-application advice if you&rsquo;re unsure.</p>
+<p>When you sell, the buyer&rsquo;s solicitor will usually ask for proof that permitted development work was lawful. A Lawful Development Certificate gives you that. You don&rsquo;t have to get one. From 8 December it costs &pound;287.50, and you can apply before you build.</p>
+<p>Read the conditions attached to any approval. Many householder approvals require details to be agreed before work starts, such as brick samples or roof tiles. Each request to discharge a condition rises from &pound;89 to &pound;125, and varying a condition rises from &pound;89 to &pound;112. If your builder wants different window sizes or a different roof from the drawings, agree those changes before you apply, not afterwards.</p>
+<p>These regulations don&rsquo;t change building control charges, which are set separately. Almost every extension needs Building Regulations approval, whether or not it needs planning permission. You can use the council&rsquo;s building control service or a registered private building control approver.</p>
+<h2>Liverpool: small HMOs now need planning permission in five more areas</h2>
+<p>Liverpool City Council made five immediate Article 4 Directions in early November, and they came into force on 5 November. An Article 4 Direction removes a permitted development right in a defined area. These remove the right to change a house (use class C3) into a small house in multiple occupation (use class C4): a home for three to six unrelated people, living there as their main home and sharing a kitchen or bathroom. In these areas that change now needs a planning application.</p>
+<p>According to the Directions as published by Planning Geek, the areas are:</p>
+<ul><li>Area 1: Kirkdale West and East, Everton North, County, Walton, Orrell Park and part of Fazakerley North and West</li><li>Area 2: Tuebrook Larkhill (part)</li><li>Area 3: Old Swan East, and parts of Old Swan West and Stoneycroft</li><li>Area 4: Penny Lane and Calderstones (parts)</li><li>Area 5: St Michaels, Sefton Park and part of Festival Gardens</li></ul>
+<p>The boundaries don&rsquo;t always follow ward lines, so check the council&rsquo;s maps rather than relying on the name of your ward. These areas are in addition to two older Directions: one from 2018 covering The Dales, and one from 2021 covering 11 wards (the council&rsquo;s map shows the boundary). An HMO for seven or more people already needs planning permission anywhere in Liverpool.</p>
+<p>The immediate Directions last until 5 May 2027 unless the council confirms them. It consulted on them between 5 and 26 November 2026. A further Direction covering more of the city has also been made. If confirmed, it comes into force on 5 November 2027. The council says it wants to stop HMOs clustering in particular streets.</p>
+<p>In these areas the application should be free. Under regulation 5 of the 2012 Fees Regulations, no planning fee is payable when an application is needed only because an Article 4 Direction has removed a permitted development right. Confirm this with the council before you submit.</p>
+<p>HMOs already lawfully in use before the Directions took effect are not affected. The council says owners can apply for a Lawful Development Certificate for an existing use to prove it. Evidence normally means tenancy agreements, HMO licence records and council tax records showing the use was in place. The fee for an existing-use certificate is tied to the fee for the matching planning application, so ask the council what it will charge.</p>
+<h2>Builders pricing HMO conversions</h2>
+<p>Only a small HMO actually in use before 5 November is protected. A house bought for conversion, or part-way through the works but not yet let as an HMO on that date, needs permission if it sits in one of the new areas. Check this before you carry on with a job you started in October.</p>
+<p>The council has eight weeks from validation to decide, and decisions can take longer. Allow ten to twelve weeks from submission before you commit to a start date. Agree in writing what happens if permission is refused or delayed: who pays for design work already done, and how long your price holds.</p>
+<p>You may need an HMO licence as well as planning permission. Building Regulations apply to the conversion work too, including fire separation, fire doors and escape routes. Price these from the fire strategy agreed with building control, not from a lump-sum allowance.</p>
+<h2>Getting a price</h2>
+<p>TheGo2Guys is an estimating service based in Liverpool. Send us your planning drawings through the <a href="/quote">quote form</a> and we&rsquo;ll send back an itemised estimate at current North West rates, with each trade priced separately, in 3 to 5 working days.</p>
+<h2>Sources</h2>
+<ul>
+<li><a href="https://www.legislation.gov.uk/uksi/2026/1192" rel="noopener">The Town and Country Planning (Fees for Applications, Deemed Applications, Requests and Site Visits) (England) (Amendment and Transitional Provision) Regulations 2026, S.I. 2026/1192, made 10 November 2026</a></li>
+<li><a href="https://assets.publishing.service.gov.uk/media/6af1a985bdaa07fdf9470e18/Planning_fees_national_increases_from_8_December_2026.pdf" rel="noopener">GOV.UK, Planning fees: national increases from 8 December 2026</a></li>
+<li><a href="https://ecab.planningportal.co.uk/uploads/forthcoming_english_application_fees.pdf" rel="noopener">Planning Portal, Forthcoming fees for planning applications in England</a></li>
+<li><a href="https://www.legislation.gov.uk/uksi/2012/2920/regulation/5" rel="noopener">The Town and Country Planning (Fees for Applications, Deemed Applications, Requests and Site Visits) (England) Regulations 2012, regulation 5</a></li>
+<li><a href="https://www.gov.uk/guidance/fees-for-planning-applications" rel="noopener">GOV.UK, Fees for planning applications (guidance)</a></li>
+<li><a href="https://liverpool.gov.uk/planning-and-building-control/planning-permission/planning-permission-for-hmos" rel="noopener">Liverpool City Council, Planning permission for houses in multiple occupation (updated 5 November 2026)</a></li>
+<li><a href="https://www.planninggeek.co.uk/2026/liverpool-hmo-controls/" rel="noopener">Planning Geek, &ldquo;Liverpool HMO controls take effect in five areas&rdquo;, 5 November 2026</a></li>
+<li><a href="https://www.placenorthwest.co.uk/liverpool-plans-citywide-hmo-crackdown/" rel="noopener">Place North West, &ldquo;Liverpool plans citywide HMO crackdown&rdquo;, 6 October 2026</a></li>
+</ul>
+</div></section>` + ctaBand('Got drawings ready for planning?', 'Send them over and we&rsquo;ll price the job at current North West rates, with each trade on its own line, so you know the build cost before you commit to fees. Back in 3&ndash;5 working days.')
   });
 }
 
