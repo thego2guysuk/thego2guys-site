@@ -970,7 +970,7 @@ function boqServicePage() {
 const TENDER_FAQ = [
   ['Can you price a bill of quantities sent by the client\'s QS?', 'Yes. We put rates against the bill in the format it was issued in, and list anything in it that is unclear or missing so you can raise it before the tender closes.'],
   ['Will you submit the tender for me?', 'No. We price the work and you check it, set your margin and submit it under your own name. Overheads and profit are shown separately, so the final number is your decision.'],
-  ['What kind of jobs do you price?', 'Mainly residential work: extensions, loft conversions, refurbishments and new houses. We also price electrical, ductwork, lightning protection and steelwork packages for subcontractors; see <a href="/services/specialist-packages">M&amp;E and specialist packages</a>. For other jobs, send the documents and we\'ll tell you straight away whether it is something we can price well.'],
+  ['What kind of jobs do you price?', 'Mainly residential work: extensions, loft conversions, refurbishments and new houses. We also price electrical, ductwork, lightning protection and steelwork packages for subcontractors (see <a href="/services/specialist-packages">M&amp;E and specialist packages</a>). For other jobs, send the documents and we\'ll tell you straight away whether it is something we can price well.'],
   ['What if the drawings change during the tender?', 'Send the revised drawings and we re-price the items that have changed. The Tender Pack includes one free re-price.']
 ];
 
