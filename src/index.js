@@ -1053,8 +1053,8 @@ function aboutPage() {
     body: pageHero([['/', 'Home'], ['/about', 'About']], 'About TheGo2Guys', 'A construction estimating service based in Liverpool, measuring and pricing work for builders, specialist subcontractors and homeowners across the UK.') +
       `<section class="plain alt"><div class="container prose">
 <h2>Experience</h2>
-<p>We bring 10 years of estimating experience on UK projects across infrastructure, M&amp;E and housebuilding, pricing work from the contractor&rsquo;s side: main contract tenders, specialist subcontract packages and new homes.</p>
-<p>Every estimate is prepared the way a contractor&rsquo;s own estimator would prepare it: measured from the drawings, priced from first principles and set out so each figure can be checked.</p>
+<p>Ten years pricing UK construction work for contractors, across infrastructure, M&amp;E and housebuilding. Main contract tenders, specialist subcontract packages and new-build housing, priced against real return dates and real margins.</p>
+<p>Every estimate is held to that standard. Quantities are measured from the drawings, rates are built up from labour, materials and plant, and every figure can be traced back to where it came from. If something isn&rsquo;t on the drawings, it is flagged, not guessed.</p>
 <h2>How we price</h2>
 <ul><li>Quantities are measured from the drawings, with every opening counted and the workings kept.</li><li>Rates are built up from labour, materials and plant at current prices for the region, so you can see what is in each one.</li><li>We price what is on the drawings. Anything unclear is listed as a query or qualification, not guessed.</li><li>Preliminaries and overheads and profit are shown on their own lines, so the margin stays your decision.</li></ul>
 <h2>Who we work with</h2>
