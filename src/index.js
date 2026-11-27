@@ -1001,44 +1001,42 @@ function tenderServicePage() {
 }
 
 const PACKAGES_FAQ = [
-  ['Do you price whole M&E installations?', 'We price trade packages: electrical, ductwork, lightning protection and steelwork. For a full mechanical and electrical installation on a large project, send the documents and we\'ll tell you straight away which parts we can price well, rather than take on the lot and guess.'],
-  ['Where do the labour rates come from?', 'Labour is built up from published M&amp;E labour norms for each item, adjusted for access, working height and the type of building. Send us your own gang rates and productivity and we\'ll price on those instead.'],
-  ['Can I have the takeoff without the pricing?', 'Yes. Plenty of contractors want the quantities measured and then put their own rates and supplier quotes against them. A takeoff only is priced lower than a fully priced package.'],
-  ['What do you need from me?', 'The tender drawings (layouts, schematics and schedules), the specification and the return date. If the client issued a bill or pricing schedule, send that too and we\'ll price it in the format it was issued in.'],
-  ['Can you meet my tender return date?', 'Tell us the date when you send the documents. We confirm within 24 hours whether we can meet it, and the price, before any work starts.']
+  ['Do you price full M&amp;E installations?', 'We price individual packages: electrical, ductwork, lightning protection and steelwork. If you have a full mechanical and electrical tender, send it over and we\'ll say which packages we can take on.'],
+  ['Where do your labour rates come from?', 'Published M&amp;E labour norms, adjusted for access, working height and the type of building. If you have your own gang rates and outputs, send them and we\'ll price on those.'],
+  ['Can I just have the quantities?', 'Yes. A lot of contractors prefer to put their own rates and supplier prices against the takeoff. A takeoff on its own costs less than a fully priced package.'],
+  ['What do you need from me?', 'The tender drawings (layouts, schematics and schedules), the specification and the return date. If the main contractor has issued a pricing schedule or bill, send that as well and we\'ll price it in their format.'],
+  ['Can you hit my return date?', 'Tell us the date when you send the documents. We\'ll confirm within 24 hours, along with the fee, before any work starts.']
 ];
 
 function packagesServicePage() {
-  const desc = 'Takeoffs and pricing for electrical, ductwork, lightning protection and steelwork subcontract packages. Measured from the tender drawings, with labour built up from published norms and an editable Excel schedule.';
+  const desc = 'Takeoffs and priced schedules for electrical, ductwork, lightning protection and steelwork subcontractors, measured from your tender drawings and returned as an editable Excel file.';
   return pageShell({
     path: '/services/specialist-packages',
     title: 'M&amp;E and Specialist Package Estimating UK | TheGo2Guys',
     desc: desc,
     schema: [serviceSchema('M&E and specialist package estimating', desc, '/services/specialist-packages'), faqSchema(PACKAGES_FAQ)],
-    body: pageHero([['/', 'Home'], ['/#services', 'Services'], ['/services/specialist-packages', 'M&amp;E and specialist packages']], 'M&amp;E and specialist packages', 'Takeoffs and priced schedules for subcontractors pricing electrical, ductwork, lightning protection and steelwork packages. Measured from the tender drawings and returned before your deadline.') +
+    body: pageHero([['/', 'Home'], ['/#services', 'Services'], ['/services/specialist-packages', 'M&amp;E and specialist packages']], 'M&amp;E and specialist packages', 'Measured and priced packages for electrical, ductwork, lightning protection and steelwork subcontractors, worked up from your tender drawings.') +
       `<section class="plain alt"><div class="container prose">
-<h2>Who it's for</h2>
-<p>Specialist subcontractors who get sent tenders by main contractors and don't have an estimator in-house. When a tender comes in and nobody has time to measure it, send it to us and we return a measured, priced schedule you can check, adjust and submit under your own name.</p>
+<h2>Pricing for specialist subcontractors</h2>
+<p>Most of the specialist contractors we speak to price their own tenders, usually in the evening after a day on site. On a small job that works. On a full set of layouts with a two-week return, items get missed. We measure the package from the drawings, build up the rates and send it back as a schedule you can check line by line before it goes out under your name.</p>
 <h2>Packages we price</h2>
-<div class="table-wrap"><table class="data-table"><thead><tr><th>Package</th><th>Typically measured</th></tr></thead><tbody>
-<tr><th>Electrical</th><td>Containment (tray, basket, trunking and conduit), cabling by type and size, distribution boards, small power, lighting and controls, fire alarm and testing</td></tr>
-<tr><th>Ductwork</th><td>Rectangular and circular duct by size and length, bends, tees and transitions, dampers, grilles and diffusers, insulation, supports and hangers</td></tr>
-<tr><th>Lightning protection and earthing</th><td>Air terminations and roof conductors, down conductors, test clamps, earth rods and electrodes, bonding, testing and certification</td></tr>
-<tr><th>Steelwork and fabrication</th><td>Secondary steel, frames, brackets and supports, fixings, finishes, and install by weight or by number</td></tr>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Package</th><th>What we measure</th></tr></thead><tbody>
+<tr><th>Electrical</th><td>Containment (tray, basket, trunking, conduit), cabling by type and size, distribution boards, small power, lighting and controls, fire alarm, testing</td></tr>
+<tr><th>Ductwork</th><td>Rectangular and circular duct by size, bends, tees and transitions, fire and volume control dampers, grilles and diffusers, insulation, supports</td></tr>
+<tr><th>Lightning protection and earthing</th><td>Air terminals, roof and down conductors, test clamps, earth rods, bonding, test and certification</td></tr>
+<tr><th>Steelwork and fabrication</th><td>Secondary steel, frames, brackets and supports, fixings, finishes, installation</td></tr>
 </tbody></table></div>
-<p>Steelwork pricing comes from years spent estimating telecoms infrastructure: headframes, monopoles, stand-off brackets and the steel that carries them.</p>
-<h2>Recent packages</h2>
-<ul><li><strong>Lightning protection, school, London.</strong> The full lightning protection package, measured from the roof and elevation drawings.</li><li><strong>Ductwork, hospital tender.</strong> A ductwork takeoff for a healthcare project, priced in stages to suit the tender programme.</li><li><strong>Electrical package, Scotland.</strong> A priced electrical estimate for an electrical contractor tendering to a main contractor.</li></ul>
-<p>Client names and project details are kept confidential.</p>
-<h2>How the price is built up</h2>
-<p>Every item is measured from the drawings and schedules, then priced from its parts: labour hours from published M&amp;E labour norms, materials at current supplier prices with waste allowed, and access equipment and plant where the job needs them. The rates aren't round numbers, and you can see exactly what is in each one and change it if your costs are different.</p>
-<p>Preliminaries, testing and commissioning, and overheads and profit are shown separately, so you set your own margin.</p>
-<h2>What you get back</h2>
-<ul><li>An editable Excel schedule with quantities, built-up rates and totals, or the client's bill priced in the format it was issued in.</li><li>A PDF summary with the drawing numbers and revisions it was priced from.</li><li>Everything the drawings or specification leave unclear, listed as qualifications for your tender return.</li><li>Provisional sums and exclusions set out separately.</li></ul>
-<h2>Price and turnaround</h2>
-<p>Specialist packages vary too much for a fixed list price, so each one is quoted once we've seen the documents. You get a fixed fee within 24 hours, and it is agreed before any work starts. Tell us the tender return date when you send the drawings and we confirm we can meet it. For a large tender, we can do the first section as a trial before you commit to the full package.</p>
+<p>Our steelwork rates come from pricing telecoms infrastructure since 2022: headframes, monopoles, stand-off brackets and the secondary steel that goes with them.</p>
+<h2>Recent work</h2>
+<ul><li>Lightning protection to a school in London, measured from the roof plans and elevations.</li><li>Ductwork for a hospital tender, measured in phases to suit the tender programme.</li><li>An electrical package for a contractor in Scotland.</li></ul>
+<h2>How the rates are built up</h2>
+<p>Labour comes from published M&amp;E labour norms, adjusted for access, working height and the type of building. Materials are priced at current supplier rates with waste added, and access equipment goes in where the job needs it. Preliminaries, testing and commissioning, and overheads and profit sit at the bottom as separate lines, so the margin is your call.</p>
+<h2>What you get</h2>
+<ul><li>An editable Excel schedule with quantities, rates and totals, or the main contractor's schedule priced in their format.</li><li>A PDF summary listing the drawings and revisions priced.</li><li>A list of queries and qualifications for your tender return.</li><li>Provisional sums and exclusions shown separately.</li></ul>
+<h2>Fees and turnaround</h2>
+<p>We quote each package once we've seen the drawings, and come back within 24 hours with a fixed fee and confirmation that we can meet your return date. On larger tenders we can price the first section on its own, so you can see the standard of work before committing to the rest.</p>
 <h2>Common questions</h2>${faqHtml(PACKAGES_FAQ)}
-</div></section>` + serviceCta('Got a package to price?', 'Send the drawings, specification and return date. We reply within 24 hours with a fixed fee and confirm the deadline.', 'Specialist Package'),
+</div></section>` + serviceCta('Got a package to price?', 'Send the drawings, specification and return date. We\'ll come back within 24 hours with a fixed fee.', 'Specialist Package'),
     script: ''
   });
 }
