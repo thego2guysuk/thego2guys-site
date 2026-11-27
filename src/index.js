@@ -1028,7 +1028,7 @@ function packagesServicePage() {
 <tr><th>Lightning protection and earthing</th><td>Air terminals, roof and down conductors, test clamps, earth rods, bonding, test and certification</td></tr>
 <tr><th>Steelwork and fabrication</th><td>Secondary steel, frames, brackets and supports, fixings, finishes, installation</td></tr>
 </tbody></table></div>
-<p>Our steelwork rates come from pricing telecoms infrastructure since 2022: headframes, monopoles, stand-off brackets and the secondary steel that goes with them.</p>
+<p>Steelwork pricing draws on our infrastructure work, including telecoms structures, support frames and secondary steel.</p>
 <h2>Recent work</h2>
 <ul><li>Lightning protection to a school in London, measured from the roof plans and elevations.</li><li>Ductwork for a hospital tender, measured in phases to suit the tender programme.</li><li>An electrical package for a contractor in Scotland.</li></ul>
 <h2>How the rates are built up</h2>
@@ -1051,9 +1051,9 @@ function aboutPage() {
     desc: 'TheGo2Guys is a construction estimating service based in Liverpool, pricing work for builders, homeowners and specialist subcontractors across the UK.',
     body: pageHero([['/', 'Home'], ['/about', 'About']], 'About TheGo2Guys', 'A construction estimating service based in Liverpool, measuring and pricing work for builders, specialist subcontractors and homeowners across the UK.') +
       `<section class="plain alt"><div class="container prose">
-<h2>Background</h2>
-<p>Our estimating comes from the contractor side. Since 2022 that has meant pricing live tenders for a national infrastructure contractor: build tenders, rate cards and drawing reviews for telecoms sites, including the steelwork that goes with them. Alongside that sits residential and house-building work, which is where TheGo2Guys started.</p>
-<p>Pricing work you are going to build, or that a client is going to hold you to, is different from producing a figure for a report. Every estimate we send is put together the way a contractor&rsquo;s own estimator would do it.</p>
+<h2>Experience</h2>
+<p>We bring 10 years of estimating experience on UK projects across infrastructure, M&amp;E and housebuilding, pricing work from the contractor&rsquo;s side: main contract tenders, specialist subcontract packages and new homes.</p>
+<p>Every estimate is prepared the way a contractor&rsquo;s own estimator would prepare it: measured from the drawings, priced from first principles and set out so each figure can be checked.</p>
 <h2>How we price</h2>
 <ul><li>Quantities are measured from the drawings, with every opening counted and the workings kept.</li><li>Rates are built up from labour, materials and plant at current prices for the region, so you can see what is in each one.</li><li>We price what is on the drawings. Anything unclear is listed as a query or qualification, not guessed.</li><li>Preliminaries and overheads and profit are shown on their own lines, so the margin stays your decision.</li></ul>
 <h2>Who we work with</h2>
