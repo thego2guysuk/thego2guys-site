@@ -390,6 +390,7 @@ function routeExtraPage(path) {
     '/guides/house-extension-cost-liverpool': extensionLiverpoolPage,
     '/guides/loft-conversion-cost-liverpool': loftLiverpoolPage,
     '/guides/house-extension-cost-st-helens': extensionStHelensPage,
+    '/guides/house-extension-cost-sefton-southport': extensionSeftonPage,
     '/about': aboutPage,
     '/resources': resourcesPage,
     '/refer': referPage,
@@ -406,7 +407,7 @@ function routeExtraPage(path) {
 }
 
 function sitemapXml() {
-  const paths = ['/', '/calculators', '/calculators/bricks-and-blocks', '/calculators/concrete', '/calculators/plaster', '/calculators/roof-tiles', '/calculators/footings', '/calculators/screed', '/services/material-takeoffs', '/services/bills-of-quantities', '/services/tender-pricing', '/services/specialist-packages', '/guides', '/guides/house-extension-cost', '/guides/loft-conversion-cost', '/guides/extension-preliminaries', '/guides/garage-conversion-cost', '/guides/house-extension-cost-liverpool', '/guides/loft-conversion-cost-liverpool', '/guides/house-extension-cost-st-helens', '/insights', '/insights/steel-prices-mortgage-rates-october-2026', '/insights/construction-jobs-plan-builder-shortages-october-2026', '/insights/autumn-budget-2026-extensions-small-builders', '/about', '/resources', '/refer', '/quote', '/terms', '/privacy'];
+  const paths = ['/', '/calculators', '/calculators/bricks-and-blocks', '/calculators/concrete', '/calculators/plaster', '/calculators/roof-tiles', '/calculators/footings', '/calculators/screed', '/services/material-takeoffs', '/services/bills-of-quantities', '/services/tender-pricing', '/services/specialist-packages', '/guides', '/guides/house-extension-cost', '/guides/loft-conversion-cost', '/guides/extension-preliminaries', '/guides/garage-conversion-cost', '/guides/house-extension-cost-liverpool', '/guides/loft-conversion-cost-liverpool', '/guides/house-extension-cost-st-helens', '/guides/house-extension-cost-sefton-southport', '/insights', '/insights/steel-prices-mortgage-rates-october-2026', '/insights/construction-jobs-plan-builder-shortages-october-2026', '/insights/autumn-budget-2026-extensions-small-builders', '/about', '/resources', '/refer', '/quote', '/terms', '/privacy'];
   return '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
     paths.map(function (p) { return '  <url><loc>' + SITE + (p === '/' ? '/' : p) + '</loc></url>'; }).join('\n') + '\n</urlset>\n';
 }
@@ -1158,6 +1159,7 @@ function guidesIndexPage() {
 <a class="card" href="/guides/house-extension-cost-liverpool"><h3>House extension cost in Liverpool (2026)</h3><p>Cost per m² for extensions in Liverpool and Merseyside, with a real Merseyside estimate broken down.</p><span class="card-go">Read the guide &rarr;</span></a>
 <a class="card" href="/guides/loft-conversion-cost-liverpool"><h3>Loft conversion cost in Liverpool (2026)</h3><p>Velux, dormer, hip-to-gable and mansard prices for Liverpool and the North West.</p><span class="card-go">Read the guide &rarr;</span></a>
 <a class="card" href="/guides/house-extension-cost-st-helens"><h3>House extension cost in St Helens (2026)</h3><p>Cost per m², an all-in 20 m² budget, St Helens Council fees, conservation areas and coalfield ground.</p><span class="card-go">Read the guide &rarr;</span></a>
+<a class="card" href="/guides/house-extension-cost-sefton-southport"><h3>House extension cost in Sefton and Southport (2026)</h3><p>Cost per m², an all-in 20 m² budget, Sefton Council fees, conservation areas and building on sand.</p><span class="card-go">Read the guide &rarr;</span></a>
 <a class="card" href="/guides/extension-preliminaries"><h3>Pricing preliminaries on an extension</h3><p>For builders: what goes in preliminaries, a real 2026 breakdown, and the items most often left out of a quote.</p><span class="card-go">Read the guide &rarr;</span></a>
 </div></div></section>` + ctaBand('Pricing a job?', 'Send the drawings over and we\'ll come back within 24 hours with a fixed fee and a delivery date.')
   });
@@ -1658,6 +1660,112 @@ function extensionStHelensPage() {
 <p>Clay soil near trees can also mean deeper foundations. The trial hole will usually show this.</p>
 <h2>Common questions</h2>${faqHtml(EXT_STH_FAQ)}
 </div></section>` + ctaBand('Got drawings for a St Helens extension?', 'Send them to us and we will send back an itemised estimate at current Merseyside rates, to budget with or check builders&rsquo; quotes against. From £150, in 3&ndash;5 working days. We are based in Liverpool.')
+  });
+}
+
+// --------------------- Local guide: Sefton and Southport extensions ----------
+// Same North of England rates as the Liverpool guide (national x 0.92), rounded to £50/m²; 20 m² examples worked from the rounded rates.
+// Sefton building control: Schedule 2 (domestic extensions and alterations), effective 1 April 2026, incl. VAT. Full plans = plan charge + inspection charge.
+// Planning fees: national, rising from 8 December 2026 (householder £575, larger home extension prior approval £310). A further 3.5% rise is due 1 April 2027: update this page then.
+const EXT_SEFTON_FAQ = [
+  ['How much does a single-storey extension cost in Southport in 2026?', 'About £2,000 to £2,650 per m² plus VAT for a standard finish, and more per m² on a small extension. For a 20 m² rear extension, budget £56,000 to £83,000 all in, with contingency, fees, surveys and VAT. A Victorian house in a conservation area can go above that, because the council will expect the materials to match.'],
+  ['How much is building control for an extension in Sefton?', 'For a single-storey extension under 40 m², Sefton Council charges £714 including VAT on a full plans application: £306 when you submit and £408 for the inspections. A building notice costs the same, but can&rsquo;t be used if you are building within 3m of a public sewer.'],
+  ['Do I need planning permission for an extension in Sefton?', 'Many single-storey rear extensions are permitted development: up to 3m deep on a terrace or semi, 4m on a detached house, and no more than 4m high. Going deeper needs a larger home extension prior approval or a householder planning application. In a conservation area, prior approval isn&rsquo;t available, and side extensions and rear extensions of more than one storey need planning.'],
+  ['Is building on sand in Southport or Formby a problem?', 'Not usually, but it can cost more. Loose sand and a high water table make foundation trenches harder to dig and keep open. A trial hole before you get quotes shows what you are dealing with.'],
+  ['How long does an extension take?', 'Usually 8&ndash;14 weeks on site for a single-storey rear extension. From first drawings to a builder starting, allow 4&ndash;6 months if the extension is permitted development or goes through prior approval, and 5&ndash;8 months if it needs a planning application and party wall notices.']
+];
+
+function extensionSeftonPage() {
+  return pageShell({
+    path: '/guides/house-extension-cost-sefton-southport',
+    title: 'House Extension Cost Southport &amp; Sefton 2026 | TheGo2Guys',
+    desc: 'What a house extension costs in Southport, Crosby, Formby, Bootle and Maghull in 2026: cost per m², an all-in 20 m² budget, Sefton Council fees, conservation areas and building on sand.',
+    schema: faqSchema(EXT_SEFTON_FAQ),
+    body: pageHero([['/', 'Home'], ['/guides', 'Cost guides'], ['/guides/house-extension-cost-sefton-southport', 'Extension cost Sefton']], 'House extension cost in Sefton and Southport (2026)', 'A single-storey extension in Sefton with a standard finish costs £2,000&ndash;£2,650 per m² to build in 2026, before VAT. We use the same rates in Southport, Formby, Crosby, Bootle and Maghull; the house and the ground move the price more than the town does. A 20&nbsp;m² rear extension comes to roughly £40,000&ndash;£53,000 for the build, and £56,000&ndash;£83,000 once contingency, fees, surveys and VAT are added. A smaller one, around 15&nbsp;m², is nearer £2,850 per m².') +
+      `<section class="plain alt"><div class="container prose">
+<p class="pub-date">Published 28 November 2026</p>
+<h2>Extension cost per m² in Sefton</h2>
+<p>These are our own 2026 rates per m² of new internal floor area, before VAT, and they include the builder&rsquo;s preliminaries (scaffold, skips, site set-up and supervision), overheads and profit. Each rate covers the extension up to a plastered room ready for decorating: foundations, walls, roof, steelwork, windows and doors, the connection to the existing house, electrics, heating and plastering. We take our <a href="/guides/house-extension-cost">UK figures</a>, knock off about 8% for the North of England, and use the result across Merseyside.</p>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Extension</th><th class="num">Cost per m²</th><th class="num">20 m² example</th></tr></thead><tbody>
+<tr><th>Single-storey, basic finish</th><td class="num">£1,650&ndash;£2,000</td><td class="num">£33,000&ndash;£40,000</td></tr>
+<tr><th>Single-storey, standard finish</th><td class="num">£2,000&ndash;£2,650</td><td class="num">£40,000&ndash;£53,000</td></tr>
+<tr><th>Single-storey, high finish</th><td class="num">£2,650&ndash;£3,200</td><td class="num">£53,000&ndash;£64,000</td></tr>
+<tr><th>Double-storey, standard finish</th><td class="num">£1,650&ndash;£2,500</td><td class="num">20 m² footprint, 40 m² of floor: £66,000&ndash;£100,000</td></tr>
+</tbody></table></div>
+<p>Basic means facing brick to match, standard double glazing and a simple flat or pitched roof. Standard adds a pair of French or sliding doors and better finishes. High means large sliders, a roof lantern, underfloor heating and a more involved roof. The bottom of each band assumes an easy site with side access, firm ground and the drains out of the way. Double-storey is cheaper per m² because one set of foundations and one roof serve two floors, but the total is higher.</p>
+<p>Small extensions cost more per m², because scaffolding, foundations, steelwork and the connection to the house cost much the same whatever the size. Our <a href="/sample-estimate.pdf" target="_blank" rel="noopener">sample estimate</a> for a 16.28&nbsp;m² single-storey rear extension in Merseyside, priced line by line on a standard finish, came to £46,451 before VAT, or £2,853 per m². On a 15&nbsp;m² extension, budget around £43,000 before VAT for the build, not the bottom of the table.</p>
+<h2>A 20 m² Sefton extension, all in</h2>
+<p>A budget for a 20&nbsp;m² single-storey rear extension with a standard finish, built by a VAT-registered builder. Fee lines include VAT where it is charged.</p>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Item</th><th class="num">Typical cost</th></tr></thead><tbody>
+<tr><th>Build cost, ex VAT</th><td class="num">£40,000&ndash;£53,000</td></tr>
+<tr><th>Contingency, 10&ndash;15%</th><td class="num">£4,000&ndash;£8,000</td></tr>
+<tr><th>VAT at 20% on build and contingency</th><td class="num">£8,800&ndash;£12,200</td></tr>
+<tr><th>Drawings (architect or architectural technologist)</th><td class="num">£1,500&ndash;£3,500</td></tr>
+<tr><th>Structural engineer&rsquo;s calculations</th><td class="num">£500&ndash;£1,200</td></tr>
+<tr><th>Sefton building control, full plans (single-storey, under 40 m²)</th><td class="num">£714</td></tr>
+<tr><th>Prior approval or householder planning application</th><td class="num">£310&ndash;£575</td></tr>
+<tr><th>CCTV drain survey and trial hole (a small dig to see the existing foundations)</th><td class="num">£450&ndash;£950</td></tr>
+<tr><th>Party wall surveyor, per neighbour, if needed</th><td class="num">£0&ndash;£3,000</td></tr>
+<tr><th>Total</th><td class="num"><strong>roughly £56,000&ndash;£83,000</strong></td></tr>
+</tbody></table></div>
+<p>The planning line is £0 if the extension is permitted development and you don&rsquo;t want a lawful development certificate. The party wall line is £0 if the neighbour agrees in writing; on a mid-terrace with notices to both sides, it can be double the figure shown. Not in the total: fitting out (kitchen, floors, decorating), taking down an old conservatory, a build-over agreement or manhole move if a sewer is in the way, energy calculations if the glazing is large (roughly £150&ndash;£400), and extra foundation work on soft or wet ground (see below).</p>
+<p>Builders whose taxable turnover is under £90,000 over any 12 months don&rsquo;t have to register for VAT, which is why some quotes look much cheaper. They still pay VAT on materials and pass it on, so the real saving is mostly the VAT on labour, not the full 20%. If a quote on a £50,000 job has no VAT, ask whether the builder is registered.</p>
+<h2>Sefton Council fees</h2>
+<h3>Building control</h3>
+<p>Sefton&rsquo;s domestic charges (<a href="https://sefton.gov.uk/media/xqibwod5/schedule-2-domestic-extensions-and-alterations-ondensed-version.pdf" rel="noopener">Schedule 2</a>) took effect on 1 April 2026. Full plans is paid in two parts: a plan charge when you submit, and an inspection charge that is usually invoiced once work starts. Figures include VAT.</p>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Work</th><th class="num">Full plans (plan + inspection)</th><th class="num">Building notice</th></tr></thead><tbody>
+<tr><th>Single-storey extension, under 40 m²</th><td class="num">£714 (£306 + £408)</td><td class="num">£714</td></tr>
+<tr><th>Single-storey extension, 40&ndash;100 m²</th><td class="num">£1,071 (£459 + £612)</td><td class="num">£1,071</td></tr>
+<tr><th>Two-storey extension, under 40 m²</th><td class="num">£918 (£408 + £510)</td><td class="num">£918</td></tr>
+<tr><th>Two-storey extension, 40&ndash;100 m²</th><td class="num">£1,071 (£459 + £612)</td><td class="num">£870.60</td></tr>
+<tr><th>Loft conversion with dormers, under 40 m²</th><td class="num">£912 (£408 + £504)</td><td class="num">£912</td></tr>
+</tbody></table></div>
+<p>Sefton has one band for every single-storey extension under 40&nbsp;m², so an 8&nbsp;m² kitchen extension pays the same £714 as a 35&nbsp;m² one. A two-storey extension with a 20&nbsp;m² footprint has 40&nbsp;m² of floor and falls in the 40&ndash;100&nbsp;m² band; confirm the band with the council if you are close to the line.</p>
+<p>For most extensions the building notice costs the same as full plans, but it gives you no approved drawings before work starts. It also can&rsquo;t be used if you are building over or within 3m of a public sewer shown on United Utilities&rsquo; map, which rules it out behind most terraces. On an extension with steelwork, full plans is the usual route.</p>
+<p>Approval for work already done without consent (regularisation) costs £773.50 for a single-storey extension under 40&nbsp;m², with no VAT. Replacement windows and doors elsewhere in the house, done at the same time as the extension, are charged at half rate. If the electrician isn&rsquo;t registered with a Part P scheme and can&rsquo;t provide a BS 7671 certificate, the council adds £305 plus VAT to inspect the electrics. If you are doing more than one piece of work, such as an extension and a loft, ask for a combined quote on building@sefton.gov.uk or 0345 140 0845. You can use a registered building control approver (a private inspector) instead; their fees are set privately.</p>
+<h3>Planning</h3>
+<p>Planning fees in England are set nationally, and they <a href="https://assets.publishing.service.gov.uk/media/6af1a985bdaa07fdf9470e18/Planning_fees_national_increases_from_8_December_2026.pdf" rel="noopener">rise from 8 December 2026</a>. A householder application goes from £548 to £575, and a larger home extension prior approval from £249 to £310. A lawful development certificate for a proposed extension is half the householder fee, so about £287 from 8 December. If your drawings are ready, an application the council receives before 8 December pays the old fee. Fees are due to rise again by 3.5% on 1 April 2027.</p>
+<h2>Will 20 m² fit under permitted development?</h2>
+<p>Often not. Permitted development allows a single-storey rear extension up to 3m deep on a terraced or semi-detached house and 4m on a detached house, no more than 4m high, and no more than 3m to the eaves within 2m of a boundary. Depth is measured from the original rear wall, so an earlier extension counts against it. Materials have to match the house, and extensions and outbuildings can&rsquo;t cover more than half the land around the original house. On a semi around 5.5&ndash;6m wide, 3m deep gives roughly 13&ndash;15&nbsp;m² inside once the walls are taken off.</p>
+<p>Going to 3.5&ndash;4m deep needs either a larger home extension prior approval (up to 6m on a semi or terrace, 8m detached), where the council consults the neighbours and has 42 days to decide, or a householder planning application. Prior approval isn&rsquo;t available in a conservation area.</p>
+<h2>Conservation areas and Article 4 directions</h2>
+<p>Sefton has <a href="https://sefton.gov.uk/planning-building-control/conservation-and-heritage/conservation-areas/" rel="noopener">25 conservation areas</a>. Nine are in Southport and Birkdale: Lord Street, Churchtown, North Meols, the Promenade, Hesketh Road, Birkdale Park, Birkdale Village, Gloucester Road and West Birkdale. Others include Blundellsands Park and Little Crosby to the south, Green Lane in Freshfield and Derby Park in Bootle. Boundaries are on the council&rsquo;s SIMON map, under the Conservation and Heritage layer.</p>
+<p>In a conservation area, side extensions and rear extensions of more than one storey need planning permission even where they would be permitted development elsewhere. The council publishes an advisory leaflet for most of its conservation areas, setting out what it expects on materials and design. Your designer should work from the leaflet for your area. Work to a tree in a conservation area needs six weeks&rsquo; written notice to the council.</p>
+<p>Two Article 4 directions remove further permitted development rights: <a href="https://sefton.gov.uk/planning-building-control/planning-policy-including-local-plan-and-neighbourhood-planning/article-4-directions/article-4-direction-for-conservation-areas" rel="noopener">Moor Park in Crosby</a> (confirmed July 2010) and Sefton Village (from 1983). If the house is in either, read the direction before paying for drawings.</p>
+<h2>Sefton house types and what they mean for cost</h2>
+<h3>Terraces in Bootle, Litherland, Seaforth and Waterloo</h3>
+<p>Late-Victorian and Edwardian terraces with narrow plots, shared drains, back entries and no side access. If the entry is too narrow for a dumper, materials and spoil go down the alley by barrow or through the house, which can add a week or more of labour. The Party Wall Act comes in for a new wall on the boundary, a steel bearing on the party wall, or foundations within 3m of a neighbour&rsquo;s that go deeper than theirs (or within 6m where the dig cuts below a 45° line from their foundations). On a terrace that usually means notices to both neighbours.</p>
+<p>On a narrow terrace, 3m deep may give only 10&ndash;12&nbsp;m², so side-return and wrap-around extensions are common. A single-storey side-return infill no wider than half the original house can be permitted development outside a conservation area. A wrap-around needs a householder planning application.</p>
+<h3>Victorian and Edwardian houses in Southport, Birkdale and Crosby</h3>
+<p>Bigger houses, often with a rear outrigger, solid walls and high ceilings. Matching the brick and the roof pitch takes longer than on a 1930s semi, and many of these houses are in conservation areas, where the council will expect matching materials.</p>
+<h3>Post-war and newer semis and detached houses</h3>
+<p>Formby, Ainsdale, Maghull, Aintree and much of Crosby. Side access and room for a full-width rear extension are usual, so these are often the simplest to price. On estates built from the 1970s onwards, check whether the original planning permission removed permitted development rights.</p>
+<h2>Ground, water and drains</h2>
+<p>The Sefton coast from Crosby up to Southport is a dune coast, and much of the housing on that side of the borough is built on wind-blown sand. In places there can be peat beneath; it shows on the beach at Formby. Dense, dry sand is good to build on, but loose sand and a high water table make trench sides collapse, which can mean pumping, trench support or a deeper concrete fill. Inland, clay near trees can mean deeper foundations. The trial hole and the structural engineer will tell you which applies; until you have their answer, don&rsquo;t price for the cheapest foundation; leave room for it in the contingency.</p>
+<p>Check the address on the government&rsquo;s long-term flood risk service. Maghull is prone to surface water flooding: on the night of 10 August 2020 heavy rain flooded homes and businesses on Liverpool Road North. A house in a flood risk area may need a higher floor level and flood-resistant materials, which add cost.</p>
+<p>Since October 2011, most shared drains built before then have been public sewers. On most terraces and many semis, that means a build-over agreement with United Utilities if the extension comes within 3m of the sewer.</p>
+<h2>What pushes the price up</h2>
+<ul><li><strong>Opening up the back of the house.</strong> One steel beam and knock-through in a rear wall is usually £3,000&ndash;£6,000 of the build. A side-return infill with a goalpost frame or several steels, often bearing on the party wall, costs more.</li><li><strong>Big glazing.</strong> Large sliders and roof lanterns cost more, and a lot of glass may need calculations to show the extension meets Part L.</li></ul>
+<p>Poor access, soft ground, a sewer in the way and conservation-area materials all add cost too; see the sections above.</p>
+<h2>Extras people forget</h2>
+<ul><li>A new consumer unit if the existing one can&rsquo;t take the extra circuits: usually £500&ndash;£900.</li><li>Moving a boiler, gas meter or soil stack that&rsquo;s in the way.</li><li>Making good inside the house after the knock-through.</li><li>Skip permits and parking suspensions on busy roads.</li></ul>
+<h2>Before you spend anything</h2>
+<ol><li>Measure from the original back wall and check what permitted development allows.</li><li>Check SIMON for conservation areas, Article 4 directions and tree preservation orders.</li><li>Check the flood risk, and find out where the drains and manholes run. A CCTV survey settles it.</li><li>Get a budget estimate from a sketch and measurements before paying for full drawings, so the design fits your budget.</li><li>Get drawings and structural calculations done.</li><li>Apply for prior approval, planning or a lawful development certificate, as needed.</li><li>Make a full plans application to building control.</li><li>Serve party wall notices at least one month ahead for a new wall on the boundary or nearby excavation, and two months for work to the existing party wall, such as a steel bearing on it.</li><li>Get itemised quotes from two or three builders against the same drawings.</li></ol>
+<p>For Liverpool prices, see our <a href="/guides/house-extension-cost-liverpool">Liverpool extension cost guide</a>.</p>
+<h2>Common questions</h2>${faqHtml(EXT_SEFTON_FAQ)}
+<h2>Sources</h2>
+<ul>
+<li><a href="https://sefton.gov.uk/media/xqibwod5/schedule-2-domestic-extensions-and-alterations-ondensed-version.pdf" rel="noopener">Sefton Council, Building regulation charges, Schedule 2: domestic extensions and alterations, from 1 April 2026</a></li>
+<li><a href="https://www.sefton.gov.uk/planning-building-control/building-control/making-a-building-regulations-application" rel="noopener">Sefton Council, Making a building regulations application</a></li>
+<li><a href="https://assets.publishing.service.gov.uk/media/6af1a985bdaa07fdf9470e18/Planning_fees_national_increases_from_8_December_2026.pdf" rel="noopener">MHCLG, Planning fees: national increases from 8 December 2026</a></li>
+<li><a href="https://assets.publishing.service.gov.uk/media/69a073bb07d7bff3604d6df6/Planning_fees_-_annual_indexation_from_1_April_2026.pdf" rel="noopener">MHCLG, Planning fees: annual indexation from 1 April 2026</a></li>
+<li><a href="https://sefton.gov.uk/planning-building-control/conservation-and-heritage/conservation-areas/" rel="noopener">Sefton Council, Conservation areas</a> and <a href="https://www.sefton.gov.uk/planning-building-control/conservation-and-heritage/conservation-and-heritage-faqs" rel="noopener">conservation and heritage FAQs</a></li>
+<li><a href="https://sefton.gov.uk/planning-building-control/planning-policy-including-local-plan-and-neighbourhood-planning/article-4-directions/article-4-direction-for-conservation-areas" rel="noopener">Sefton Council, Article 4 directions for conservation areas</a></li>
+<li><a href="https://sefton.gov.uk/planning-building-control/apply-for-permission/planning-constraints/" rel="noopener">Sefton Council, Planning constraints</a></li>
+<li><a href="https://www.sefton.gov.uk/media/2415/en22d-sefton-coast-final.pdf" rel="noopener">North West Shoreline Management Plan 2, Appendix C: Sefton Coast</a></li>
+<li><a href="https://www.sefton.gov.uk/media/ezbn10i5/flood-investigation-report-2020-maghull.pdf" rel="noopener">Sefton Council, Flood investigation report, Liverpool Road North, Maghull, August 2020</a></li>
+</ul>
+</div></section>` + ctaBand('Got drawings for a Sefton extension?', 'Send them over and we will price the job line by line at current Merseyside rates. Homeowners use our estimates to budget and to compare builders&rsquo; quotes; builders use them to tender. From £150, in 3&ndash;5 working days. We are based in Liverpool.')
   });
 }
 
