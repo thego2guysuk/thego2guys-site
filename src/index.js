@@ -395,6 +395,7 @@ function routeExtraPage(path) {
     '/refer': referPage,
     '/quote': quotePage,
     '/insights': insightsIndexPage,
+    '/insights/construction-output-q3-2026-home-improvement': outputQ3InsightPage,
     '/insights/autumn-budget-2026-extensions-small-builders': budgetInsightPage,
     '/insights/steel-prices-mortgage-rates-october-2026': steelMortgageInsightPage,
     '/insights/construction-jobs-plan-builder-shortages-october-2026': jobsPlanInsightPage
@@ -406,7 +407,7 @@ function routeExtraPage(path) {
 }
 
 function sitemapXml() {
-  const paths = ['/', '/calculators', '/calculators/bricks-and-blocks', '/calculators/concrete', '/calculators/plaster', '/calculators/roof-tiles', '/calculators/footings', '/calculators/screed', '/services/material-takeoffs', '/services/bills-of-quantities', '/services/tender-pricing', '/services/specialist-packages', '/guides', '/guides/house-extension-cost', '/guides/loft-conversion-cost', '/guides/extension-preliminaries', '/guides/garage-conversion-cost', '/guides/house-extension-cost-liverpool', '/guides/loft-conversion-cost-liverpool', '/guides/house-extension-cost-st-helens', '/insights', '/insights/steel-prices-mortgage-rates-october-2026', '/insights/construction-jobs-plan-builder-shortages-october-2026', '/insights/autumn-budget-2026-extensions-small-builders', '/about', '/resources', '/refer', '/quote', '/terms', '/privacy'];
+  const paths = ['/', '/calculators', '/calculators/bricks-and-blocks', '/calculators/concrete', '/calculators/plaster', '/calculators/roof-tiles', '/calculators/footings', '/calculators/screed', '/services/material-takeoffs', '/services/bills-of-quantities', '/services/tender-pricing', '/services/specialist-packages', '/guides', '/guides/house-extension-cost', '/guides/loft-conversion-cost', '/guides/extension-preliminaries', '/guides/garage-conversion-cost', '/guides/house-extension-cost-liverpool', '/guides/loft-conversion-cost-liverpool', '/guides/house-extension-cost-st-helens', '/insights', '/insights/steel-prices-mortgage-rates-october-2026', '/insights/construction-jobs-plan-builder-shortages-october-2026', '/insights/autumn-budget-2026-extensions-small-builders', '/about', '/resources', '/insights/construction-output-q3-2026-home-improvement', '/refer', '/quote', '/terms', '/privacy'];
   return '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
     paths.map(function (p) { return '  <url><loc>' + SITE + (p === '/' ? '/' : p) + '</loc></url>'; }).join('\n') + '\n</urlset>\n';
 }
@@ -1663,6 +1664,7 @@ function extensionStHelensPage() {
 
 // Newest first. Each insight: [path, date label, title, summary]
 const INSIGHTS = [
+  ['/insights/construction-output-q3-2026-home-improvement', '16 November 2026', 'Fewer new homes, steady home improvement: protecting your extension budget this winter', 'Building work fell 0.7% in the third quarter while repair and maintenance grew, and builders make up 17% of insolvencies. What it means for pricing and paying for an extension.'],
   ['/insights/autumn-budget-2026-extensions-small-builders', '31 October 2026', 'Autumn Budget 2026: what it means for extensions and small builders', 'VAT stays at 20%, the National Living Wage rises to &pound;13.21 and major Building Regulations changes are paused. What it means for an extension price and for small firms.'],
   ['/insights/construction-jobs-plan-builder-shortages-october-2026', '25 October 2026', 'Builder shortages and the Construction Jobs Plan: what changes for extensions', 'The new jobs plan, the general builder apprenticeship and the &pound;2,000 hiring payment, and how to plan an extension around the shortage of electricians and other trades.'],
   ['/insights/steel-prices-mortgage-rates-october-2026', '18 October 2026', 'Structural steel up 21%, five-year fixes at 6%: pricing an extension this autumn', 'August&rsquo;s materials figures, the new steel import duty and dearer mortgages, and what homeowners and builders should do about them.']
@@ -1867,6 +1869,79 @@ function budgetInsightPage() {
 <li><a href="https://www.bankofengland.co.uk/monetary-policy/upcoming-mpc-dates" rel="noopener">Bank of England, Upcoming MPC dates</a></li>
 </ul>
 </div></section>` + ctaBand('Want to check a quote against current rates?', 'Send your drawings and every item is priced at current North West rates, with labour and materials on their own lines. From &pound;150 for a single-storey extension, in 3&ndash;5 working days.')
+  });
+}
+
+function outputQ3InsightPage() {
+  const path = '/insights/construction-output-q3-2026-home-improvement';
+  const title = 'Fewer new homes, steady home improvement: protecting your extension budget this winter';
+  return pageShell({
+    path: path,
+    title: 'Q3 2026 Building Figures: What They Mean for Extensions',
+    desc: 'Building work fell 0.7% in July to September 2026 while repair and maintenance grew. What the ONS figures and builder insolvencies mean for homeowners planning an extension and for small builders.',
+    schema: { '@context': 'https://schema.org', '@type': 'Article', headline: title, datePublished: '2026-11-16', author: { '@type': 'Organization', name: 'TheGo2Guys' }, publisher: { '@type': 'Organization', name: 'TheGo2Guys' }, mainEntityOfPage: SITE + path },
+    body: pageHero([['/', 'Home'], ['/insights', 'Insights'], [path, 'Q3 2026 building figures']], title, 'Figures published on 12 November show building work in Great Britain fell 0.7% between July and September, pulled down by a 4.7% drop in private house building. Repair and maintenance, the category that includes extensions and home improvements, grew 0.5%. Prices charged for building work were 3.2% higher than a year earlier. Construction also has more company insolvencies than any other industry, so pay a builder in stages rather than up front.') +
+      `<section class="plain"><div class="container prose">
+<p class="pub-date">Published 16 November 2026</p>
+<div class="callout"><p><strong>In short</strong></p><ul><li>New house building is shrinking. Repair and maintenance work is holding up.</li><li>Builders were charging 3.2% more in September than a year before, so a quote from last year is likely to be out of date.</li><li>Construction firms made up 17% of company insolvencies in England and Wales in the year to September. Pay in stages for finished work, not large sums up front.</li></ul></div>
+<h2>What the figures say</h2>
+<p>The Office for National Statistics (ONS) published its construction output figures for July to September 2026 on 12 November. Output is the value of building work actually carried out.</p>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Measure (Great Britain)</th><th>Period compared</th><th class="num">Change</th></tr></thead><tbody>
+<tr><th>All construction output</th><td>Jul&ndash;Sep vs Apr&ndash;Jun 2026</td><td class="num">&minus;0.7%</td></tr>
+<tr><th>New work</th><td>Jul&ndash;Sep vs Apr&ndash;Jun 2026</td><td class="num">&minus;1.6%</td></tr>
+<tr><th>Private new housing</th><td>Jul&ndash;Sep vs Apr&ndash;Jun 2026</td><td class="num">&minus;4.7%</td></tr>
+<tr><th>Repair and maintenance (all sectors)</th><td>Jul&ndash;Sep vs Apr&ndash;Jun 2026</td><td class="num">+0.5%</td></tr>
+<tr><th>New orders</th><td>Jul&ndash;Sep vs Apr&ndash;Jun 2026</td><td class="num">+1.2% (&pound;107m)</td></tr>
+<tr><th>All construction output</th><td>September vs August 2026</td><td class="num">+0.8%</td></tr>
+<tr><th>Construction output prices</th><td>Year to September 2026</td><td class="num">+3.2%</td></tr>
+</tbody></table></div>
+<p>Source: ONS, Construction output in Great Britain: September 2026, published 12 November 2026. Output prices are the prices contractors charge for work, not the cost of materials.</p>
+<p>September was the first monthly rise after four falls in a row, led by infrastructure work, which rose 3.3% in the month. Against the same quarter last year, private new housing output was down 8.6% and public new housing down 32%, according to Dr David Crosthwaite, chief economist at the Building Cost Information Service (BCIS). He said repair and maintenance and new infrastructure work had &ldquo;effectively propped up&rdquo; the industry.</p>
+<p>The ONS repair and maintenance figure covers all sectors, not just homes, so it is a broad signal rather than a measure of extension work on its own. These are national figures; the ONS does not publish a North West breakdown in this release.</p>
+<p>Looking ahead, the construction data firm Glenigan said on 11 November that it expects private housing to recover gradually from 2027. Its economic director, Allan Wilen, said a sustained recovery could come in the second half of 2027.</p>
+<h2>Builders going out of business</h2>
+<p>In the year to September 2026 there were 3,873 construction company insolvencies in England and Wales, 2% fewer than the year before but 20% more than in 2019, according to BCIS&rsquo;s analysis of the Insolvency Service figures. RSM UK calculates that this is 17% of all company insolvencies, more than any other industry. In September alone there were 285, and 168 of those were specialist trade firms such as roofers, electricians and plasterers.</p>
+<p>Kelly Boorman, head of construction at RSM UK, said insolvencies usually dip in September and that &ldquo;we are therefore likely to see a significant hike in October&rdquo;. The October figures are due later in November.</p>
+<p>These figures only count limited companies. Many builders who do domestic work are sole traders, and a sole trader who stops trading does not appear in them. For a homeowner the risk is a builder stopping halfway through a job, with money paid and the work not done.</p>
+</div></section>
+<section class="plain alt"><div class="container prose">
+<h2>If you are planning an extension</h2>
+<p>Winter is usually a quieter time to book an extension, and with less new-build work about you may find builders able to start sooner. Prices are not falling, though. Builders&rsquo; prices are 3.2% up on a year ago, and materials such as structural steel and drainage have risen faster (see our <a href="/insights/steel-prices-mortgage-rates-october-2026">steel and materials insight</a>). If your drawings and approvals are ready, waiting is unlikely to save you money. Forecasters expect house building to pick up in the second half of 2027, and builders will be busier then.</p>
+<p>A builder short of work may price low to win the job, then struggle to finish it. Compare quotes line by line and ask about any price well below the others.</p>
+<p>Before you pay anything:</p>
+<ol>
+<li><strong>Get a written contract</strong> with the scope, the price, a stage payment schedule, start and finish dates, and how changes will be priced. The FMB and JCT both publish contracts for homeowners. Ask for a fixed-price quotation rather than an estimate, which is not binding.</li>
+<li><strong>Pay in stages for work completed.</strong> A typical schedule: foundations and slab up to damp-proof course; walls built up to roof level; roof on and watertight; first fix electrics and plumbing; plastering; completion. Pay each stage promptly once it is done, but not before.</li>
+<li><strong>Hold back a retention</strong> of 2.5&ndash;5% until snagging is finished and the building control completion certificate is issued.</li>
+<li><strong>Keep any deposit small,</strong> typically no more than 10%. Made-to-order items such as bespoke windows, bi-fold doors, roof lanterns or a kitchen often need a supplier deposit. Ask for the supplier&rsquo;s order confirmation, and pay that deposit against the supplier&rsquo;s invoice.</li>
+<li><strong>Check who you are dealing with.</strong> If the builder is a limited company, look it up on Companies House: are the accounts and confirmation statement up to date, is there a notice of proposed strike-off, and have the directors run a string of companies that were dissolved? Search The Gazette for winding-up petitions. If the builder is a sole trader, ask for proof of public liability insurance, recent references and a past job you can see.</li>
+<li><strong>Know the limits of card protection.</strong> Section 75 of the Consumer Credit Act only applies where the cash price is between &pound;100 and &pound;30,000, so it will not cover most whole extensions, though it may cover a separately bought item such as windows. Outside that, a card chargeback is the only route, and it is not guaranteed.</li>
+<li><strong>Ask about an insurance-backed guarantee</strong> or deposit protection, and check what it covers.</li>
+</ol>
+<p>If you sign the contract at home, you normally have 14 days to cancel. Keep a contingency of 10&ndash;15% of the build cost, and 15&ndash;20% on an older house or where the ground is unknown. Hold it yourself, outside the contract price.</p>
+<h2>If you run a small building firm</h2>
+<p>Expect firms that have lost new-build work to compete with you for domestic jobs this winter. Cutting your price to keep the van busy is risky while your own costs are still rising. If you charge less and pay more, the difference comes out of your margin.</p>
+<ul>
+<li>Price from current supplier quotes and put a validity date on every quotation.</li>
+<li>Write stage payments into your contract and invoice as soon as each stage is reached. On a job for a homeowner living in the property, the Housing Grants, Construction and Regeneration Act 1996 (the Construction Act) does not apply, so your contract is your only protection on payment.</li>
+<li>When you subcontract to a main contractor or housebuilder, the Construction Act does apply: keep on top of payment applications and notices, and chase late payment early.</li>
+<li>Check customers and main contractors before giving credit, and have a second supplier or subcontractor in mind in case one you rely on gets into difficulty.</li>
+</ul>
+<h2>An estimator&rsquo;s view</h2>
+<p>A 20&nbsp;m&sup2; single-storey extension in Liverpool at &pound;2,000&ndash;&pound;2,650 per m&sup2; (see the <a href="/guides/house-extension-cost-liverpool">Liverpool extension cost guide</a>) is roughly &pound;40,000&ndash;&pound;53,000 to build before VAT. A quote from a year ago is likely to be around &pound;1,300&ndash;&pound;1,700 light at today&rsquo;s prices. Quotes for the same drawings can differ by more than that, so an itemised estimate that shows what a low quote has left out matters more this winter than last year&rsquo;s prices.</p>
+<h2>Getting a price</h2>
+<p>TheGo2Guys is an estimating service based in Liverpool, working for homeowners and builders. Homeowners use an itemised estimate to compare builders&rsquo; quotes like for like before signing; builders use it to price a job without doing the take-off themselves. A full measured estimate for a single-storey extension starts at &pound;150 and takes 3&ndash;5 working days. You will need drawings; if you don&rsquo;t have them yet, an architect or designer comes first. Send your drawings through the <a href="/quote">quote form</a>, or call <a href="tel:01516621274">0151 662 1274</a>, and the fee and delivery date are confirmed within 24 hours.</p>
+<h2>Sources</h2>
+<ul>
+<li><a href="https://www.ons.gov.uk/businessindustryandtrade/constructionindustry/bulletins/constructionoutputingreatbritain/september2026newordersandconstructionoutputpriceindicesjulytoseptember2026" rel="noopener">Office for National Statistics, Construction output in Great Britain: September 2026, new orders and Construction Output Price Indices, July to September 2026, 12 November 2026</a></li>
+<li><a href="https://roofingtoday.co.uk/marginal-growth-for-construction-after-four-month-slump/" rel="noopener">Roofing Today, &ldquo;Marginal growth for construction after four month slump&rdquo;, 12 November 2026 (comments from Dr David Crosthwaite, BCIS)</a></li>
+<li><a href="https://roofingtoday.co.uk/glenigan-forecasts-2027-recovery/" rel="noopener">Roofing Today, &ldquo;Glenigan forecasts 2027 recovery&rdquo;, 11 November 2026</a></li>
+<li><a href="https://www.bcis.co.uk/news/construction-insolvencies-latest-news/" rel="noopener">BCIS, Latest construction firm insolvency figures, 21 October 2026</a></li>
+<li><a href="https://www.rsmuk.com/news/construction-insolvencies-show-seasonal-dip-significant-viability-challenges-remain" rel="noopener">RSM UK, Construction insolvencies show seasonal dip, but significant viability challenges remain, 20 October 2026</a></li>
+<li><a href="https://www.legislation.gov.uk/ukpga/1974/39/section/75" rel="noopener">Consumer Credit Act 1974, section 75</a></li>
+<li><a href="https://www.legislation.gov.uk/ukpga/1996/53/section/106" rel="noopener">Housing Grants, Construction and Regeneration Act 1996, section 106 (contracts with residential occupiers)</a></li>
+</ul>
+</div></section>` + ctaBand('Want to check a builder&rsquo;s quote before you sign?', 'Send your drawings and every item is priced at current North West rates on its own line. From &pound;150 for a single-storey extension, in 3&ndash;5 working days.')
   });
 }
 
